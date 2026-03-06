@@ -1,121 +1,175 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Salut</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Salut | Benestar Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2e7d32;
+            --primary-light: #4caf50;
+            --accent: #8bc34a;
+            --text-dark: #1a1a1a;
+            --text-light: #666;
+            --bg-gradient: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            --glass: rgba(255, 255, 255, 0.9);
+        }
 
-<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family: "Segoe UI", Arial, sans-serif;
-}
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            overflow: hidden;
+        }
 
-body{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background: linear-gradient(135deg,#4CAF50,#8BC34A,#A5D6A7);
-}
+        /* Contenedor con efecto cristal */
+        .container {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 60px 40px;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.8s ease-out;
+        }
 
-.container{
-text-align:center;
-background:white;
-padding:50px 60px;
-border-radius:25px;
-box-shadow:0 20px 40px rgba(0,0,0,0.15);
-max-width:500px;
-width:90%;
-}
+        h1 {
+            color: var(--primary);
+            font-size: 38px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
 
-h1{
-color:#2e7d32;
-margin-bottom:10px;
-font-size:32px;
-}
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 45px;
+            font-size: 18px;
+            font-weight: 300;
+        }
 
-.subtitle{
-color:#666;
-margin-bottom:40px;
-font-size:16px;
-}
+        /* Layout de tarjetas en Grid */
+        .menu {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
-.menu{
-display:flex;
-flex-direction:column;
-gap:20px;
-}
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
 
-.card{
-display:flex;
-align-items:center;
-justify-content:center;
-gap:15px;
-padding:18px;
-font-size:20px;
-border-radius:14px;
-text-decoration:none;
-color:white;
-font-weight:600;
-transition:all 0.3s ease;
-}
+        /* Estilo específico para cada tarjeta */
+        .digestio {
+            background: linear-gradient(135deg, #2e7d32, #43a047);
+        }
 
-.card:hover{
-transform:translateY(-4px);
-box-shadow:0 10px 20px rgba(0,0,0,0.15);
-}
+        .nutricio {
+            background: linear-gradient(135deg, #558b2f, #7cb342);
+        }
 
-.digestio{
-background:linear-gradient(135deg,#43a047,#2e7d32);
-}
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(46, 125, 50, 0.3);
+        }
 
-.nutricio{
-background:linear-gradient(135deg,#66bb6a,#43a047);
-}
+        .icon-wrapper {
+            background: rgba(255, 255, 255, 0.2);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            font-size: 28px;
+            transition: transform 0.3s ease;
+        }
 
-.icon{
-font-size:26px;
-}
+        .card:hover .icon-wrapper {
+            transform: scale(1.2);
+        }
 
-footer{
-margin-top:35px;
-font-size:13px;
-color:#888;
-}
+        .card span {
+            font-size: 18px;
+            letter-spacing: 0.5px;
+        }
 
-</style>
+        footer {
+            margin-top: 50px;
+            font-size: 14px;
+            color: #999;
+            font-weight: 400;
+        }
+
+        /* Animación de entrada */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 480px) {
+            .menu {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 40px 20px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="container">
+    <div class="container">
+        <header>
+            <h1>Portal de Salut</h1>
+            <p class="subtitle">La teva guia cap a un benestar integral</p>
+        </header>
 
-<h1>Portal de Salut</h1>
-<p class="subtitle">Informació sobre digestió i nutrició</p>
+        <nav class="menu">
+            <a class="card digestio" href="timthumb-alt.jpeg">
+                <div class="icon-wrapper">🫃</div>
+                <span>Digestió</span>
+            </a>
 
-<div class="menu">
+            <a class="card nutricio" href="nutricio.html">
+                <div class="icon-wrapper">🥗</div>
+                <span>Nutrició</span>
+            </a>
+        </nav>
 
-<a class="card digestio" href="digestio.html">
-<span class="icon">🫃</span>
-Digestió
-</a>
-
-<a class="card nutricio" href="nutricio.html">
-<span class="icon">🥗</span>
-Nutrició
-</a>
-
-</div>
-
-<footer>
-© 2026 Portal de Salut
-</footer>
-
-</div>
+        <footer>
+            &copy; 2026 Portal de Salut &bull; Compromís amb la vida
+        </footer>
+    </div>
 
 </body>
 </html>
