@@ -3,65 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Menú Salut</title>
+<title>Portal de Salut</title>
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "Segoe UI", Arial, sans-serif;
+}
+
 body{
-    margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#4CAF50,#8BC34A);
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background: linear-gradient(135deg,#4CAF50,#8BC34A,#A5D6A7);
+}
+
+.container{
+text-align:center;
+background:white;
+padding:50px 60px;
+border-radius:25px;
+box-shadow:0 20px 40px rgba(0,0,0,0.15);
+max-width:500px;
+width:90%;
+}
+
+h1{
+color:#2e7d32;
+margin-bottom:10px;
+font-size:32px;
+}
+
+.subtitle{
+color:#666;
+margin-bottom:40px;
+font-size:16px;
 }
 
 .menu{
-    background:white;
-    padding:40px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    text-align:center;
+display:flex;
+flex-direction:column;
+gap:20px;
 }
 
-.menu h1{
-    margin-bottom:30px;
-    color:#333;
+.card{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+padding:18px;
+font-size:20px;
+border-radius:14px;
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:all 0.3s ease;
 }
 
-button{
-    display:block;
-    width:200px;
-    margin:15px auto;
-    padding:15px;
-    font-size:18px;
-    border:none;
-    border-radius:12px;
-    cursor:pointer;
-    background:#4CAF50;
-    color:white;
-    transition:0.3s;
+.card:hover{
+transform:translateY(-4px);
+box-shadow:0 10px 20px rgba(0,0,0,0.15);
 }
 
-button:hover{
-    background:#388E3C;
-    transform:scale(1.05);
+.digestio{
+background:linear-gradient(135deg,#43a047,#2e7d32);
 }
+
+.nutricio{
+background:linear-gradient(135deg,#66bb6a,#43a047);
+}
+
+.icon{
+font-size:26px;
+}
+
+footer{
+margin-top:35px;
+font-size:13px;
+color:#888;
+}
+
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
+<h1>Portal de Salut</h1>
+<p class="subtitle">Informació sobre digestió i nutrició</p>
+
 <div class="menu">
-<h1>Menú</h1>
 
-<button onclick="location.href='digestio.html'">
+<a class="card digestio" href="digestio.html">
+<span class="icon">🫃</span>
 Digestió
-</button>
+</a>
 
-<button onclick="location.href='nutricio.html'">
+<a class="card nutricio" href="nutricio.html">
+<span class="icon">🥗</span>
 Nutrició
-</button>
+</a>
+
+</div>
+
+<footer>
+© 2026 Portal de Salut
+</footer>
 
 </div>
 
