@@ -4,147 +4,250 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Salut | IE Temple</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root { 
-            --primary: #2e7d32; 
-            --discord-color: #5865F2; /* El color oficial de Discord */
-            --bg: linear-gradient(135deg, #e8f5e9, #c8e6c9); 
+        :root {
+            --primary: #2e7d32;
+            --primary-dark: #1b5e20;
+            --discord: #5865F2;
+            --glass: rgba(255, 255, 255, 0.85);
+            --shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
-        
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
-        
-        body { 
-            height: 100vh; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: var(--bg); 
-            position: relative;
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at top left, #e8f5e9, #ffffff, #c8e6c9);
             overflow: hidden;
         }
 
-        .container { 
-            background: white; 
-            padding: 50px 40px; 
-            border-radius: 24px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1); 
-            max-width: 600px; 
-            width: 90%; 
-            text-align: center; 
-            z-index: 1;
+        /* Fondo decorativo */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(150px);
+            opacity: 0.1;
+            top: -50px;
+            left: -50px;
+            z-index: 0;
         }
 
-        h1 { color: var(--primary); font-size: 34px; margin-bottom: 30px; letter-spacing: -0.5px; }
-        
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-
-        .card { 
-            display: flex; flex-direction: column; align-items: center; 
-            padding: 35px; border-radius: 16px; color: white; 
-            text-decoration: none; font-weight: 700; cursor: pointer; 
-            transition: all 0.2s ease-in-out; border: none; 
+        .main-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 60px 50px;
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+            max-width: 750px;
+            width: 92%;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            z-index: 10;
+            position: relative;
         }
 
-        .card:hover { transform: translateY(-5px); filter: brightness(1.1); border-radius: 12px; }
-        
-        .bg-main { background: linear-gradient(135deg, #4caf50, #2e7d32); }
-        .bg-teoria { background: linear-gradient(135deg, #2196f3, #1565c0); }
-        .bg-activitats { background: linear-gradient(135deg, #ff9800, #ef6c00); }
-        
-        .icon { font-size: 45px; margin-bottom: 15px; }
-        .hidden { display: none; }
-        
-        .btn-tornar { 
-            margin-top: 30px; background: #eee; border: none; 
-            padding: 12px 25px; border-radius: 8px; cursor: pointer; 
-            color: #444; font-weight: 600; transition: 0.2s;
+        header {
+            margin-bottom: 50px;
         }
-        .btn-tornar:hover { background: #ddd; }
 
-        /* BOTÓ ESTIL DISCORD BAIX A LA DRETA */
-        .discord-btn {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--discord-color);
+        h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            letter-spacing: -1.5px;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #555;
+            font-weight: 400;
+        }
+
+        /* Grid System */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            position: relative;
+            padding: 45px 30px;
+            border-radius: 28px;
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 16px; /* Més quadrat com Discord */
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .bg-dig { background: linear-gradient(135deg, #2e7d32, #66bb6a); }
+        .bg-nut { background: linear-gradient(135deg, #558b2f, #9ccc65); }
+        .bg-teoria { background: linear-gradient(135deg, #1976d2, #64b5f6); }
+        .bg-activitats { background: linear-gradient(135deg, #f57c00, #ffb74d); }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-circle {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .card span {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Botón Estilo Discord */
+        .discord-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--discord);
+            color: white;
+            padding: 14px 24px;
+            border-radius: 14px;
+            text-decoration: none;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
-            transition: all 0.2s ease;
-            font-size: 14px;
+            gap: 12px;
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+            transition: all 0.2s ease-in-out;
             z-index: 100;
         }
 
         .discord-btn:hover {
-            border-radius: 10px; /* Es torna més quadrat en fer hover, estil Discord */
-            box-shadow: 0 8px 20px rgba(88, 101, 242, 0.6);
-            transform: translateY(-2px);
+            border-radius: 8px; /* Cambio de forma estilo Discord */
+            background: #4752c4;
+            transform: translateY(-3px);
         }
 
-        .insti-icon {
-            width: 24px;
-            height: 24px;
-            background: white;
-            color: var(--discord-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
+        .btn-back {
+            grid-column: 1 / -1;
+            background: transparent;
+            border: 2px solid #ddd;
+            padding: 12px;
+            border-radius: 15px;
+            font-weight: 600;
+            color: #777;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
+        .btn-back:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: #f1f8e9;
+        }
+
+        .hidden { display: none; }
+
+        @media (max-width: 600px) {
+            .menu-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 32px; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1 id="titol">Portal de Salut</h1>
+    <div class="main-card">
+        <header>
+            <h1 id="title">Portal de Salut</h1>
+            <p class="subtitle" id="subtitle">Explora la biologia humana des de l'IE Temple</p>
+        </header>
 
-        <div id="menu-principal" class="grid">
-            <div class="card bg-main" onclick="obrir('digestio')">
-                <span class="icon">🫃</span>Digestió
-            </div>
-            <div class="card bg-main" onclick="obrir('nutricio')">
-                <span class="icon">🥗</span>Nutrició
-            </div>
+        <div class="menu-grid" id="main-menu">
+            <button class="card bg-dig" onclick="openSub('digestio')">
+                <div class="icon-circle">🫃</div>
+                <span>Digestió</span>
+            </button>
+            <button class="card bg-nut" onclick="openSub('nutricio')">
+                <div class="icon-circle">🥗</div>
+                <span>Nutrició</span>
+            </button>
         </div>
 
-        <div id="menu-digestio" class="grid hidden">
-            <a href="timthumb-alt.jpeg" class="card bg-teoria"><span class="icon">📖</span>Teoria</a>
-            <a href="activitats-digestio.html" class="card bg-activitats"><span class="icon">✏️</span>Activitats</a>
-            <div style="grid-column: 1/3"><button class="btn-tornar" onclick="tornar()">← Tornar</button></div>
+        <div class="menu-grid hidden" id="sub-digestio">
+            <a href="timthumb-alt.jpeg" class="card bg-teoria">
+                <div class="icon-circle">📖</div>
+                <span>Teoria</span>
+            </a>
+            <a href="activitats-digestio.html" class="card bg-activitats">
+                <div class="icon-circle">✏️</div>
+                <span>Activitats</span>
+            </a>
+            <button class="btn-back" onclick="goMain()">← Tornar al menú</button>
         </div>
 
-        <div id="menu-nutricio" class="grid hidden">
-            <a href="teoria-nutricio.html" class="card bg-teoria"><span class="icon">📚</span>Teoria</a>
-            <a href="activitats-nutricio.html" class="card bg-activitats"><span class="icon">🍎</span>Activitats</a>
-            <div style="grid-column: 1/3"><button class="btn-tornar" onclick="tornar()">← Tornar</button></div>
+        <div class="menu-grid hidden" id="sub-nutricio">
+            <a href="teoria-nutricio.html" class="card bg-teoria">
+                <div class="icon-circle">📚</div>
+                <span>Teoria</span>
+            </a>
+            <a href="activitats-nutricio.html" class="card bg-activitats">
+                <div class="icon-circle">🍎</div>
+                <span>Activitats</span>
+            </a>
+            <button class="btn-back" onclick="goMain()">← Tornar al menú</button>
         </div>
     </div>
 
     <a href="https://agora.xtec.cat/ietemple/" target="_blank" class="discord-btn">
-        <div class="insti-icon">🏛️</div>
+        <span style="font-size: 20px;">🏛️</span>
         Més informació de l'Institut
     </a>
 
     <script>
-        function obrir(seccio) {
-            document.getElementById('menu-principal').classList.add('hidden');
-            document.getElementById('menu-' + seccio).classList.remove('hidden');
-            document.getElementById('titol').innerText = seccio.charAt(0).toUpperCase() + seccio.slice(1);
+        function openSub(type) {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('sub-' + type).classList.remove('hidden');
+            document.getElementById('title').innerText = type.charAt(0).toUpperCase() + type.slice(1);
+            document.getElementById('subtitle').innerText = "Selecciona una modalitat d'aprenentatge";
         }
-        function tornar() {
-            document.getElementById('menu-principal').classList.remove('hidden');
-            document.getElementById('menu-digestio').classList.add('hidden');
-            document.getElementById('menu-nutricio').classList.add('hidden');
-            document.getElementById('titol').innerText = "Portal de Salut";
+
+        function goMain() {
+            document.getElementById('sub-digestio').classList.add('hidden');
+            document.getElementById('sub-nutricio').classList.add('hidden');
+            document.getElementById('main-menu').classList.remove('hidden');
+            document.getElementById('title').innerText = "Portal de Salut";
+            document.getElementById('subtitle').innerText = "Explora la biologia humana des de l'IE Temple";
         }
     </script>
 </body>
