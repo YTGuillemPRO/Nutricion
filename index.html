@@ -10,130 +10,105 @@
             --primary: #2e7d32;
             --primary-dark: #1b5e20;
             --discord: #5865F2;
-            --glass: rgba(255, 255, 255, 0.85);
+            --bg: radial-gradient(circle at top left, #e8f5e9, #ffffff, #c8e6c9);
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text: #1a1a1a;
             --shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        /* Variables Modo Oscuro */
+        [data-theme="dark"] {
+            --bg: radial-gradient(circle at top left, #1b2e1b, #121212, #0d1a0d);
+            --card-bg: rgba(30, 30, 30, 0.9);
+            --text: #f0f0f0;
+            --primary: #66bb6a;
+            --shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.3s, color 0.3s; }
 
         body {
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            background: radial-gradient(circle at top left, #e8f5e9, #ffffff, #c8e6c9);
+            background: var(--bg);
             overflow: hidden;
+            color: var(--text);
         }
 
-        /* Fondo decorativo */
-        body::before {
-            content: "";
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--primary);
-            filter: blur(150px);
-            opacity: 0.1;
-            top: -50px;
-            left: -50px;
-            z-index: 0;
-        }
-
+        /* Contenedor Principal */
         .main-card {
-            background: var(--glass);
+            background: var(--card-bg);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            padding: 60px 50px;
+            padding: 50px;
             border-radius: 40px;
             box-shadow: var(--shadow);
-            max-width: 750px;
+            max-width: 800px;
             width: 92%;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             z-index: 10;
             position: relative;
+            animation: slideUp 0.6s ease-out;
         }
 
-        header {
-            margin-bottom: 50px;
-        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        h1 {
-            font-size: 42px;
-            font-weight: 800;
-            color: var(--primary-dark);
-            letter-spacing: -1.5px;
-            margin-bottom: 12px;
-        }
+        header { margin-bottom: 40px; }
+        h1 { font-size: 42px; font-weight: 800; color: var(--primary); letter-spacing: -1.5px; }
+        .subtitle { font-size: 18px; opacity: 0.8; margin-top: 10px; }
 
-        .subtitle {
-            font-size: 18px;
-            color: #555;
-            font-weight: 400;
-        }
-
-        /* Grid System */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-        }
+        /* Grid */
+        .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         .card {
-            position: relative;
-            padding: 45px 30px;
+            padding: 40px 20px;
             border-radius: 28px;
             color: white;
             text-decoration: none;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border: none;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
-        .card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
+        .card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.2); }
         .bg-dig { background: linear-gradient(135deg, #2e7d32, #66bb6a); }
         .bg-nut { background: linear-gradient(135deg, #558b2f, #9ccc65); }
         .bg-teoria { background: linear-gradient(135deg, #1976d2, #64b5f6); }
         .bg-activitats { background: linear-gradient(135deg, #f57c00, #ffb74d); }
 
-        .icon-circle {
-            width: 70px;
-            height: 70px;
-            background: rgba(255, 255, 255, 0.25);
-            border-radius: 22px;
+        .icon-box { font-size: 40px; margin-bottom: 15px; background: rgba(255,255,255,0.2); width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border-radius: 20px; }
+
+        /* Badges de Progreso */
+        .badges {
+            margin-top: 30px;
             display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 35px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
+            gap: 15px;
+            opacity: 0.6;
         }
+        .badge { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1px solid currentColor; }
 
-        .card:hover .icon-circle {
-            transform: rotate(-10deg) scale(1.1);
-        }
-
-        .card span {
+        /* Botón Modo Oscuro */
+        .theme-toggle {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: var(--card-bg);
+            border: none;
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow);
             font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            z-index: 100;
         }
 
-        /* Botón Estilo Discord */
+        /* Botón Discord (Institut) */
         .discord-btn {
             position: fixed;
             bottom: 30px;
@@ -148,106 +123,75 @@
             align-items: center;
             gap: 12px;
             box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
-            transition: all 0.2s ease-in-out;
+            transition: all 0.2s;
             z-index: 100;
         }
+        .discord-btn:hover { border-radius: 8px; transform: scale(1.05); }
 
-        .discord-btn:hover {
-            border-radius: 8px; /* Cambio de forma estilo Discord */
-            background: #4752c4;
-            transform: translateY(-3px);
-        }
-
-        .btn-back {
-            grid-column: 1 / -1;
-            background: transparent;
-            border: 2px solid #ddd;
-            padding: 12px;
-            border-radius: 15px;
-            font-weight: 600;
-            color: #777;
-            cursor: pointer;
-            transition: 0.3s;
-            margin-top: 10px;
-        }
-
-        .btn-back:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: #f1f8e9;
-        }
-
+        .btn-back { grid-column: 1 / -1; background: transparent; border: 1px solid #999; padding: 10px; border-radius: 12px; cursor: pointer; color: inherit; margin-top: 10px; }
         .hidden { display: none; }
-
-        @media (max-width: 600px) {
-            .menu-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 32px; }
-        }
     </style>
 </head>
 <body>
 
+    <button class="theme-toggle" onclick="toggleTheme()" title="Canviar mode">🌓</button>
+
     <div class="main-card">
         <header>
             <h1 id="title">Portal de Salut</h1>
-            <p class="subtitle" id="subtitle">Explora la biologia humana des de l'IE Temple</p>
+            <p class="subtitle" id="subtitle">Explora i aprèn sobre el teu cos</p>
         </header>
 
         <div class="menu-grid" id="main-menu">
             <button class="card bg-dig" onclick="openSub('digestio')">
-                <div class="icon-circle">🫃</div>
+                <div class="icon-box">🫃</div>
                 <span>Digestió</span>
             </button>
             <button class="card bg-nut" onclick="openSub('nutricio')">
-                <div class="icon-circle">🥗</div>
+                <div class="icon-box">🥗</div>
                 <span>Nutrició</span>
             </button>
         </div>
 
         <div class="menu-grid hidden" id="sub-digestio">
-            <a href="timthumb-alt.jpeg" class="card bg-teoria">
-                <div class="icon-circle">📖</div>
-                <span>Teoria</span>
-            </a>
-            <a href="activitats-digestio.html" class="card bg-activitats">
-                <div class="icon-circle">✏️</div>
-                <span>Activitats</span>
-            </a>
-            <button class="btn-back" onclick="goMain()">← Tornar al menú</button>
+            <a href="timthumb-alt.jpeg" class="card bg-teoria"><div class="icon-box">📖</div><span>Teoria</span></a>
+            <a href="activitats-digestio.html" class="card bg-activitats"><div class="icon-box">✏️</div><span>Activitats</span></a>
+            <button class="btn-back" onclick="goMain()">← Tornar</button>
         </div>
 
         <div class="menu-grid hidden" id="sub-nutricio">
-            <a href="teoria-nutricio.html" class="card bg-teoria">
-                <div class="icon-circle">📚</div>
-                <span>Teoria</span>
-            </a>
-            <a href="activitats-nutricio.html" class="card bg-activitats">
-                <div class="icon-circle">🍎</div>
-                <span>Activitats</span>
-            </a>
-            <button class="btn-back" onclick="goMain()">← Tornar al menú</button>
+            <a href="teoria-nutricio.html" class="card bg-teoria"><div class="icon-box">📚</div><span>Teoria</span></a>
+            <a href="activitats-nutricio.html" class="card bg-activitats"><div class="icon-box">🍎</div><span>Activitats</span></a>
+            <button class="btn-back" onclick="goMain()">← Tornar</button>
+        </div>
+
+        <div class="badges">
+            <span class="badge">Lliçó 1: Completada</span>
+            <span class="badge" style="opacity: 0.3;">Lliçó 2: Bloquejada</span>
         </div>
     </div>
 
     <a href="https://agora.xtec.cat/ietemple/" target="_blank" class="discord-btn">
-        <span style="font-size: 20px;">🏛️</span>
-        Més informació de l'Institut
+        <span>🏛️</span> IE Temple
     </a>
 
     <script>
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            body.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
         function openSub(type) {
             document.getElementById('main-menu').classList.add('hidden');
             document.getElementById('sub-' + type).classList.remove('hidden');
             document.getElementById('title').innerText = type.charAt(0).toUpperCase() + type.slice(1);
-            document.getElementById('subtitle').innerText = "Selecciona una modalitat d'aprenentatge";
         }
 
         function goMain() {
-            document.getElementById('sub-digestio').classList.add('hidden');
-            document.getElementById('sub-nutricio').classList.add('hidden');
+            document.querySelectorAll('.menu-grid').forEach(m => m.classList.add('hidden'));
             document.getElementById('main-menu').classList.remove('hidden');
             document.getElementById('title').innerText = "Portal de Salut";
-            document.getElementById('subtitle').innerText = "Explora la biologia humana des de l'IE Temple";
         }
     </script>
 </body>
