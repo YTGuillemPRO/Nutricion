@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teoria: La Digestió | IE Temple</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f8fafc;
+            --primary: #2e7d32;
+            --text: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        header {
+            background: linear-gradient(135deg, #1b5e20, #2e7d32);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        h1 { font-size: 40px; font-weight: 800; letter-spacing: -1px; }
+
+        .container { max-width: 900px; margin: -40px auto 40px; padding: 20px; }
+
+        .intro-card {
+            background: white;
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Timeline de la Digestió */
+        .step {
+            display: flex;
+            background: white;
+            margin-bottom: 30px;
+            border-radius: 35px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .step:hover { transform: scale(1.02); }
+
+        .step-img {
+            width: 40%;
+            min-height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .step-content {
+            width: 60%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .step-num {
+            background: var(--primary);
+            color: white;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        h2 { font-size: 24px; margin-bottom: 10px; color: var(--primary); }
+        p { color: #64748b; font-size: 17px; }
+
+        .back-nav {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-tornar {
+            background: var(--text);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn-tornar:hover { opacity: 0.9; transform: translateY(-3px); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .step { flex-direction: column; }
+            .step-img, .step-content { width: 100%; }
+            .step-img { min-height: 200px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>El Viatge dels Aliments</h1>
+        <p>Aprèn com el teu cos transforma el menjar en energia</p>
+    </header>
+
+    <div class="container">
+        <div class="intro-card">
+            <p>La digestió és el procés pel qual el nostre organisme descompon els aliments per obtenir nutrients i energia per viure.</p>
+        </div>
+
+        <div class="step">
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-content">
+                <div class="step-num">1</div>
+                <h2>La Boca i l'Esòfag</h2>
+                <p>Tot comença aquí. Les dents trituren el menjar i la saliva l'estova creant el <b>bol alimentari</b>, que baixa pel tub de l'esòfag fins a l'estómac.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1628114259560-60b64f331627?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-content">
+                <div class="step-num">2</div>
+                <h2>L'Estómac</h2>
+                <p>Aquí és on la cosa es posa seriosa. Els sucs gàstrics es barregen amb el menjar fins a convertir-lo en una pasta líquida anomenada <b>quim</b>.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-content">
+                <div class="step-num">3</div>
+                <h2>Intestí Prim</h2>
+                <p>És la part més llarga. Aquí s'absorbeixen els <b>nutrients</b> que passen a la sang per alimentar tot el nostre cos.</p>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-content">
+                <div class="step-num">4</div>
+                <h2>Intestí Gros i Sortida</h2>
+                <p>El que el cos no necessita passa a l'intestí gros, on s'absorbeix l'aigua i es formen les restes que finalment expulsem.</p>
+            </div>
+        </div>
+
+        <div class="back-nav">
+            <a href="index.html" class="btn-tornar">← Tornar al Portal de Salut</a>
+        </div>
+    </div>
+
+</body>
+</html>
