@@ -10,6 +10,7 @@
             --bg: #f8fafc;
             --primary: #2e7d32;
             --text: #1e293b;
+            --accent: #e8f5e9;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
@@ -19,50 +20,59 @@
         header {
             background: linear-gradient(135deg, #1b5e20, #2e7d32);
             color: white;
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
-            border-bottom-left-radius: 50px;
-            border-bottom-right-radius: 50px;
+            border-bottom-left-radius: 60px;
+            border-bottom-right-radius: 60px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
-        h1 { font-size: 40px; font-weight: 800; letter-spacing: -1px; }
+        h1 { font-size: 45px; font-weight: 800; letter-spacing: -1px; }
+        .header-sub { opacity: 0.9; font-size: 18px; margin-top: 10px; }
 
-        .container { max-width: 900px; margin: -40px auto 40px; padding: 20px; }
+        .container { max-width: 950px; margin: -50px auto 60px; padding: 0 20px; }
 
         .intro-card {
             background: white;
-            padding: 30px;
-            border-radius: 30px;
+            padding: 40px;
+            border-radius: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
+            border: 1px solid rgba(0,0,0,0.02);
         }
 
-        /* Timeline de la Digestió */
+        /* Targetes de la Digestió */
         .step {
             display: flex;
             background: white;
-            margin-bottom: 30px;
-            border-radius: 35px;
+            margin-bottom: 40px;
+            border-radius: 40px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
             border: 1px solid rgba(0,0,0,0.05);
             transition: transform 0.3s ease;
         }
 
-        .step:hover { transform: scale(1.02); }
+        .step:hover { transform: translateY(-5px); }
 
         .step-img {
-            width: 40%;
-            min-height: 250px;
+            width: 45%;
+            min-height: 300px;
             background-size: cover;
             background-position: center;
+            position: relative;
         }
 
+        /* Imatges específiques per a cada pas */
+        .img-boca { background-image: url('https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?q=80&w=800'); }
+        .img-estomac { background-image: url('https://images.unsplash.com/photo-1559757175-5700dde675bc?q=80&w=800'); } /* Imatge més anatòmica */
+        .img-intestins { background-image: url('https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=800'); }
+        .img-sortida { background-image: url('https://images.unsplash.com/photo-1464618663641-bbdd760ae84a?q=80&w=800'); }
+
         .step-content {
-            width: 60%;
-            padding: 40px;
+            width: 55%;
+            padding: 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -71,94 +81,94 @@
         .step-num {
             background: var(--primary);
             color: white;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 50%;
+            border-radius: 12px;
             font-weight: 800;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            font-size: 20px;
         }
 
-        h2 { font-size: 24px; margin-bottom: 10px; color: var(--primary); }
-        p { color: #64748b; font-size: 17px; }
+        h2 { font-size: 28px; margin-bottom: 15px; color: var(--primary); font-weight: 800; }
+        p { color: #475569; font-size: 17px; }
+        b { color: #1e293b; }
 
-        .back-nav {
-            text-align: center;
-            margin-top: 50px;
-        }
-
+        .back-nav { text-align: center; margin-top: 60px; }
         .btn-tornar {
             background: var(--text);
             color: white;
-            padding: 15px 40px;
+            padding: 18px 50px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 700;
             transition: 0.3s;
+            display: inline-block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
-        .btn-tornar:hover { opacity: 0.9; transform: translateY(-3px); }
+        .btn-tornar:hover { background: #000; transform: scale(1.05); }
 
-        /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 850px) {
             .step { flex-direction: column; }
             .step-img, .step-content { width: 100%; }
-            .step-img { min-height: 200px; }
+            .step-img { min-height: 250px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>El Viatge dels Aliments</h1>
-        <p>Aprèn com el teu cos transforma el menjar en energia</p>
+        <h1>El Viatge de l'Aliment</h1>
+        <p class="header-sub">Com el teu cos transforma una poma en energia pura</p>
     </header>
 
     <div class="container">
         <div class="intro-card">
-            <p>La digestió és el procés pel qual el nostre organisme descompon els aliments per obtenir nutrients i energia per viure.</p>
+            <h2 style="color: #1e293b; margin-bottom: 10px;">Què és la Digestió?</h2>
+            <p>És el conjunt de processos mecànics i químics que transformen els aliments en nutrients prou petits perquè les nostres cèl·lules els puguin utilitzar.</p>
         </div>
 
         <div class="step">
-            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-img img-boca"></div>
             <div class="step-content">
                 <div class="step-num">1</div>
-                <h2>La Boca i l'Esòfag</h2>
-                <p>Tot comença aquí. Les dents trituren el menjar i la saliva l'estova creant el <b>bol alimentari</b>, que baixa pel tub de l'esòfag fins a l'estómac.</p>
+                <h2>Ingestió i Boca</h2>
+                <p>Tot comença amb la masticació. Les dents i la saliva creen el <b>bol alimentari</b>. La llengua l'empeny cap a l'esòfag en un procés anomenat deglució.</p>
             </div>
         </div>
 
         <div class="step">
-            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1628114259560-60b64f331627?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-img img-estomac"></div>
             <div class="step-content">
                 <div class="step-num">2</div>
                 <h2>L'Estómac</h2>
-                <p>Aquí és on la cosa es posa seriosa. Els sucs gàstrics es barregen amb el menjar fins a convertir-lo en una pasta líquida anomenada <b>quim</b>.</p>
+                <p>L'estómac és un sac muscular que bat el menjar i el barreja amb <b>sucs gàstrics</b> (àcids). El resultat és una pasta líquida anomenada <b>quim</b>.</p>
             </div>
         </div>
 
         <div class="step">
-            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1576086213369-97a306d36557?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-img img-intestins"></div>
             <div class="step-content">
                 <div class="step-num">3</div>
                 <h2>Intestí Prim</h2>
-                <p>És la part més llarga. Aquí s'absorbeixen els <b>nutrients</b> que passen a la sang per alimentar tot el nostre cos.</p>
+                <p>Aquí s'afegeixen la bilis (del fetge) i els sucs del pàncrees. Els nutrients passen a la sang a través de les parets de l'intestí. Ara el líquid es diu <b>quil</b>.</p>
             </div>
         </div>
 
         <div class="step">
-            <div class="step-img" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800')"></div>
+            <div class="step-img img-sortida"></div>
             <div class="step-content">
                 <div class="step-num">4</div>
-                <h2>Intestí Gros i Sortida</h2>
-                <p>El que el cos no necessita passa a l'intestí gros, on s'absorbeix l'aigua i es formen les restes que finalment expulsem.</p>
+                <h2>Egestió (Sortida)</h2>
+                <p>A l'intestí gros s'absorbeix l'aigua i es formen les femtes amb tot allò que el cos no ha pogut aprofitar, que finalment s'expulsa per l'anus.</p>
             </div>
         </div>
 
         <div class="back-nav">
-            <a href="index.html" class="btn-tornar">← Tornar al Portal de Salut</a>
+            <a href="index.html" class="btn-tornar">← Tornar al Portal BioPortal</a>
         </div>
     </div>
 
