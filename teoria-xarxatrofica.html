@@ -3,13 +3,16 @@ const panel = document.getElementById('main-panel');
 
 // Función general para navegar a secciones
 function navTo(type){
+  // Aseguramos que siempre haya transición suave
+  panel.style.transition = 'transform .25s, opacity .25s';
   panel.style.transform = 'scale(.95)';
-  panel.style.opacity = '0';
+  panel.style.opacity = '0.5'; // no 0 para que no se vea totalmente blanco
 
   setTimeout(()=>{
     // Oculta todas las vistas
     document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
 
+    // Mostrar la vista correspondiente
     if(type==='digestio'){
       document.getElementById('selection-view').classList.add('active');
       document.getElementById('selection-title').innerText="Digestió";
@@ -26,35 +29,36 @@ function navTo(type){
       document.getElementById('xarxa-trofica-view').classList.add('active');
     }
 
+    // Restaurar opacidad y escala
     panel.style.transform = 'scale(1)';
     panel.style.opacity = '1';
 
     // Confetti al navegar
     confetti({ particleCount:40, spread:60, origin:{y:.8} });
-  },250);
+  },200); // tiempo reducido para que no se vea completamente blanco
 }
 
 // Volver al menú desde la vista de selección
 function goBack(){
-  panel.style.opacity='0';
+  panel.style.opacity='0.5';
   setTimeout(()=>{
     document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
     document.getElementById('home-view').classList.add('active');
     panel.style.opacity='1';
-  },250);
+  },200);
 }
 
 // Volver al menú desde la vista Xarxa Tròfica
 function goBackFromXarxa(){
-  panel.style.opacity='0';
+  panel.style.opacity='0.5';
   setTimeout(()=>{
     document.querySelectorAll('.view').forEach(view => view.classList.remove('active'));
     document.getElementById('home-view').classList.add('active');
     panel.style.opacity='1';
-  },250);
+  },200);
 }
 
-// Evento confetti en botón del instituto
+// Confetti en botón del instituto
 document.getElementById("confettiBtn").addEventListener("mouseenter",()=>{
   confetti({ particleCount:20, spread:40, origin:{x:.9,y:.9}, colors:['#5865F2','#ffffff'] });
 });
