@@ -860,35 +860,6 @@ function answerQuiz(qi,oi,el){
 
 function restartQuiz(){buildQuiz();document.getElementById("quizScoreBox").classList.remove("show")}
 
-var bgMusic=document.getElementById("bgMusic");
-var musicPlayer=document.getElementById("musicPlayer");
-var musicIcon=document.getElementById("musicIcon");
-var musicText=document.getElementById("musicText");
-var isPlaying=false;
-
-function startMusic(){
-  bgMusic.volume=0.25;
-  bgMusic.play().then(function(){
-    isPlaying=true;musicPlayer.classList.add("playing");
-    musicIcon.setAttribute("icon","solar:pause-bold-duotone");musicText.textContent="Chill";
-  }).catch(function(){
-    isPlaying=false;musicPlayer.classList.remove("playing");
-    musicIcon.setAttribute("icon","solar:play-bold-duotone");musicText.textContent="Play";
-  });
-}
-
-window.addEventListener("click",function(){if(!isPlaying)startMusic()},{once:true});
-
-function toggleMusic(){
-  if(isPlaying){
-    bgMusic.pause();isPlaying=false;musicPlayer.classList.remove("playing");
-    musicIcon.setAttribute("icon","solar:play-bold-duotone");musicText.textContent="Play";
-  }else{
-    bgMusic.volume=0.25;bgMusic.play().catch(function(){});
-    isPlaying=true;musicPlayer.classList.add("playing");
-    musicIcon.setAttribute("icon","solar:pause-bold-duotone");musicText.textContent="Chill";
-  }
-}
 </script>
 </body>
 </html>
