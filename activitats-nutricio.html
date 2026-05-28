@@ -11,20 +11,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --bg: #0a0a0f;
-            --card: #121218;
+            --bg: #050508;
+            --card: #101014;
             --primary: #00e676;
             --danger: #ff3d00;
             --gold: #ffd700;
             --text: #ffffff;
             --accent: #2979ff;
             --surface: #16161d;
-            --cat-fruites: #FF6B6B;
-            --cat-verdures: #51CF66;
-            --cat-proteines: #FF922B;
-            --cat-lactis: #845EF7;
-            --cat-cereals: #FCC419;
-            --cat-dolcos: #F06595;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; -webkit-user-select: none; }
@@ -42,256 +36,139 @@
             position: absolute; inset: 0;
             display: flex; flex-direction: column;
             background: var(--bg); z-index: 10;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
         }
 
-        .view-hidden { transform: translateY(30px) scale(0.95); opacity: 0; pointer-events: none; z-index: 0; }
+        .view-hidden { transform: translateY(40px) scale(0.92); opacity: 0; pointer-events: none; z-index: 0; }
         .active-view { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; z-index: 10; }
 
+        /* === PARTÍCULES FONS === */
+        .bg-particles { position: absolute; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+        .particle { position: absolute; background: rgba(255,255,255,0.15); border-radius: 50%; animation: float-up linear infinite; }
+        @keyframes float-up {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            20% { opacity: 1; } 80% { opacity: 1; }
+            100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+        }
+
         /* === MENÚ === */
-        .menu-container { display: flex; flex-direction: column; height: 100%; position: relative; background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a0f 50%, #000000 100%); }
+        .menu-container { display: flex; flex-direction: column; height: 100%; position: relative; }
         .menu-scroll-wrapper { flex: 1; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; scroll-behavior: smooth; }
-        .menu-scroll-wrapper::-webkit-scrollbar { width: 4px; }
-        .menu-scroll-wrapper::-webkit-scrollbar-track { background: transparent; }
-        .menu-scroll-wrapper::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
-        .menu-content-full { min-height: 100%; display: flex; flex-direction: column; padding-bottom: 60px; }
-        .menu-header { padding: 80px 40px 50px; text-align: center; }
-        .brand-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.2); padding: 8px 20px; border-radius: 30px; font-size: 12px; font-weight: 700; letter-spacing: 1px; }
+        .menu-content-full { min-height: 100%; display: flex; flex-direction: column; padding-bottom: 60px; position: relative; z-index: 2; }
+        .menu-header { padding: 80px 40px 50px; text-align: center; position: relative; }
+        .brand-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.15); padding: 8px 20px; border-radius: 30px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--primary); backdrop-filter: blur(10px); }
         .brand-icon { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse-glow 2s ease-in-out infinite; }
-        @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 5px var(--primary); opacity: 1; } 50% { box-shadow: 0 0 15px var(--primary); opacity: 0.7; } }
-        .main-title { font-size: clamp(42px,9vw,58px); font-weight: 900; line-height: 1.05; margin-bottom: 20px; background: linear-gradient(135deg,#fff 0%,#b0b0b0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .subtitle { font-size: 17px; color: rgba(255,255,255,0.5); font-weight: 400; max-width: 340px; margin: 0 auto; line-height: 1.7; }
-        .menu-cards-section { padding: 20px 32px 60px; display: flex; flex-direction: column; gap: 24px; }
-        .game-card { position: relative; background: linear-gradient(135deg, var(--surface) 0%, rgba(22,22,29,0.8) 100%); border: 1px solid rgba(255,255,255,0.08); border-radius: 28px; padding: 32px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); }
-        .game-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.02) 100%); opacity: 0; transition: opacity 0.4s; border-radius: 28px; }
+        @keyframes pulse-glow { 0%,100% { box-shadow: 0 0 5px var(--primary); opacity: 1; } 50% { box-shadow: 0 0 20px var(--primary); opacity: 0.5; } }
+        .main-title { font-size: clamp(44px,10vw,60px); font-weight: 900; line-height: 1; margin-bottom: 20px; background: linear-gradient(135deg,#fff 0%,#888 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { font-size: 17px; color: rgba(255,255,255,0.4); font-weight: 400; max-width: 340px; margin: 0 auto; line-height: 1.7; }
+        .menu-cards-section { padding: 20px 28px 60px; display: flex; flex-direction: column; gap: 24px; }
+        
+        .game-card { position: relative; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 28px; padding: 32px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); backdrop-filter: blur(20px); overflow: hidden; }
+        .game-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.03) 100%); opacity: 0; transition: opacity 0.4s; border-radius: 28px; }
         .game-card:hover::before, .game-card:active::before { opacity: 1; }
-        .game-card:hover, .game-card:active { transform: translateY(-4px) scale(1.01); border-color: rgba(255,255,255,0.15); box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1); }
-        .card-glow { position: absolute; width: 200px; height: 200px; border-radius: 50%; filter: blur(80px); opacity: 0.15; pointer-events: none; transition: all 0.4s; }
-        .card-quiz .card-glow { background: var(--primary); top: -80px; right: -60px; }
-        .card-classify .card-glow { background: var(--accent); bottom: -80px; left: -60px; }
-        .game-card:hover .card-glow { opacity: 0.25; transform: scale(1.2); }
+        .game-card:hover, .game-card:active { transform: translateY(-6px) scale(1.02); border-color: rgba(255,255,255,0.15); box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
+        .card-glow { position: absolute; width: 250px; height: 250px; border-radius: 50%; filter: blur(80px); opacity: 0.1; pointer-events: none; transition: all 0.4s; }
+        .card-quiz .card-glow { background: var(--primary); top: -100px; right: -80px; }
+        .card-classify .card-glow { background: var(--accent); bottom: -100px; left: -80px; }
+        .game-card:hover .card-glow { opacity: 0.25; transform: scale(1.3); }
         .card-header { display: flex; align-items: center; gap: 20px; margin-bottom: 18px; position: relative; z-index: 2; }
-        .card-icon { width: 64px; height: 64px; border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; }
+        .card-icon { width: 64px; height: 64px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0; transition: transform 0.3s; }
+        .game-card:hover .card-icon { transform: scale(1.1) rotate(-5deg); }
         .icon-quiz { background: linear-gradient(135deg, rgba(0,230,118,0.15) 0%, rgba(0,230,118,0.05) 100%); color: var(--primary); box-shadow: 0 8px 24px rgba(0,230,118,0.15); }
         .icon-classify { background: linear-gradient(135deg, rgba(41,121,255,0.15) 0%, rgba(41,121,255,0.05) 100%); color: var(--accent); box-shadow: 0 8px 24px rgba(41,121,255,0.15); }
         .card-title-group { flex: 1; }
         .card-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 4px; letter-spacing: -0.5px; }
-        .card-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
-        .card-description { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.6; position: relative; z-index: 2; }
-        .card-arrow { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(255,255,255,0.5); transition: all 0.3s; }
-        .game-card:hover .card-arrow { background: rgba(255,255,255,0.12); transform: translateY(-50%) translateX(4px); color: rgba(255,255,255,0.7); }
+        .card-tag { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; padding: 4px 12px; border-radius: 20px; background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6); }
+        .card-description { font-size: 15px; color: rgba(255,255,255,0.35); line-height: 1.6; position: relative; z-index: 2; }
+        .card-arrow { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.04); display: flex; align-items: center; justify-content: center; font-size: 18px; color: rgba(255,255,255,0.3); transition: all 0.3s; }
+        .game-card:hover .card-arrow { background: rgba(255,255,255,0.1); transform: translateY(-50%) translateX(4px); color: rgba(255,255,255,0.7); }
 
         /* === QUIZ === */
-        .quiz-header { padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.4); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .back-btn { width: 48px; height: 48px; border-radius: 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: #fff; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-        .back-btn:hover, .back-btn:active { background: rgba(255,255,255,0.15); transform: scale(0.96); }
-        .score-display { display: flex; align-items: center; gap: 10px; background: rgba(0,230,118,0.1); border: 1px solid rgba(0,230,118,0.2); padding: 10px 20px; border-radius: 30px; font-weight: 800; }
-        .quiz-container { display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; padding: 40px 24px; gap: 40px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
-        .food-card { width: 100%; max-width: 360px; background: linear-gradient(180deg, var(--surface) 0%, rgba(22,22,29,0.9) 100%); border-radius: 32px; padding: 56px 32px; border: 1px solid rgba(255,255,255,0.1); position: relative; }
-        .food-card::before { content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 200px; height: 200px; background: radial-gradient(circle, rgba(0,230,118,0.08) 0%, transparent 70%); filter: blur(40px); }
-        .food-emoji { font-size: 120px; display: block; margin-bottom: 24px; animation: pop-in 0.5s cubic-bezier(0.175,0.885,0.32,1.275); filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3)); }
-        @keyframes pop-in { 0% { transform: scale(0) rotate(-10deg); opacity: 0; } 70% { transform: scale(1.15) rotate(2deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
-        .food-name { font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px; }
-        .food-question { font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 500; }
+        .quiz-header { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.08); z-index: 10; }
+        .back-btn { width: 44px; height: 44px; border-radius: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); color: #fff; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+        .back-btn:hover { background: rgba(255,255,255,0.12); }
+        
+        .quiz-stats-row { display: flex; align-items: center; gap: 16px; }
+        .lives-container { display: flex; gap: 4px; font-size: 20px; }
+        .life { transition: all 0.3s; }
+        .life-lost { transform: scale(0); opacity: 0; }
+        
+        .score-display { display: flex; align-items: center; gap: 8px; background: rgba(0,230,118,0.08); border: 1px solid rgba(0,230,118,0.15); padding: 8px 16px; border-radius: 24px; font-weight: 800; color: var(--primary); font-size: 17px; transition: transform 0.2s; }
+        .score-bump { transform: scale(1.15); }
+        
+        .quiz-container { display: flex; flex-direction: column; justify-content: center; align-items: center; flex: 1; padding: 30px 24px; gap: 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        
+        .difficulty-selector { display: flex; gap: 8px; justify-content: center; }
+        .diff-btn { padding: 8px 16px; border-radius: 12px; border: 2px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); cursor: pointer; font-weight: 700; font-family: inherit; transition: all 0.3s; font-size: 12px; }
+        .diff-btn.active { background: var(--primary); color: #000; border-color: var(--primary); box-shadow: 0 0 15px rgba(0,230,118,0.3); }
+
+        .food-card { width: 100%; max-width: 340px; background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 28px; padding: 40px 28px 24px; border: 1px solid rgba(255,255,255,0.08); position: relative; transition: all 0.3s; }
+        .food-card.quiz-correct { border-color: var(--primary); box-shadow: 0 0 40px rgba(0,230,118,0.2); }
+        .food-card.quiz-wrong { border-color: var(--danger); box-shadow: 0 0 40px rgba(255,61,0,0.2); animation: shake 0.5s ease; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(5px); } }
+        
+        .food-emoji { font-size: 100px; display: block; margin-bottom: 20px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4)); animation: bounce-in 0.6s cubic-bezier(0.175,0.885,0.32,1.275); }
+        @keyframes bounce-in { 0% { transform: scale(0) rotate(-15deg); opacity: 0; } 60% { transform: scale(1.15) rotate(3deg); } 100% { transform: scale(1) rotate(0); opacity: 1; } }
+        
+        .food-name { font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 6px; }
+        .food-question { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 500; margin-bottom: 16px; }
+        
+        .timer-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+        .timer-fill { height: 100%; background: var(--primary); border-radius: 3px; transition: width 0.1s linear; }
+        .timer-fill.warning { background: var(--gold); }
+        .timer-fill.danger { background: var(--danger); animation: pulse-timer 0.4s infinite alternate; }
+        @keyframes pulse-timer { from { opacity: 0.7; } to { opacity: 1; } }
+
         .streak-display { font-size: 14px; color: var(--primary); font-weight: 700; margin-top: 12px; display: flex; align-items: center; gap: 6px; }
-        .streak-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(0,230,118,0.15); padding: 4px 10px; border-radius: 20px; }
-        .quiz-controls { display: flex; gap: 20px; width: 100%; max-width: 380px; flex-shrink: 0; }
-        .answer-btn { flex: 1; height: 120px; border-radius: 24px; border: none; font-family: inherit; font-size: 19px; font-weight: 800; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: all 0.15s; }
-        .answer-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, transparent 50%); opacity: 0; transition: opacity 0.2s; border-radius: 24px; }
-        .answer-btn:hover::before, .answer-btn:active::before { opacity: 1; }
-        .btn-yes { background: linear-gradient(135deg, var(--primary) 0%, #00c853 100%); box-shadow: 0 12px 0 #009624, 0 15px 30px rgba(0,230,118,0.3); }
-        .btn-no { background: linear-gradient(135deg, var(--danger) 0%, #dd2c00 100%); box-shadow: 0 12px 0 #bf360c, 0 15px 30px rgba(255,61,0,0.3); }
-        .answer-btn:hover { transform: translateY(-2px); }
-        .answer-btn:active { transform: translateY(8px); box-shadow: 0 4px 0 currentColor, 0 8px 20px rgba(0,0,0,0.2); }
-        .btn-label { font-size: 11px; opacity: 0.75; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
-        .btn-score { font-size: 16px; font-weight: 900; }
-        .difficulty-selector { display: flex; gap: 12px; justify-content: center; margin-bottom: 10px; }
-        .diff-btn { padding: 10px 20px; border-radius: 20px; border: 2px solid rgba(255,255,255,0.2); background: transparent; color: rgba(255,255,255,0.6); cursor: pointer; font-weight: 700; font-family: inherit; transition: all 0.3s; }
-        .diff-btn.active { background: var(--primary); color: #000; border-color: var(--primary); }
-        .diff-btn:hover { border-color: rgba(255,255,255,0.5); }
+        .streak-badge { display: inline-flex; align-items: center; gap: 4px; background: rgba(0,230,118,0.15); padding: 4px 10px; border-radius: 20px; font-size: 12px; box-shadow: 0 0 10px rgba(0,230,118,0.2); }
+        
+        .quiz-controls { display: flex; gap: 16px; width: 100%; max-width: 340px; flex-shrink: 0; }
+        .answer-btn { flex: 1; height: 100px; border-radius: 24px; border: none; font-family: inherit; font-size: 19px; font-weight: 800; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; transition: all 0.15s; }
+        .btn-yes { background: linear-gradient(135deg, var(--primary) 0%, #00c853 100%); box-shadow: 0 10px 0 #009624, 0 12px 20px rgba(0,230,118,0.2); }
+        .btn-no { background: linear-gradient(135deg, var(--danger) 0%, #dd2c00 100%); box-shadow: 0 10px 0 #bf360c, 0 12px 20px rgba(255,61,0,0.2); }
+        .answer-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 currentColor, 0 6px 10px rgba(0,0,0,0.2); }
+        .btn-label { font-size: 11px; opacity: 0.8; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+        .btn-score { font-size: 18px; font-weight: 900; }
+
+        /* Floating Text */
+        .floating-text { position: absolute; font-weight: 900; font-size: 24px; pointer-events: none; animation: float-away 1s ease-out forwards; z-index: 100; text-shadow: 0 2px 10px rgba(0,0,0,0.5); left: 50%; transform: translateX(-50%); }
+        @keyframes float-away { 0% { opacity: 1; transform: translateY(0) translateX(-50%) scale(1); } 100% { opacity: 0; transform: translateY(-80px) translateX(-50%) scale(1.2); } }
 
         /* === CLASSIFY GAME === */
-        .classify-container {
-            display: flex; flex-direction: column; height: 100%;
-            background: linear-gradient(160deg, #0d1117 0%, #0a0a0f 40%, #0f0f18 100%);
-            position: relative; overflow: hidden;
-        }
-
-        .classify-bg-emoji {
-            position: absolute; font-size: 80px; opacity: 0.03;
-            pointer-events: none; z-index: 0;
-            animation: float-emoji 18s ease-in-out infinite;
-        }
+        .classify-container { display: flex; flex-direction: column; height: 100%; background: linear-gradient(160deg, #0d1117 0%, #0a0a0f 40%, #0f0f18 100%); position: relative; overflow: hidden; }
+        .classify-bg-emoji { position: absolute; font-size: 80px; opacity: 0.02; pointer-events: none; z-index: 0; animation: float-emoji 20s ease-in-out infinite; }
         .classify-bg-emoji:nth-child(1) { top: 8%; left: 5%; animation-delay: 0s; }
-        .classify-bg-emoji:nth-child(2) { top: 25%; right: 8%; animation-delay: -4s; font-size: 60px; }
-        .classify-bg-emoji:nth-child(3) { bottom: 20%; left: 12%; animation-delay: -8s; font-size: 70px; }
-        .classify-bg-emoji:nth-child(4) { bottom: 35%; right: 5%; animation-delay: -12s; font-size: 50px; }
-        .classify-bg-emoji:nth-child(5) { top: 55%; left: 50%; animation-delay: -6s; font-size: 90px; }
+        .classify-bg-emoji:nth-child(2) { top: 25%; right: 8%; animation-delay: -5s; font-size: 60px; }
+        .classify-bg-emoji:nth-child(3) { bottom: 20%; left: 12%; animation-delay: -10s; font-size: 70px; }
+        @keyframes float-emoji { 0%, 100% { transform: translateY(0) rotate(0deg); } 33% { transform: translateY(-30px) rotate(5deg); } 66% { transform: translateY(15px) rotate(-3deg); } }
 
-        @keyframes float-emoji {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            33% { transform: translateY(-20px) rotate(5deg); }
-            66% { transform: translateY(10px) rotate(-3deg); }
-        }
+        .classify-header { padding: 16px 20px; display: flex; align-items: center; gap: 14px; background: rgba(0,0,0,0.6); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.06); z-index: 10; flex-shrink: 0; }
+        
+        .progress-ring-container { position: relative; width: 44px; height: 44px; flex-shrink: 0; }
+        .progress-ring-circle { transition: stroke-dashoffset 0.5s cubic-bezier(0.16,1,0.3,1); transform: rotate(-90deg); transform-origin: 50% 50%; }
+        .progress-ring-text { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; color: rgba(255,255,255,0.8); }
 
-        .classify-header {
-            padding: 16px 20px; display: flex; align-items: center; gap: 14px;
-            background: rgba(0,0,0,0.5); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            z-index: 10; flex-shrink: 0;
-        }
+        .classify-score-badge { display: flex; align-items: center; gap: 8px; background: rgba(41,121,255,0.1); border: 1px solid rgba(41,121,255,0.2); padding: 8px 16px; border-radius: 24px; font-weight: 800; font-size: 16px; color: var(--accent); }
 
-        .classify-progress-wrap {
-            flex: 1; display: flex; align-items: center; gap: 12px;
-        }
+        .classify-body { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px 32px; gap: 24px; z-index: 5; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 
-        .classify-progress-bar {
-            flex: 1; height: 8px; background: rgba(255,255,255,0.08);
-            border-radius: 10px; overflow: hidden;
-        }
+        .classify-food-card { width: 100%; max-width: 340px; background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border-radius: 28px; padding: 40px 28px 24px; border: 1px solid rgba(255,255,255,0.08); position: relative; text-align: center; transition: all 0.4s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        .classify-food-card.card-correct { border-color: rgba(0,230,118,0.5); box-shadow: 0 0 50px rgba(0,230,118,0.15); transform: scale(1.03); }
+        .classify-food-card.card-wrong { border-color: rgba(255,61,0,0.5); box-shadow: 0 0 50px rgba(255,61,0,0.15); animation: shake 0.5s ease; }
 
-        .classify-progress-fill {
-            height: 100%; width: 10%;
-            background: linear-gradient(90deg, var(--accent), #64B5F6);
-            border-radius: 10px;
-            transition: width 0.5s cubic-bezier(0.16,1,0.3,1);
-        }
+        .classify-food-emoji { font-size: 80px; display: block; margin-bottom: 16px; filter: drop-shadow(0 10px 25px rgba(0,0,0,0.3)); animation: bounce-in 0.5s cubic-bezier(0.175,0.885,0.32,1.275); }
+        .classify-food-name { font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .classify-food-question { font-size: 14px; color: rgba(255,255,255,0.35); font-weight: 500; margin-bottom: 16px; }
 
-        .classify-progress-text {
-            font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.6);
-            min-width: 38px; text-align: right;
-        }
+        .classify-tip { margin-top: 12px; padding: 12px 16px; background: rgba(41,121,255,0.06); border-radius: 14px; font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; border-left: 3px solid var(--accent); animation: tip-appear 0.3s ease-out; }
+        @keyframes tip-appear { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        .classify-score-badge {
-            display: flex; align-items: center; gap: 8px;
-            background: rgba(41,121,255,0.12); border: 1px solid rgba(41,121,255,0.25);
-            padding: 8px 16px; border-radius: 24px; font-weight: 800; font-size: 15px;
-        }
-
-        .classify-body {
-            flex: 1; display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            padding: 24px 20px 32px; gap: 28px;
-            z-index: 5; overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .classify-food-card {
-            width: 100%; max-width: 340px;
-            background: linear-gradient(180deg, var(--surface) 0%, rgba(22,22,29,0.9) 100%);
-            border-radius: 28px; padding: 44px 28px 32px;
-            border: 1px solid rgba(255,255,255,0.1);
-            position: relative; text-align: center;
-            transition: border-color 0.4s, box-shadow 0.4s;
-        }
-
-        .classify-food-card::before {
-            content: ''; position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-            width: 180px; height: 180px;
-            background: radial-gradient(circle, rgba(41,121,255,0.1) 0%, transparent 70%);
-            filter: blur(30px); pointer-events: none;
-        }
-
-        .classify-food-card.card-correct {
-            border-color: rgba(0,230,118,0.5);
-            box-shadow: 0 0 40px rgba(0,230,118,0.15);
-        }
-
-        .classify-food-card.card-wrong {
-            border-color: rgba(255,61,0,0.5);
-            box-shadow: 0 0 40px rgba(255,61,0,0.15);
-        }
-
-        @keyframes gentle-appear {
-            from { opacity: 0; transform: translateY(16px) scale(0.97); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        .classify-food-emoji {
-            font-size: 90px; display: block; margin-bottom: 16px;
-            filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
-        }
-
-        .classify-food-name {
-            font-size: 26px; font-weight: 800; color: #fff; margin-bottom: 6px;
-        }
-
-        .classify-food-question {
-            font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 500;
-        }
-
-        .classify-tip {
-            margin-top: 16px; padding: 12px 16px;
-            background: rgba(255,255,255,0.04); border-radius: 14px;
-            font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.5;
-            border-left: 3px solid var(--accent);
-            animation: tip-appear 0.3s ease-out;
-        }
-
-        @keyframes tip-appear {
-            from { opacity: 0; transform: translateY(8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .classify-categories {
-            display: grid; grid-template-columns: 1fr 1fr;
-            gap: 12px; width: 100%; max-width: 380px;
-        }
-
-        .cat-btn {
-            display: flex; align-items: center; gap: 10px;
-            padding: 16px 18px; border-radius: 18px;
-            border: 2px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.03);
-            cursor: pointer; font-family: inherit;
-            font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.75);
-            transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
-            position: relative; overflow: hidden;
-        }
-
-        .cat-btn::before {
-            content: ''; position: absolute; inset: 0;
-            opacity: 0; transition: opacity 0.3s; border-radius: 16px;
-        }
-
-        .cat-btn:hover, .cat-btn:active {
-            transform: translateY(-2px) scale(1.02);
-            border-color: rgba(255,255,255,0.2);
-        }
-
-        .cat-btn:hover::before { opacity: 1; }
-
+        .classify-categories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 380px; }
+        .cat-btn { display: flex; align-items: center; gap: 10px; padding: 14px 16px; border-radius: 18px; border: 2px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); cursor: pointer; font-family: inherit; font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.65); transition: all 0.25s cubic-bezier(0.16,1,0.3,1); position: relative; overflow: hidden; backdrop-filter: blur(5px); }
+        .cat-btn:hover, .cat-btn:active { transform: translateY(-2px) scale(1.02); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .cat-btn .cat-emoji { font-size: 22px; flex-shrink: 0; }
-
-        .cat-btn.cat-correct {
-            border-color: var(--primary) !important;
-            background: rgba(0,230,118,0.15) !important;
-            color: #fff !important;
-            transform: scale(1.04);
-            box-shadow: 0 0 24px rgba(0,230,118,0.2);
-        }
-
-        .cat-btn.cat-wrong {
-            border-color: var(--danger) !important;
-            background: rgba(255,61,0,0.12) !important;
-            animation: shake 0.4s ease;
-        }
-
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            20% { transform: translateX(-6px); }
-            40% { transform: translateX(6px); }
-            60% { transform: translateX(-4px); }
-            80% { transform: translateX(4px); }
-        }
-
-        .cat-btn[data-category="fruites"]::before { background: rgba(255,107,107,0.08); }
-        .cat-btn[data-category="verdures"]::before { background: rgba(81,207,102,0.08); }
-        .cat-btn[data-category="proteines"]::before { background: rgba(255,146,43,0.08); }
-        .cat-btn[data-category="lactis"]::before { background: rgba(132,94,247,0.08); }
-        .cat-btn[data-category="cereals"]::before { background: rgba(252,196,25,0.08); }
-        .cat-btn[data-category="dolcos"]::before { background: rgba(240,101,149,0.08); }
-
+        .cat-btn.cat-correct { border-color: var(--primary) !important; background: rgba(0,230,118,0.15) !important; color: #fff !important; transform: scale(1.05); box-shadow: 0 0 30px rgba(0,230,118,0.25); }
+        .cat-btn.cat-wrong { border-color: var(--danger) !important; background: rgba(255,61,0,0.12) !important; animation: shake 0.4s ease; }
         .cat-btn[data-category="fruites"]:hover { border-color: rgba(255,107,107,0.4); }
         .cat-btn[data-category="verdures"]:hover { border-color: rgba(81,207,102,0.4); }
         .cat-btn[data-category="proteines"]:hover { border-color: rgba(255,146,43,0.4); }
@@ -300,131 +177,40 @@
         .cat-btn[data-category="dolcos"]:hover { border-color: rgba(240,101,149,0.4); }
 
         /* OVERLAY BASE */
-        .game-overlay {
-            position: absolute; inset: 0; z-index: 300;
-            backdrop-filter: blur(30px);
-            display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            padding: 40px; text-align: center;
-        }
-
-        .classify-overlay {
-            background: linear-gradient(160deg, rgba(13,17,23,0.97) 0%, rgba(10,10,15,0.97) 50%, rgba(15,15,24,0.97) 100%);
-        }
-
-        .overlay-icon-large {
-            font-size: 100px; margin-bottom: 24px;
-            filter: drop-shadow(0 15px 35px rgba(0,0,0,0.4));
-            animation: bounceIcon 1.4s ease-in-out infinite;
-        }
-
-        @keyframes bounceIcon {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-14px) scale(1.06); }
-        }
-
-        .overlay-title {
-            font-size: 34px; font-weight: 900; margin-bottom: 12px;
-            letter-spacing: -1px; color: #fff;
-        }
-
-        .overlay-subtitle {
-            font-size: 15px; color: rgba(255,255,255,0.45);
-            margin-bottom: 36px; line-height: 1.7; max-width: 320px;
-        }
-
-        .cat-preview-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr);
-            gap: 10px; margin-bottom: 36px; width: 100%; max-width: 300px;
-        }
-
-        .cat-preview-item {
-            display: flex; flex-direction: column; align-items: center; gap: 4px;
-            padding: 10px 6px; border-radius: 14px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.5);
-        }
-
+        .game-overlay { position: absolute; inset: 0; z-index: 300; backdrop-filter: blur(30px); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 40px; text-align: center; background: linear-gradient(160deg, rgba(5,5,8,0.95) 0%, rgba(10,10,15,0.98) 100%); }
+        .overlay-icon-large { font-size: 100px; margin-bottom: 24px; filter: drop-shadow(0 15px 35px rgba(0,0,0,0.5)); animation: bounceIcon 1.4s ease-in-out infinite; }
+        @keyframes bounceIcon { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-14px) scale(1.06); } }
+        .overlay-title { font-size: 34px; font-weight: 900; margin-bottom: 12px; letter-spacing: -1px; color: #fff; }
+        .overlay-subtitle { font-size: 15px; color: rgba(255,255,255,0.4); margin-bottom: 36px; line-height: 1.7; max-width: 320px; }
+        .cat-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 36px; width: 100%; max-width: 300px; }
+        .cat-preview-item { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 6px; border-radius: 14px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.4); }
         .cat-preview-item .cp-emoji { font-size: 24px; }
-
-        .primary-btn {
-            background: linear-gradient(135deg, var(--accent) 0%, #1565C0 100%);
-            color: #fff; border: none; padding: 20px 50px;
-            border-radius: 50px; font-size: 18px; font-weight: 900;
-            font-family: inherit; cursor: pointer; width: 100%; max-width: 280px;
-            box-shadow: 0 10px 0 #0D47A1, 0 16px 40px rgba(41,121,255,0.3);
-            transition: all 0.2s cubic-bezier(0.16,1,0.3,1);
-            letter-spacing: 0.5px;
-        }
-
-        .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 13px 0 #0D47A1, 0 22px 50px rgba(41,121,255,0.4); }
-        .primary-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 #0D47A1, 0 8px 20px rgba(41,121,255,0.2); }
-
-        .secondary-btn {
-            background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15);
-            color: #fff; font-size: 22px; margin-top: 18px; cursor: pointer;
-            padding: 14px 24px; border-radius: 50%; transition: all 0.2s;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .secondary-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.1); }
+        .primary-btn { background: linear-gradient(135deg, var(--accent) 0%, #1565C0 100%); color: #fff; border: none; padding: 20px 50px; border-radius: 50px; font-size: 18px; font-weight: 900; font-family: inherit; cursor: pointer; width: 100%; max-width: 280px; box-shadow: 0 10px 0 #0D47A1, 0 16px 40px rgba(41,121,255,0.25); transition: all 0.2s cubic-bezier(0.16,1,0.3,1); letter-spacing: 0.5px; }
+        .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 13px 0 #0D47A1, 0 22px 50px rgba(41,121,255,0.35); }
+        .primary-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 #0D47A1, 0 8px 20px rgba(41,121,255,0.15); }
+        .secondary-btn { background: rgba(255,255,255,0.06); border: 2px solid rgba(255,255,255,0.1); color: #fff; font-size: 22px; margin-top: 18px; cursor: pointer; padding: 14px 24px; border-radius: 50%; transition: all 0.2s; display: flex; align-items: center; justify-content: center; }
+        .secondary-btn:hover { background: rgba(255,255,255,0.12); transform: scale(1.1); }
 
         /* RESULTATS */
-        .results-accuracy {
-            font-size: 72px; font-weight: 900; color: var(--accent);
-            margin-bottom: 8px;
-            text-shadow: 0 6px 20px rgba(41,121,255,0.4);
-        }
-
-        .results-correct {
-            font-size: 16px; color: rgba(255,255,255,0.5); font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .results-score-big {
-            font-size: 20px; font-weight: 800; color: var(--gold);
-            margin-bottom: 24px;
-        }
-
-        .results-message {
-            font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.7;
-            margin-bottom: 36px; max-width: 300px;
-        }
-
-        .results-breakdown {
-            display: grid; grid-template-columns: repeat(3,1fr);
-            gap: 8px; margin-bottom: 28px; width: 100%; max-width: 280px;
-        }
-
-        .breakdown-item {
-            padding: 10px 6px; border-radius: 12px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            text-align: center;
-        }
-
-        .breakdown-item .bi-emoji { font-size: 20px; display: block; margin-bottom: 2px; }
-        .breakdown-item .bi-count { font-size: 14px; font-weight: 800; color: rgba(255,255,255,0.7); }
+        .results-accuracy { font-size: 72px; font-weight: 900; color: var(--accent); margin-bottom: 8px; text-shadow: 0 10px 30px rgba(41,121,255,0.4); }
+        .results-correct { font-size: 16px; color: rgba(255,255,255,0.5); font-weight: 600; margin-bottom: 6px; }
+        .results-score-big { font-size: 22px; font-weight: 800; color: var(--gold); margin-bottom: 24px; }
+        .results-message { font-size: 15px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 36px; max-width: 300px; }
+        .results-breakdown { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 28px; width: 100%; max-width: 280px; }
+        .breakdown-item { padding: 10px 6px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); text-align: center; font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 700; }
+        .breakdown-item span { display: block; font-size: 20px; margin-bottom: 4px; }
 
         @media (max-width: 480px) {
             .menu-header { padding: 64px 24px 40px; }
             .main-title { font-size: clamp(38px,10vw,52px); }
             .menu-cards-section { padding: 16px 20px 48px; gap: 20px; }
             .game-card { padding: 28px 24px; }
-            .card-icon { width: 56px; height: 56px; font-size: 24px; }
-            .card-title { font-size: 21px; }
-            .card-description { font-size: 14px; }
-            .card-arrow { width: 40px; height: 40px; right: 20px; }
-            .quiz-controls { gap: 16px; }
-            .answer-btn { height: 110px; font-size: 17px; }
-            .classify-food-emoji { font-size: 72px; }
-            .classify-food-name { font-size: 22px; }
-            .classify-categories { gap: 10px; }
-            .cat-btn { padding: 14px 14px; font-size: 13px; }
-            .cat-btn .cat-emoji { font-size: 20px; }
+            .quiz-controls { gap: 12px; }
+            .answer-btn { height: 90px; font-size: 17px; border-radius: 20px; }
+            .classify-food-emoji { font-size: 64px; }
+            .classify-categories { gap: 8px; }
+            .cat-btn { padding: 12px; font-size: 13px; }
             .overlay-title { font-size: 28px; }
-            .results-accuracy { font-size: 56px; }
         }
     </style>
 </head>
@@ -433,22 +219,23 @@
 <!-- MENÚ -->
 <div id="viewMenu" class="app-view active-view">
     <div class="menu-container">
+        <div class="bg-particles" id="bgParticles"></div>
         <div class="menu-scroll-wrapper">
             <div class="menu-content-full">
                 <div class="menu-header">
                     <div class="brand-badge"><span class="brand-icon"></span>Nutri &bull; Dash</div>
                     <h1 class="main-title">Benvingut</h1>
-                    <p class="subtitle">Desafia la teva ment i aprèn sobre nutrició amb dues experiències educatives</p>
+                    <p class="subtitle">Desafia la teva ment i aprèn sobre nutrició amb dues experiències arcade.</p>
                 </div>
                 <div class="menu-cards-section">
                     <button class="game-card card-quiz" onclick="nav.to('quiz')">
                         <div class="card-glow"></div>
                         <div class="card-header">
-                            <div class="card-icon icon-quiz"><i class="fa-solid fa-brain"></i></div>
-                            <div class="card-title-group"><h3 class="card-title">Mode Preguntes</h3><span class="card-tag">Mental</span></div>
+                            <div class="card-icon icon-quiz"><i class="fa-solid fa-bolt"></i></div>
+                            <div class="card-title-group"><h3 class="card-title">Mode Preguntes</h3><span class="card-tag">Arcade</span></div>
                             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                         </div>
-                        <p class="card-description">Ràpid, mental i adictiu. Identifica aliments saludables en un rellotge contrarellotge.</p>
+                        <p class="card-description">Contrarellotge i vides! Respon ràpid per sumar punts extra.</p>
                     </button>
 
                     <button class="game-card card-classify" onclick="nav.to('classify')">
@@ -458,7 +245,7 @@
                             <div class="card-title-group"><h3 class="card-title">Mode Classificació</h3><span class="card-tag">Educatiu</span></div>
                             <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
                         </div>
-                        <p class="card-description">Aprèn a classificar els aliments en els seus grups nutricionals. Calm i educatiu.</p>
+                        <p class="card-description">Classifica aliments i aprèn. Respon ràpid per a bonificacions!</p>
                     </button>
                 </div>
             </div>
@@ -470,7 +257,12 @@
 <div id="viewQuiz" class="app-view view-hidden">
     <div class="quiz-header">
         <button class="back-btn" onclick="nav.to('menu')"><i class="fa-solid fa-chevron-left"></i></button>
-        <div class="score-display"><span>🎯</span><span id="scoreQuiz">0</span></div>
+        <div class="quiz-stats-row">
+            <div class="lives-container" id="quizLives">
+                <span class="life">❤️</span><span class="life">❤️</span><span class="life">❤️</span>
+            </div>
+            <div class="score-display"><span>🎯</span><span id="scoreQuiz">0</span></div>
+        </div>
     </div>
     <div class="quiz-container">
         <div class="difficulty-selector">
@@ -478,10 +270,11 @@
             <button class="diff-btn" data-diff="medium" onclick="setQuizDifficulty('medium')">Mitjà</button>
             <button class="diff-btn" data-diff="hard" onclick="setQuizDifficulty('hard')">Difícil</button>
         </div>
-        <div class="food-card">
+        <div class="food-card" id="quizFoodCard">
             <span class="food-emoji" id="foodEmoji">🍎</span>
             <h2 class="food-name" id="foodName">Poma</h2>
             <p class="food-question">És una opció saludable?</p>
+            <div class="timer-bar"><div class="timer-fill" id="quizTimerFill"></div></div>
             <div class="streak-display" id="streakDisplay" style="display:none;">
                 <span>🔥</span><span id="streakCount">0</span><span>streak</span>
                 <span id="multiplier" class="streak-badge">x1</span>
@@ -498,54 +291,46 @@
             </button>
         </div>
     </div>
+    <div id="quizOverlay" class="game-overlay" style="display: none;"></div>
 </div>
 
 <!-- CLASSIFY -->
 <div id="viewClassify" class="app-view view-hidden">
     <div class="classify-container">
-        <!-- Fons decoratiu -->
         <div class="classify-bg-emoji">🥦</div>
         <div class="classify-bg-emoji">🐟</div>
         <div class="classify-bg-emoji">🌾</div>
-        <div class="classify-bg-emoji">🧀</div>
-        <div class="classify-bg-emoji">🍎</div>
 
-        <!-- Capçalera -->
         <div class="classify-header">
             <button class="back-btn" onclick="nav.to('menu')"><i class="fa-solid fa-chevron-left"></i></button>
-            <div class="classify-progress-wrap">
-                <div class="classify-progress-bar">
-                    <div class="classify-progress-fill" id="classifyProgressFill"></div>
-                </div>
-                <span class="classify-progress-text" id="classifyProgressText">1/10</span>
+            <div class="progress-ring-container">
+                <svg class="progress-ring" width="44" height="44">
+                    <circle stroke="rgba(255,255,255,0.08)" stroke-width="4" fill="transparent" r="18" cx="22" cy="22"/>
+                    <circle class="progress-ring-circle" id="progressCircle" stroke="#2979ff" stroke-width="4" fill="transparent" r="18" cx="22" cy="22" stroke-dasharray="113.1" stroke-dashoffset="113.1" stroke-linecap="round"/>
+                </svg>
+                <div class="progress-ring-text" id="classifyProgressText">0</div>
             </div>
-            <div class="classify-score-badge">
-                <span>⭐</span><span id="classifyScore">0</span>
-            </div>
+            <div style="flex:1"></div>
+            <div class="classify-score-badge"><span>⭐</span><span id="classifyScore">0</span></div>
         </div>
 
-        <!-- Cos del joc -->
         <div class="classify-body">
             <div class="classify-food-card" id="classifyFoodCard">
                 <span class="classify-food-emoji" id="classifyEmoji">🍎</span>
                 <h3 class="classify-food-name" id="classifyName">Poma</h3>
                 <p class="classify-food-question">A quin grup pertany?</p>
+                <div class="timer-bar"><div class="timer-fill" id="classifyTimerFill"></div></div>
                 <div class="classify-tip" id="classifyTip" style="display:none;"></div>
             </div>
 
-            <div class="classify-categories" id="classifyCategories">
-                <!-- Es generen via JS -->
-            </div>
+            <div class="classify-categories" id="classifyCategories"></div>
         </div>
 
-        <!-- Overlay inici / resultats -->
         <div id="classifyOverlay" class="game-overlay classify-overlay">
             <div class="overlay-icon-large">📚</div>
             <div class="overlay-title">Classifica els Aliments</div>
-            <div class="overlay-subtitle">Identifica a quin grup nutricional pertany cada aliment i aprèn curiositats sobre nutrició</div>
-            <div class="cat-preview-grid" id="catPreviewGrid">
-                <!-- Es genera via JS -->
-            </div>
+            <div class="overlay-subtitle">Identifica a quin grup pertany cada aliment abans que s'acabi el temps. Ràpid = Més punts!</div>
+            <div class="cat-preview-grid" id="catPreviewGrid"></div>
             <button class="primary-btn" onclick="startClassify()">Començar</button>
         </div>
     </div>
@@ -555,108 +340,76 @@
     // ========== DADES ==========
     const foodDatabase = {
         easy: [
-            { name: 'Poma', emoji: '🍎', healthy: true },
-            { name: 'Plàtan', emoji: '🍌', healthy: true },
-            { name: 'Zanahòria', emoji: '🥕', healthy: true },
-            { name: 'Bròquil', emoji: '🥦', healthy: true },
-            { name: 'Galeta', emoji: '🍪', healthy: false },
-            { name: 'Xocolata', emoji: '🍫', healthy: false },
-            { name: 'Beguda gaseosa', emoji: '🥤', healthy: false },
-            { name: 'Llimona', emoji: '🍋', healthy: true },
+            { name: 'Poma', emoji: '🍎', healthy: true }, { name: 'Plàtan', emoji: '🍌', healthy: true },
+            { name: 'Zanahòria', emoji: '🥕', healthy: true }, { name: 'Bròquil', emoji: '🥦', healthy: true },
+            { name: 'Galeta', emoji: '🍪', healthy: false }, { name: 'Xocolata', emoji: '🍫', healthy: false },
+            { name: 'Beguda gaseosa', emoji: '🥤', healthy: false }, { name: 'Llimona', emoji: '🍋', healthy: true },
         ],
         medium: [
-            { name: 'Bròquil', emoji: '🥦', healthy: true },
-            { name: 'Peix', emoji: '🐟', healthy: true },
-            { name: 'Ou', emoji: '🥚', healthy: true },
-            { name: 'Fruits secs', emoji: '🥜', healthy: true },
-            { name: 'Formatge', emoji: '🧀', healthy: true },
-            { name: 'Pizza', emoji: '🍕', healthy: false },
-            { name: 'Hamburguesa', emoji: '🍔', healthy: false },
-            { name: 'Patates fregides', emoji: '🍟', healthy: false },
+            { name: 'Bròquil', emoji: '🥦', healthy: true }, { name: 'Peix', emoji: '🐟', healthy: true },
+            { name: 'Ou', emoji: '🥚', healthy: true }, { name: 'Fruits secs', emoji: '🥜', healthy: true },
+            { name: 'Formatge', emoji: '🧀', healthy: true }, { name: 'Pizza', emoji: '🍕', healthy: false },
+            { name: 'Hamburguesa', emoji: '🍔', healthy: false }, { name: 'Patates fregides', emoji: '🍟', healthy: false },
         ],
         hard: [
-            { name: 'Kiwi', emoji: '🥝', healthy: true },
-            { name: 'Mango', emoji: '🥭', healthy: true },
-            { name: 'Síndria', emoji: '🍉', healthy: true },
-            { name: 'Iogurt natural', emoji: '🍶', healthy: true },
-            { name: 'Oli d\'oliva', emoji: '🫒', healthy: true },
-            { name: 'Pastís', emoji: '🎂', healthy: false },
-            { name: 'Gelat', emoji: '🍦', healthy: false },
-            { name: 'Caramel', emoji: '🍭', healthy: false },
+            { name: 'Kiwi', emoji: '🥝', healthy: true }, { name: 'Mango', emoji: '🥭', healthy: true },
+            { name: 'Síndria', emoji: '🍉', healthy: true }, { name: 'Iogurt natural', emoji: '🍶', healthy: true },
+            { name: 'Oli d\'oliva', emoji: '🫒', healthy: true }, { name: 'Pastís', emoji: '🎂', healthy: false },
+            { name: 'Gelat', emoji: '🍦', healthy: false }, { name: 'Caramel', emoji: '🍭', healthy: false },
         ]
     };
 
-    // Categories per al Mode Classificació
     const categories = [
-        { id: 'fruites', name: 'Fruites', emoji: '🍎' },
-        { id: 'verdures', name: 'Verdures', emoji: '🥬' },
-        { id: 'proteines', name: 'Proteïnes', emoji: '🥩' },
-        { id: 'lactis', name: 'Lactis', emoji: '🧀' },
-        { id: 'cereals', name: 'Cereals', emoji: '🌾' },
-        { id: 'dolcos', name: 'Dolços', emoji: '🍬' }
+        { id: 'fruites', name: 'Fruites', emoji: '🍎' }, { id: 'verdures', name: 'Verdures', emoji: '🥬' },
+        { id: 'proteines', name: 'Proteïnes', emoji: '🥩' }, { id: 'lactis', name: 'Lactis', emoji: '🧀' },
+        { id: 'cereals', name: 'Cereals', emoji: '🌾' }, { id: 'dolcos', name: 'Dolços', emoji: '🍬' }
     ];
 
-    // Base de dades completa per classificar
     const classifyFoods = [
-        // Fruites
-        { name: 'Poma', emoji: '🍎', category: 'fruites', tip: 'Rica en fibra i vitamina C. Ajuda a regular el trànsit intestinal.' },
-        { name: 'Plàtan', emoji: '🍌', category: 'fruites', tip: 'Font de potassi i energia ràpida. Ideal per esportistes.' },
-        { name: 'Taronja', emoji: '🍊', category: 'fruites', tip: 'Alta en vitamina C. Reforça el sistema immunitari.' },
-        { name: 'Raïm', emoji: '🍇', category: 'fruites', tip: 'Conté antioxidants i resveratrol, bo per al cor.' },
-        { name: 'Mango', emoji: '🥭', category: 'fruites', tip: 'Ric en vitamina A i C. Excel·lent per la pell i la vista.' },
-        { name: 'Maduixa', emoji: '🍓', category: 'fruites', tip: 'Baixa en calories i rica en vitamina C i antioxidants.' },
-        { name: 'Llimona', emoji: '🍋', category: 'fruites', tip: 'Excel·lent font de vitamina C. Afavoreix la digestió.' },
-        { name: 'Cirera', emoji: '🍒', category: 'fruites', tip: 'Conté antioxidants i fibra. Amb propietats antiinflamatòries.' },
-        { name: 'Préssec', emoji: '🍑', category: 'fruites', tip: 'Ric en vitamina A i potassi. Molt hidratant.' },
-        { name: 'Kiwi', emoji: '🥝', category: 'fruites', tip: 'Té més vitamina C que la taronja. Ric en fibra.' },
-        { name: 'Pera', emoji: '🍐', category: 'fruites', tip: 'Font de fibra i aigua. Molt suau per l\'estómac.' },
-        { name: 'Síndria', emoji: '🍉', category: 'fruites', tip: 'Molt hidratant (92% aigua). Conté licopè.' },
-
-        // Verdures
-        { name: 'Zanahòria', emoji: '🥕', category: 'verdures', tip: 'Rica en betacarotè i vitamina A. Bona per la vista.' },
-        { name: 'Bròquil', emoji: '🥦', category: 'verdures', tip: 'Super aliment: ric en vitamines C, K i fibra.' },
-        { name: 'Tomàquet', emoji: '🍅', category: 'verdures', tip: 'Font de licopè i vitamina C. Protegeix el cor.' },
-        { name: 'Enciam', emoji: '🥬', category: 'verdures', tip: 'Molt baix en calories i ric en aigua i fibra.' },
-        { name: 'Blat de moro', emoji: '🌽', category: 'verdures', tip: 'Font de fibra i energia. Conté vitamines del grup B.' },
-        { name: 'Pepino', emoji: '🥒', category: 'verdures', tip: 'Molt hidratant i baix en calories. Perfecte en amanides.' },
-        { name: 'Pebrot', emoji: '🫑', category: 'verdures', tip: 'Ric en vitamina C (més que la taronja!).' },
-        { name: 'Ceba', emoji: '🧅', category: 'verdures', tip: 'Propietats antibacterianes i antioxidants.' },
-        { name: 'Patata', emoji: '🥔', category: 'verdures', tip: 'Font de carbohidrats i potassi. Energia sostenida.' },
-        { name: 'Albergínia', emoji: '🍆', category: 'verdures', tip: 'Rica en fibra i antioxidants. Molt versàtil.' },
-        { name: 'All', emoji: '🧄', category: 'verdures', tip: 'Propietats medicinals reconegudes. Bo per al cor.' },
-        { name: 'Coliflor', emoji: '🥦', category: 'verdures', tip: 'Rica en vitamina C i fibra. Baixa en calories.' },
-
-        // Proteïnes
-        { name: 'Peix', emoji: '🐟', category: 'proteines', tip: 'Ric en Omega 3. Bo per al cor i el cervell.' },
-        { name: 'Ou', emoji: '🥚', category: 'proteines', tip: 'Proteïna completa d\'alta qualitat. Conté vitamina D.' },
-        { name: 'Pollastre', emoji: '🍗', category: 'proteines', tip: 'Proteïna magra ideal per als músculs.' },
-        { name: 'Carn', emoji: '🥩', category: 'proteines', tip: 'Font de ferro i vitamina B12. Amb moderació.' },
-        { name: 'Gambes', emoji: '🦐', category: 'proteines', tip: 'Riques en iode i proteïnes. Baixes en greix.' },
-        { name: 'Llentilles', emoji: '🫘', category: 'proteines', tip: 'Proteïna vegetal i fibra. Font de ferro.' },
-        { name: 'Cigrons', emoji: '🫘', category: 'proteines', tip: 'Rics en proteïna i fibra. Bons per al trànsit.' },
-        { name: 'Fruits secs', emoji: '🥜', category: 'proteines', tip: 'Greixos saludables i proteïna. Energia concentrada.' },
-
-        // Lactis
-        { name: 'Formatge', emoji: '🧀', category: 'lactis', tip: 'Font de calci i proteïna. Amb moderació per el greix.' },
-        { name: 'Llet', emoji: '🥛', category: 'lactis', tip: 'Essencial per als ossos. Font de calci i vitamina D.' },
-        { name: 'Iogurt', emoji: '🍶', category: 'lactis', tip: 'Probiòtics per a la salut intestinal. Ric en calci.' },
-        { name: 'Mantega', emoji: '🧈', category: 'lactis', tip: 'Alta en greixos saturats. Utilitza-la amb moderació.' },
-
-        // Cereals
-        { name: 'Pa', emoji: '🍞', category: 'cereals', tip: 'Font d\'energia i carbohidrats. El integral té més fibra.' },
-        { name: 'Arròs', emoji: '🍚', category: 'cereals', tip: 'Base energètica de moltes dietes. L\'integral és més nutritiu.' },
-        { name: 'Pasta', emoji: '🍝', category: 'cereals', tip: 'Carbohidrats per a l\'energia. La integral aporta més fibra.' },
-        { name: 'Civada', emoji: '🌾', category: 'cereals', tip: 'Rica en fibra soluble. Ajuda a reduir el colesterol.' },
-        { name: 'Cereals esmorzar', emoji: '🥣', category: 'cereals', tip: 'Font d\'energia matinal. Vigila el sucre afegit.' },
-
-        // Dolços
-        { name: 'Galeta', emoji: '🍪', category: 'dolcos', tip: 'Alta en sucre i greixos. Consum ocasional.' },
-        { name: 'Xocolata', emoji: '🍫', category: 'dolcos', tip: 'La negra (>70%) és la més saludable. Amb moderació!' },
-        { name: 'Gelat', emoji: '🍦', category: 'dolcos', tip: 'Alt en sucre i greixos. Com a premi de tant en tant.' },
-        { name: 'Pastís', emoji: '🎂', category: 'dolcos', tip: 'Alt en calories i sucre. Per a celebracions especials.' },
-        { name: 'Refresc', emoji: '🥤', category: 'dolcos', tip: 'Ple de sucre afegit. Millor aigua o infusions!' },
-        { name: 'Caramel', emoji: '🍭', category: 'dolcos', tip: 'Només sucre, sense nutrients. Consum molt ocasional.' },
-        { name: 'Rosquilla', emoji: '🍩', category: 'dolcos', tip: 'Fregida i alta en calories. Com a excepció.' },
+        { name: 'Poma', emoji: '🍎', category: 'fruites', tip: 'Rica en fibra i vitamina C.' },
+        { name: 'Plàtan', emoji: '🍌', category: 'fruites', tip: 'Font de potassi i energia ràpida.' },
+        { name: 'Taronja', emoji: '🍊', category: 'fruites', tip: 'Alta en vitamina C.' },
+        { name: 'Raïm', emoji: '🍇', category: 'fruites', tip: 'Conté antioxidants.' },
+        { name: 'Mango', emoji: '🥭', category: 'fruites', tip: 'Ric en vitamina A i C.' },
+        { name: 'Maduixa', emoji: '🍓', category: 'fruites', tip: 'Baixa en calories i rica en vitamina C.' },
+        { name: 'Llimona', emoji: '🍋', category: 'fruites', tip: 'Font de vitamina C.' },
+        { name: 'Cirera', emoji: '🍒', category: 'fruites', tip: 'Propietats antiinflamatòries.' },
+        { name: 'Préssec', emoji: '🍑', category: 'fruites', tip: 'Ric en vitamina A.' },
+        { name: 'Kiwi', emoji: '🥝', category: 'fruites', tip: 'Més vitamina C que la taronja.' },
+        { name: 'Síndria', emoji: '🍉', category: 'fruites', tip: 'Molt hidratant.' },
+        { name: 'Zanahòria', emoji: '🥕', category: 'verdures', tip: 'Bona per la vista.' },
+        { name: 'Bròquil', emoji: '🥦', category: 'verdures', tip: 'Ric en vitamines C, K i fibra.' },
+        { name: 'Tomàquet', emoji: '🍅', category: 'verdures', tip: 'Font de licopè.' },
+        { name: 'Enciam', emoji: '🥬', category: 'verdures', tip: 'Molt baix en calories.' },
+        { name: 'Blat de moro', emoji: '🌽', category: 'verdures', tip: 'Font de fibra i energia.' },
+        { name: 'Pepino', emoji: '🥒', category: 'verdures', tip: 'Molt hidratant.' },
+        { name: 'Pebrot', emoji: '🫑', category: 'verdures', tip: 'Ric en vitamina C.' },
+        { name: 'Ceba', emoji: '🧅', category: 'verdures', tip: 'Antibacteriana.' },
+        { name: 'Patata', emoji: '🥔', category: 'verdures', tip: 'Font de carbohidrats.' },
+        { name: 'All', emoji: '🧄', category: 'verdures', tip: 'Bo per al cor.' },
+        { name: 'Peix', emoji: '🐟', category: 'proteines', tip: 'Ric en Omega 3.' },
+        { name: 'Ou', emoji: '🥚', category: 'proteines', tip: 'Proteïna d\'alta qualitat.' },
+        { name: 'Pollastre', emoji: '🍗', category: 'proteines', tip: 'Proteïna magra.' },
+        { name: 'Carn', emoji: '🥩', category: 'proteines', tip: 'Font de ferro.' },
+        { name: 'Gambes', emoji: '🦐', category: 'proteines', tip: 'Riques en iode.' },
+        { name: 'Llentilles', emoji: '🫘', category: 'proteines', tip: 'Proteïna vegetal i fibra.' },
+        { name: 'Cigrons', emoji: '🫘', category: 'proteines', tip: 'Rics en proteïna.' },
+        { name: 'Fruits secs', emoji: '🥜', category: 'proteines', tip: 'Greixos saludables.' },
+        { name: 'Formatge', emoji: '🧀', category: 'lactis', tip: 'Font de calci.' },
+        { name: 'Llet', emoji: '🥛', category: 'lactis', tip: 'Essencial per als ossos.' },
+        { name: 'Iogurt', emoji: '🍶', category: 'lactis', tip: 'Probiòtics.' },
+        { name: 'Mantega', emoji: '🧈', category: 'lactis', tip: 'Alta en greixos saturats.' },
+        { name: 'Pa', emoji: '🍞', category: 'cereals', tip: 'El integral té més fibra.' },
+        { name: 'Arròs', emoji: '🍚', category: 'cereals', tip: 'Base energètica.' },
+        { name: 'Pasta', emoji: '🍝', category: 'cereals', tip: 'Carbohidrats per a l\'energia.' },
+        { name: 'Civada', emoji: '🌾', category: 'cereals', tip: 'Rica en fibra soluble.' },
+        { name: 'Cereals esmorzar', emoji: '🥣', category: 'cereals', tip: 'Vigila el sucre afegit.' },
+        { name: 'Galeta', emoji: '🍪', category: 'dolcos', tip: 'Consum ocasional.' },
+        { name: 'Xocolata', emoji: '🍫', category: 'dolcos', tip: 'La negra és la més saludable.' },
+        { name: 'Gelat', emoji: '🍦', category: 'dolcos', tip: 'Com a premi de tant en tant.' },
+        { name: 'Pastís', emoji: '🎂', category: 'dolcos', tip: 'Per a celebracions.' },
+        { name: 'Refresc', emoji: '🥤', category: 'dolcos', tip: 'Ple de sucre afegit.' },
+        { name: 'Caramel', emoji: '🍭', category: 'dolcos', tip: 'Consum molt ocasional.' },
     ];
 
     // ========== NAVEGACIÓ ==========
@@ -675,73 +428,222 @@
         }
     };
 
-    // ========== QUIZ ==========
-    let quizState = {
-        score: 0, streak: 0, multiplier: 1,
-        difficulty: 'easy', currentFood: null
-    };
+    // ========== EFECTES VISUALS ==========
+    function createFloatingText(text, color, targetElement) {
+        const el = document.createElement('div');
+        el.className = 'floating-text';
+        el.style.color = color;
+        el.textContent = text;
+        el.style.top = "40%";
+        targetElement.appendChild(el);
+        setTimeout(() => el.remove(), 1000);
+    }
+
+    function generateParticles() {
+        const container = document.getElementById('bgParticles');
+        if(!container) return;
+        container.innerHTML = '';
+        for(let i=0; i<30; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 4 + 1;
+            p.style.width = size + 'px'; p.style.height = size + 'px';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            p.style.animationDelay = (Math.random() * 10) + 's';
+            container.appendChild(p);
+        }
+    }
+
+    // ========== QUIZ ARCADE ==========
+    let quizState = {};
+    let quizTimerInterval = null;
+
+    function initQuiz() {
+        clearInterval(quizTimerInterval);
+        quizState = { 
+            score: 0, streak: 0, multiplier: 1, difficulty: 'easy', currentFood: null, 
+            isProcessing: false, lives: 3, questionIndex: 0, maxQuestions: 15, 
+            correctAnswers: 0, maxStreak: 0, timeLeft: 5 
+        };
+        document.getElementById('scoreQuiz').textContent = '0';
+        document.getElementById('streakDisplay').style.display = 'none';
+        document.getElementById('quizOverlay').style.display = 'none';
+        updateLivesUI();
+        setQuizDifficulty('easy');
+    }
 
     function setQuizDifficulty(diff) {
+        if(quizState.questionIndex > 0) return; // No canviar mig partida
         quizState.difficulty = diff;
         document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
         document.querySelector(`[data-diff="${diff}"]`).classList.add('active');
         loadNextFood();
     }
 
-    function initQuiz() {
-        quizState = { score: 0, streak: 0, multiplier: 1, difficulty: 'easy', currentFood: null };
-        document.getElementById('scoreQuiz').textContent = '0';
-        document.getElementById('streakDisplay').style.display = 'none';
-        setQuizDifficulty('easy');
+    function updateLivesUI() {
+        const livesEl = document.getElementById('quizLives');
+        livesEl.innerHTML = '';
+        for(let i=0; i<3; i++) {
+            const heart = document.createElement('span');
+            heart.className = 'life' + (i < quizState.lives ? '' : ' life-lost');
+            heart.textContent = '❤️';
+            livesEl.appendChild(heart);
+        }
     }
 
     function loadNextFood() {
+        if (quizState.lives <= 0 || quizState.questionIndex >= quizState.maxQuestions) {
+            showQuizGameOver();
+            return;
+        }
+
         const foods = foodDatabase[quizState.difficulty];
         quizState.currentFood = foods[Math.floor(Math.random() * foods.length)];
-        document.getElementById('foodEmoji').textContent = quizState.currentFood.emoji;
+        const emojiEl = document.getElementById('foodEmoji');
+        emojiEl.textContent = quizState.currentFood.emoji;
+        emojiEl.style.animation = 'none';
+        emojiEl.offsetHeight;
+        emojiEl.style.animation = 'bounce-in 0.6s cubic-bezier(0.175,0.885,0.32,1.275)';
+        
         document.getElementById('foodName').textContent = quizState.currentFood.name;
         const base = quizState.difficulty === 'easy' ? 10 : quizState.difficulty === 'medium' ? 15 : 20;
-        const pts = Math.floor(base * quizState.multiplier);
-        document.getElementById('scoreYes').textContent = '+' + pts;
-        document.getElementById('scoreNo').textContent = '+' + pts;
+        document.getElementById('scoreYes').textContent = '+' + Math.floor(base * quizState.multiplier);
+        document.getElementById('scoreNo').textContent = '+' + Math.floor(base * quizState.multiplier);
+        
+        const card = document.getElementById('quizFoodCard');
+        card.className = 'food-card';
+        quizState.isProcessing = false;
+        startQuizTimer();
+    }
+
+    function startQuizTimer() {
+        clearInterval(quizTimerInterval);
+        quizState.timeLeft = 5.0;
+        const fill = document.getElementById('quizTimerFill');
+        fill.style.width = '100%';
+        fill.className = 'timer-fill';
+        
+        quizTimerInterval = setInterval(() => {
+            quizState.timeLeft -= 0.05;
+            const pct = (quizState.timeLeft / 5.0) * 100;
+            fill.style.width = pct + '%';
+            
+            if (pct < 20) fill.className = 'timer-fill danger';
+            else if (pct < 50) fill.className = 'timer-fill warning';
+            
+            if (quizState.timeLeft <= 0) {
+                clearInterval(quizTimerInterval);
+                quizTimeout();
+            }
+        }, 50);
+    }
+
+    function quizTimeout() {
+        if(quizState.isProcessing) return;
+        quizState.isProcessing = true;
+        quizState.lives--;
+        updateLivesUI();
+        if(navigator.vibrate) navigator.vibrate(200);
+        
+        const card = document.getElementById('quizFoodCard');
+        card.classList.add('quiz-wrong');
+        createFloatingText("Temps!", 'var(--danger)', card);
+        
+        quizState.streak = 0; quizState.multiplier = 1;
+        document.getElementById('streakDisplay').style.display = 'none';
+
+        setTimeout(() => {
+            quizState.questionIndex++;
+            loadNextFood();
+        }, 1200);
     }
 
     function answerQuiz(answer) {
+        if(quizState.isProcessing) return;
+        quizState.isProcessing = true;
+        clearInterval(quizTimerInterval);
+        
         const correct = answer === quizState.currentFood.healthy;
+        const card = document.getElementById('quizFoodCard');
+        const scoreEl = document.getElementById('scoreQuiz');
         const base = quizState.difficulty === 'easy' ? 10 : quizState.difficulty === 'medium' ? 15 : 20;
+
         if (correct) {
-            quizState.score += Math.floor(base * quizState.multiplier);
+            const timeBonus = Math.floor(quizState.timeLeft * 2); // Fins a +10 extra
+            const points = Math.floor(base * quizState.multiplier) + timeBonus;
+            quizState.score += points;
+            quizState.correctAnswers++;
             quizState.streak++;
+            if(quizState.streak > quizState.maxStreak) quizState.maxStreak = quizState.streak;
             quizState.multiplier = Math.min(1 + (quizState.streak * 0.1), 3);
+            
+            createFloatingText('+' + points, 'var(--primary)', card);
+            card.classList.add('quiz-correct');
+            
             if (quizState.streak >= 3) {
                 document.getElementById('streakDisplay').style.display = 'flex';
                 document.getElementById('streakCount').textContent = quizState.streak;
                 document.getElementById('multiplier').textContent = 'x' + quizState.multiplier.toFixed(1);
-                if (quizState.streak % 5 === 0) confetti({ particleCount: 50, spread: 70, origin: { y: 0.6 } });
+                if (quizState.streak % 5 === 0) confetti({ particleCount: 60, spread: 70, origin: { y: 0.6 }, colors: ['#00e676', '#fff'] });
             }
         } else {
-            quizState.streak = 0;
-            quizState.multiplier = 1;
+            quizState.lives--;
+            updateLivesUI();
+            const penalty = 5;
+            quizState.score = Math.max(0, quizState.score - penalty);
+            quizState.streak = 0; quizState.multiplier = 1;
+            createFloatingText('-' + penalty, 'var(--danger)', card);
+            card.classList.add('quiz-wrong');
             document.getElementById('streakDisplay').style.display = 'none';
+            if(navigator.vibrate) navigator.vibrate(100);
         }
-        document.getElementById('scoreQuiz').textContent = quizState.score;
-        loadNextFood();
+
+        scoreEl.textContent = quizState.score;
+        scoreEl.parentElement.classList.add('score-bump');
+        setTimeout(() => scoreEl.parentElement.classList.remove('score-bump'), 200);
+
+        setTimeout(() => {
+            quizState.questionIndex++;
+            loadNextFood();
+        }, 1000);
     }
 
-    // ========== CLASSIFY ==========
-    let classifyState = {
-        roundFoods: [],
-        currentIndex: 0,
-        score: 0,
-        correct: 0,
-        total: 10,
-        isProcessing: false,
-        streak: 0,
-        catStats: {}
-    };
+    function showQuizGameOver() {
+        clearInterval(quizTimerInterval);
+        const overlay = document.getElementById('quizOverlay');
+        const accuracy = quizState.questionIndex > 0 ? Math.round((quizState.correctAnswers / quizState.questionIndex) * 100) : 0;
+        
+        let message, icon;
+        if (quizState.lives > 0) { message = "Has completat la partida!"; icon = "🏆"; }
+        else { message = "Has perdut totes les vides!"; icon = "💀"; }
+        
+        if(accuracy >= 80) message += " Increïble!";
+        else if(accuracy >= 50) message += " Bona feina!";
+
+        overlay.style.display = 'flex';
+        overlay.innerHTML = `
+            <div class="overlay-icon-large">${icon}</div>
+            <div class="overlay-title">Fi del Joc</div>
+            <div class="results-accuracy">${accuracy}%</div>
+            <div class="results-correct">${quizState.correctAnswers} de ${quizState.questionIndex} correctes</div>
+            <div class="results-score-big">🎯 ${quizState.score} punts</div>
+            <div class="results-message">${message}<br>Ratxa màxima: 🔥 ${quizState.maxStreak}</div>
+            <button class="primary-btn" onclick="initQuiz()">Tornar a Jugar</button>
+            <button class="secondary-btn" onclick="nav.to('menu')"><i class="fa-solid fa-house"></i></button>
+        `;
+        
+        if (accuracy >= 70) confetti({ particleCount: 100, spread: 90, origin: { y: 0.6 } });
+    }
+
+
+    // ========== CLASSIFY ARCADE ==========
+    let classifyState = {};
+    let classifyTimerInterval = null;
+    const circleCircumference = 2 * Math.PI * 18;
 
     function initClassify() {
-        // Generar botons de categories
+        clearInterval(classifyTimerInterval);
         const catContainer = document.getElementById('classifyCategories');
         catContainer.innerHTML = '';
         categories.forEach(cat => {
@@ -753,7 +655,6 @@
             catContainer.appendChild(btn);
         });
 
-        // Generar preview de categories per l'overlay
         const previewGrid = document.getElementById('catPreviewGrid');
         previewGrid.innerHTML = '';
         categories.forEach(cat => {
@@ -763,53 +664,26 @@
             previewGrid.appendChild(item);
         });
 
-        // Mostrar overlay d'inici
         showClassifyStart();
     }
 
     function showClassifyStart() {
         const overlay = document.getElementById('classifyOverlay');
         overlay.style.display = 'flex';
-        overlay.innerHTML = `
-            <div class="overlay-icon-large">📚</div>
-            <div class="overlay-title">Classifica els Aliments</div>
-            <div class="overlay-subtitle">Identifica a quin grup nutricional pertany cada aliment i aprèn curiositats sobre nutrició</div>
-            <div class="cat-preview-grid" id="catPreviewGrid"></div>
-            <button class="primary-btn" onclick="startClassify()">Començar</button>
-        `;
-        // Re-render preview
-        const pg = document.getElementById('catPreviewGrid');
-        categories.forEach(cat => {
-            const item = document.createElement('div');
-            item.className = 'cat-preview-item';
-            item.innerHTML = `<span class="cp-emoji">${cat.emoji}</span>${cat.name}`;
-            pg.appendChild(item);
-        });
+        updateProgressRing(0);
+        document.getElementById('classifyProgressText').textContent = "0";
+        document.getElementById('classifyScore').textContent = "0";
     }
 
     function startClassify() {
-        // Reset
-        classifyState = {
-            roundFoods: [],
-            currentIndex: 0,
-            score: 0,
-            correct: 0,
-            total: 10,
-            isProcessing: false,
-            streak: 0,
-            catStats: {}
-        };
-
+        clearInterval(classifyTimerInterval);
+        classifyState = { roundFoods: [], currentIndex: 0, score: 0, correct: 0, total: 10, isProcessing: false, streak: 0, catStats: {}, timeLeft: 6.0, maxStreak: 0 };
         categories.forEach(c => classifyState.catStats[c.id] = { total: 0, correct: 0 });
 
-        // Seleccionar 10 aliments aleatoris intentant cobrir totes les categories
         const byCat = {};
         categories.forEach(c => byCat[c.id] = []);
-        classifyFoods.forEach(f => {
-            if (byCat[f.category]) byCat[f.category].push(f);
-        });
+        classifyFoods.forEach(f => { if (byCat[f.category]) byCat[f.category].push(f); });
 
-        // Assegurar almenys 1 de cada categoria (si hi ha 6 cats i 10 aliments)
         const selected = [];
         const catIds = Object.keys(byCat);
         catIds.forEach(cid => {
@@ -820,145 +694,176 @@
             }
         });
 
-        // Completar fins a 10 amb aliments aleatoris
         while (selected.length < classifyState.total) {
             const food = classifyFoods[Math.floor(Math.random() * classifyFoods.length)];
-            // Evitar duplicats
-            if (!selected.find(s => s.name === food.name)) {
-                selected.push({ ...food });
-            }
+            if (!selected.find(s => s.name === food.name)) selected.push({ ...food });
         }
 
-        // Barrejar
         for (let i = selected.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [selected[i], selected[j]] = [selected[j], selected[i]];
         }
 
         classifyState.roundFoods = selected;
-
-        // Amagar overlay
         document.getElementById('classifyOverlay').style.display = 'none';
-
-        // Actualitzar UI
         updateClassifyUI();
         showClassifyFood();
     }
 
     function showClassifyFood() {
+        clearInterval(classifyTimerInterval);
         const food = classifyState.roundFoods[classifyState.currentIndex];
         const card = document.getElementById('classifyFoodCard');
-
-        document.getElementById('classifyEmoji').textContent = food.emoji;
+        const emojiEl = document.getElementById('classifyEmoji');
+        
+        emojiEl.textContent = food.emoji;
+        emojiEl.style.animation = 'none';
+        emojiEl.offsetHeight;
+        emojiEl.style.animation = 'bounce-in 0.5s cubic-bezier(0.175,0.885,0.32,1.275)';
+        
         document.getElementById('classifyName').textContent = food.name;
         document.getElementById('classifyTip').style.display = 'none';
         card.className = 'classify-food-card';
 
-        // Animació suau
-        card.style.animation = 'none';
-        card.offsetHeight;
-        card.style.animation = 'gentle-appear 0.4s ease-out';
-
-        // Netejar estats dels botons
         clearCatHighlights();
+        classifyState.isProcessing = false;
+        
+        // Timer
+        classifyState.timeLeft = 6.0;
+        const fill = document.getElementById('classifyTimerFill');
+        fill.style.width = '100%';
+        fill.className = 'timer-fill';
+        
+        classifyTimerInterval = setInterval(() => {
+            classifyState.timeLeft -= 0.05;
+            const pct = (classifyState.timeLeft / 6.0) * 100;
+            fill.style.width = pct + '%';
+            
+            if (pct < 20) fill.className = 'timer-fill danger';
+            else if (pct < 50) fill.className = 'timer-fill warning';
+            
+            if (classifyState.timeLeft <= 0) {
+                clearInterval(classifyTimerInterval);
+                classifyTimeout();
+            }
+        }, 50);
+    }
+
+    function classifyTimeout() {
+        if(classifyState.isProcessing) return;
+        classifyState.isProcessing = true;
+        const card = document.getElementById('classifyFoodCard');
+        const food = classifyState.roundFoods[classifyState.currentIndex];
+        
+        classifyState.catStats[food.category].total++;
+        card.classList.add('card-wrong');
+        createFloatingText("Temps!", 'var(--danger)', card);
+        highlightCatButton(food.category, true);
+        
+        const tipEl = document.getElementById('classifyTip');
+        tipEl.textContent = '💡 ' + food.tip;
+        tipEl.style.display = 'block';
+        
+        classifyState.streak = 0;
+        if(navigator.vibrate) navigator.vibrate(200);
+
+        setTimeout(() => {
+            classifyState.currentIndex++;
+            if (classifyState.currentIndex >= classifyState.total) showClassifyResults();
+            else showClassifyFood();
+        }, 2000);
+    }
+
+    function updateProgressRing(progress) {
+        const offset = circleCircumference - (progress * circleCircumference);
+        document.getElementById('progressCircle').style.strokeDashoffset = offset;
     }
 
     function classifyAnswer(categoryId) {
         if (classifyState.isProcessing) return;
         classifyState.isProcessing = true;
+        clearInterval(classifyTimerInterval);
 
         const food = classifyState.roundFoods[classifyState.currentIndex];
         const isCorrect = food.category === categoryId;
-
-        // Registrar estadística per categoria
         classifyState.catStats[food.category].total++;
-
         const card = document.getElementById('classifyFoodCard');
 
         if (isCorrect) {
             classifyState.correct++;
             classifyState.streak++;
-            const bonus = Math.min(classifyState.streak - 1, 5) * 2;
-            classifyState.score += 10 + bonus;
+            if(classifyState.streak > classifyState.maxStreak) classifyState.maxStreak = classifyState.streak;
+            
+            let speedBonus = 0;
+            if(classifyState.timeLeft > 4.0) speedBonus = 5;
+            else if(classifyState.timeLeft > 2.0) speedBonus = 2;
+            
+            const points = 10 + speedBonus;
+            classifyState.score += points;
             classifyState.catStats[food.category].correct++;
 
             card.classList.add('card-correct');
+            createFloatingText('+' + points + (speedBonus > 0 ? ' ⚡' : ''), 'var(--primary)', card);
             highlightCatButton(categoryId, true);
 
-            // Petita celebració
             if (classifyState.streak >= 5 && classifyState.streak % 5 === 0) {
-                confetti({ particleCount: 30, spread: 50, origin: { y: 0.5 }, colors: ['#845EF7', '#64B5F6', '#fff'] });
+                confetti({ particleCount: 40, spread: 60, origin: { y: 0.5 }, colors: ['#845EF7', '#64B5F6', '#fff'] });
             }
         } else {
             classifyState.streak = 0;
             card.classList.add('card-wrong');
+            createFloatingText('Fallo', 'var(--danger)', card);
             highlightCatButton(categoryId, false);
             highlightCatButton(food.category, true);
+            if(navigator.vibrate) navigator.vibrate(100);
         }
 
-        // Mostrar consell nutricional
         const tipEl = document.getElementById('classifyTip');
         tipEl.textContent = '💡 ' + food.tip;
         tipEl.style.display = 'block';
 
         updateClassifyUI();
 
-        // Passar al següent després d'un delay
         setTimeout(() => {
             classifyState.currentIndex++;
-            classifyState.isProcessing = false;
-
-            if (classifyState.currentIndex >= classifyState.total) {
-                showClassifyResults();
-            } else {
-                showClassifyFood();
-            }
-        }, 1800);
+            if (classifyState.currentIndex >= classifyState.total) showClassifyResults();
+            else showClassifyFood();
+        }, 2000);
     }
 
     function highlightCatButton(categoryId, isCorrect) {
         const btn = document.querySelector(`.cat-btn[data-category="${categoryId}"]`);
         if (!btn) return;
-        if (isCorrect) {
-            btn.classList.add('cat-correct');
-        } else {
-            btn.classList.add('cat-wrong');
-        }
+        if (isCorrect) btn.classList.add('cat-correct');
+        else btn.classList.add('cat-wrong');
     }
 
     function clearCatHighlights() {
-        document.querySelectorAll('.cat-btn').forEach(btn => {
-            btn.classList.remove('cat-correct', 'cat-wrong');
-        });
+        document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('cat-correct', 'cat-wrong'));
     }
 
     function updateClassifyUI() {
         document.getElementById('classifyScore').textContent = classifyState.score;
-        const idx = Math.min(classifyState.currentIndex + 1, classifyState.total);
-        document.getElementById('classifyProgressText').textContent = idx + '/' + classifyState.total;
-        const pct = (idx / classifyState.total) * 100;
-        document.getElementById('classifyProgressFill').style.width = pct + '%';
+        const progress = classifyState.currentIndex / classifyState.total;
+        updateProgressRing(progress);
+        document.getElementById('classifyProgressText').textContent = classifyState.currentIndex;
     }
 
     function showClassifyResults() {
+        updateProgressRing(1);
+        document.getElementById('classifyProgressText').textContent = classifyState.total;
         const accuracy = Math.round((classifyState.correct / classifyState.total) * 100);
-
         let message, icon;
         if (accuracy >= 90) { message = 'Excel·lent! Ets un expert en nutrició!'; icon = '🏆'; }
         else if (accuracy >= 70) { message = 'Molt bé! Saps molt sobre alimentació!'; icon = '🌟'; }
         else if (accuracy >= 50) { message = 'Bé! Segueix aprenent sobre els aliments!'; icon = '📚'; }
         else { message = 'Segueix practicant! Cada dia s\'aprèn algo nou!'; icon = '💪'; }
 
-        // Desgloss per categoria
         let breakdownHTML = '<div class="results-breakdown">';
         categories.forEach(cat => {
             const stats = classifyState.catStats[cat.id];
             if (stats.total > 0) {
-                breakdownHTML += `
-                    <div class="breakdown-item">
-                        <span class="bi-emoji">${cat.emoji}</span>
-                        <span class="bi-count">${stats.correct}/${stats.total}</span>
-                    </div>`;
+                breakdownHTML += `<div class="breakdown-item"><span>${cat.emoji}</span>${stats.correct}/${stats.total}</div>`;
             }
         });
         breakdownHTML += '</div>';
@@ -967,25 +872,23 @@
         overlay.style.display = 'flex';
         overlay.innerHTML = `
             <div class="overlay-icon-large">${icon}</div>
-            <div class="overlay-title">${message}</div>
+            <div class="overlay-title">Resultats</div>
             <div class="results-accuracy">${accuracy}%</div>
             <div class="results-correct">${classifyState.correct} de ${classifyState.total} correctes</div>
             <div class="results-score-big">⭐ ${classifyState.score} punts</div>
+            <div class="results-message">${message}<br>Ratxa màxima: 🔥 ${classifyState.maxStreak}</div>
             ${breakdownHTML}
             <button class="primary-btn" onclick="startClassify()">Tornar a Jugar</button>
             <button class="secondary-btn" onclick="nav.to('menu')"><i class="fa-solid fa-house"></i></button>
         `;
 
-        if (accuracy >= 70) {
-            confetti({ particleCount: 80, spread: 80, origin: { y: 0.6 }, colors: ['#845EF7', '#64B5F6', '#00e676', '#ffd700'] });
-        }
+        if (accuracy >= 70) confetti({ particleCount: 100, spread: 90, origin: { y: 0.6 }, colors: ['#845EF7', '#64B5F6', '#00e676', '#ffd700'] });
     }
 
     // ========== INIT ==========
     window.addEventListener('load', () => {
-        initQuiz();
+        generateParticles();
     });
 </script>
-
 </body>
 </html>
