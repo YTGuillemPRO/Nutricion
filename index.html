@@ -204,19 +204,6 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .modal-prev{left:-60px}
 .modal-next{right:-60px}
 .modal-counter{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;color:var(--text-muted);white-space:nowrap}
-.music-player{position:fixed;bottom:144px;left:24px;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);padding:12px 18px;border-radius:14px;font-size:12px;font-weight:600;z-index:999;transition:all .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(24px);cursor:pointer}
-.music-player:hover{transform:translateY(-6px) scale(1.06);box-shadow:0 12px 40px -4px rgba(167,139,250,.4);color:#a78bfa;background:rgba(167,139,250,.08)}
-.music-player.playing{border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.06)}
-.music-player iconify-icon{font-size:18px;color:#a78bfa}
-.music-eq{display:flex;align-items:flex-end;gap:2px;height:16px;margin-left:4px}
-.music-bar{width:3px;background:linear-gradient(to top,#8b5cf6,#a78bfa);border-radius:1px}
-.music-player.playing .music-bar{animation:musicBarDance .5s ease-in-out infinite alternate}
-.music-bar:nth-child(1){height:4px}
-.music-bar:nth-child(2){height:8px;animation-delay:.1s}
-.music-bar:nth-child(3){height:6px;animation-delay:.2s}
-.music-bar:nth-child(4){height:10px;animation-delay:.15s}
-.music-bar:nth-child(5){height:5px;animation-delay:.25s}
-@keyframes musicBarDance{0%{height:4px}100%{height:14px}}
 .pill{position:fixed;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);padding:14px 24px;border-radius:14px;font-size:13px;font-weight:600;text-decoration:none;z-index:999;transition:all .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(24px)}
 .pill:hover{transform:translateY(-6px) scale(1.06)}
 .insti-pill{bottom:24px;right:24px}
@@ -242,7 +229,6 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 
 <!-- MAIN SITE -->
 <div id="mainSite">
-<audio id="bgMusic" loop preload="auto"><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg"></audio>
 <canvas id="bgCanvas"></canvas>
 <div class="bg-scene"><div class="aurora"></div><div class="bg-mesh"></div><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 <div class="food-layer" id="foodLayer"></div>
@@ -282,7 +268,6 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
   <div id="photoModal" class="modal-overlay" onclick="closeModal()"><div class="modal-content" onclick="event.stopPropagation()"><button class="modal-close" onclick="closeModal()"><iconify-icon icon="solar:close-circle-bold-duotone" width="24"></iconify-icon></button><button class="modal-nav modal-prev" onclick="modalPrev(event)"><iconify-icon icon="solar:arrow-left-linear"></iconify-icon></button><button class="modal-nav modal-next" onclick="modalNext(event)"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button><img id="modalImage" src="" class="modal-image"><div class="modal-counter" id="modalCounter"></div></div></div>
 </div>
 
-<div class="music-player playing" id="musicPlayer" onclick="toggleMusic()"><iconify-icon icon="solar:pause-bold-duotone" id="musicIcon"></iconify-icon><span id="musicText">Chill</span><div class="music-eq"><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div></div></div>
 <a href="https://www.instagram.com/institutescolaeltemple/" target="_blank" class="pill social-pill"><iconify-icon icon="solar:share-circle-bold-duotone"></iconify-icon> Segueix-nos</a>
 <a href="https://padlet.com/YTGuillemPRO/som-el-que-mengem-z20awkht9kpod76f" target="_blank" class="pill forum-pill"><iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon> Forum</a>
 <a href="https://agora.xtec.cat/ietemple/" target="_blank" class="pill insti-pill"><iconify-icon icon="solar:buildings-3-bold-duotone"></iconify-icon> IE Temple</a>
@@ -614,7 +599,6 @@ requestAnimationFrame(animFrame);
 var siteInited=false;
 function initSiteFeatures(){
   if(siteInited)return;siteInited=true;
-  initBgCanvas();initFood();initParallax();initTilt();buildQuiz();startMusic();
 }
 
 var bgC=document.getElementById("bgCanvas"),bgX=bgC.getContext("2d"),bW,bH,bgPts=[],bgMx=-1e3,bgMy=-1e3;
