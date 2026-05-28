@@ -1,1 +1,81 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Social — Faig 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
+<style>
+:root{--bg:#050810;--card-bg:rgba(255,255,255,.04);--card-border:rgba(255,255,255,.06);--text-primary:#fff;--text-secondary:rgba(255,255,255,.82);--text-muted:rgba(255,255,255,.5);--green:#059669;--green-light:#10b981;--green-bg:rgba(5,150,105,.1);--green-border:rgba(5,150,105,.25);--rose:#e11d48;--rose-light:#f43f5e;--rose-bg:rgba(225,29,72,.1);--rose-border:rgba(225,29,72,.25);--amber:#d97706;--amber-light:#f59e0b;--amber-bg:rgba(217,119,6,.1);--amber-border:rgba(217,119,6,.25);--purple:#7c3aed;--purple-light:#8b5cf6;--purple-bg:rgba(124,58,237,.1);--purple-border:rgba(124,58,237,.25)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
+body{min-height:100vh;background:var(--bg);color:var(--text-primary);padding:40px 16px}
+.bg-scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.aurora{position:absolute;inset:0;opacity:.2;filter:blur(80px);animation:auroraMove 14s ease-in-out infinite alternate;background:linear-gradient(180deg,transparent,rgba(5,150,105,.12) 30%,rgba(124,58,237,.06) 60%,transparent);mask-image:linear-gradient(180deg,transparent,#000 20%,#000 70%,transparent)}
+@keyframes auroraMove{0%{transform:translateX(-8%) skewX(-3deg)}100%{transform:translateX(8%) skewX(3deg)}}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);animation:orbDrift 22s ease-in-out infinite}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(5,150,105,.2),transparent 65%);bottom:-20%;left:-15%}
+@keyframes orbDrift{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,-40px)}}
+.container{position:relative;z-index:10;max-width:800px;margin:0 auto}
+.back-btn{display:inline-flex;align-items:center;gap:6px;margin-bottom:32px;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);border:1px solid transparent;background:none}
+.back-btn:hover{color:var(--text-secondary);background:var(--card-bg);border-color:var(--card-border);transform:translateX(-8px)}
+.page-header{text-align:center;margin-bottom:48px}
+.page-icon{width:72px;height:72px;border-radius:20px;display:inline-flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:18px;background:var(--green-bg);border:1px solid var(--green-border);color:var(--green-light)}
+.page-header h1{font-size:clamp(26px,5vw,42px);font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-bottom:8px;background:linear-gradient(135deg,#fff,#34d399);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.page-header p{font-size:14px;color:var(--text-muted)}
+.section{margin-bottom:28px;opacity:0;transform:translateY(24px);animation:fadeUp .7s cubic-bezier(.16,1,.3,1) forwards}
+.section:nth-child(2){animation-delay:.1s}.section:nth-child(3){animation-delay:.2s}.section:nth-child(4){animation-delay:.3s}.section:nth-child(5){animation-delay:.4s}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.section-title{font-size:18px;font-weight:800;color:var(--green-light);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title iconify-icon{font-size:22px}
+.info-card{background:linear-gradient(135deg,rgba(4,20,14,.8),rgba(8,38,24,.7));border:1.5px solid var(--green-border);border-radius:20px;padding:28px;backdrop-filter:blur(16px);transition:all .4s}
+.info-card:hover{transform:translateY(-3px);box-shadow:0 16px 48px -8px rgba(5,150,105,.15)}
+.info-card p{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:12px}
+.info-card p:last-child{margin-bottom:0}
+.hl{color:var(--green-light);font-weight:700}
+.hl-rose{color:var(--rose-light);font-weight:700}
+.hl-amber{color:var(--amber-light);font-weight:700}
+.hl-purple{color:var(--purple-light);font-weight:700}
+@media(max-width:640px){body{padding:20px 12px}.info-card{padding:22px}}
+</style>
+</head>
+<body>
+<div class="bg-scene"><div class="aurora"></div><div class="orb orb-1"></div></div>
+<div class="container">
+<button class="back-btn" onclick="history.back()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</button>
+<div class="page-header">
+<div class="page-icon"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div>
+<h1>Cost Social</h1>
+<p>Les conseqüències del que mengem sobre les persones</p>
+</div>
 
+<div class="section">
+<div class="section-title"><iconify-icon icon="solar:hand-shake-bold-duotone"></iconify-icon> Condicions laborals</div>
+<div class="info-card">
+<p>Darrere de molts aliments barats hi ha <span class="hl-rose">condicions laborals explotadores</span>. A les plantacions de cafè, cacau i fruites tropicals, sovint els treballadors cobren salaris de misèria, treballen jornades extremadament llargues i estan exposats a pesticides sense protecció. El treball infantil continua sent una realitat en moltes cadenes de subministrament globals.</p>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><iconify-icon icon="solar:earth-bold-duotone"></iconify-icon> Comerç just</div>
+<div class="info-card">
+<p>El sistema alimentari global està dominat per <span class="hl-amber">grans multinacionals</span> que fixen els preus. Els petits agricultors dels països del Sud Global reben només una fracció minúscula del preu final del producte. El <span class="hl">comerç just</span> busca garantir que els productors rebin un salari digne i treballin en condicions segures, però encara representa una petita part del mercat.</p>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><iconify-icon icon="solar:home-bold-duotone"></iconify-icon> Sobirania alimentària</div>
+<div class="info-card">
+<p>La <span class="hl">sobirania alimentària</span> és el dret dels pobles a definir les seves pròpies polítiques agrícoles i alimentàries. Quan un país depèn de les importacions per alimentar la seva població, és vulnerable a les crisis internacionals, els canvis de preus i l'especulació. Fomentar la producció local i de proximitat és clau per a la seguretat alimentària.</p>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title"><iconify-icon icon="solar:scale-bold-duotone"></iconify-icon> Desigualtat i fam</div>
+<div class="info-card">
+<p>Paradoxalment, al món es produeix <span class="hl">menjar suficient per a tothom</span>, però prop de 800 milions de persones pateixen fam. El problema no és la producció, sinó la <span class="hl-rose">distribució i l'accés</span>. Mentrestant, als països rics es malbaraten milions de tones d'aliments cada any. El cost social del nostre sistema alimentari és que els més vulnerables paguen el preu més alt.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
