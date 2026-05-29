@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Faig 2</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cinzel:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cinzel:wght=900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <style>
@@ -13,7 +13,7 @@
 body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:#050810;color:var(--text-primary);overflow-x:hidden;padding:40px 16px}
 #animOverlay{position:fixed;inset:0;z-index:99999;background:#050810;transition:opacity 1.8s ease}
 #animOverlay.fade-out{opacity:0;pointer-events:none}
-#animOverlay.hidden{display:none}
+#animOverlay.hidden{display:none!important}
 #animCanvas{display:block;width:100%;height:100%}
 #startBtn{position:fixed;inset:0;z-index:100000;display:flex;align-items:center;justify-content:center;background:rgba(5,8,16,.95);border:none;color:#fff;font-family:'Cinzel',serif;font-size:clamp(22px,5vw,40px);letter-spacing:4px;cursor:pointer;text-transform:uppercase;transition:all .4s}
 #startBtn:hover{color:#ffd700;background:rgba(15,20,35,.95)}
@@ -228,6 +228,7 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .social-pill{bottom:24px;left:24px}
 .social-pill:hover{box-shadow:0 12px 40px -4px rgba(124,58,237,.4);color:var(--purple-light);background:rgba(124,58,237,.08)}
 .social-pill iconify-icon{font-size:18px;color:var(--purple-light)}
+@keyframes rippleOut{to{transform:scale(4);opacity:0}}
 @media(max-width:640px){body{padding:20px 12px}.glass-panel{padding:32px 20px}.main-grid{grid-template-columns:1fr}.btn-group{grid-template-columns:1fr}.pill,.music-player{padding:10px 14px;font-size:11px}.forum-pill{bottom:66px}.music-player{bottom:110px;left:12px}.gallery-grid{grid-template-columns:1fr!important}.quiz-score-number{font-size:44px}#skipBtn{bottom:16px;right:16px;padding:10px 20px;font-size:12px}.modal-prev{left:-4px}.modal-next{right:-4px}}
 </style>
 </head>
@@ -249,42 +250,42 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 <div class="glass-panel" id="mainPanel">
 
   <div id="home-view" class="view active">
-    <h1 class="title-anim" data-text="Quin es el vertader cost del que menjo?">Quin es el vertader cost del que menjo?</h1>
-    <p class="subtitle subtitle-anim">Fet per: <a href="#" class="author-link" onclick="showAuthorView('guillem',event)">Guillem Varela Cors</a> i <a href="#" class="author-link" onclick="showAuthorView('yasser',event)">Yasser Chikhi Ourinich</a> i amb la col.laboracio de <a href="#" class="author-link" onclick="showAuthorView('julian',event)">Julian Navas Paños</a></p>
+    <h1 class="title-anim" data-text="Quin &#233;s el vertader cost del que menjo?">Quin &#233;s el vertader cost del que menjo?</h1>
+    <p class="subtitle subtitle-anim">Fet per: <a href="#" class="author-link" onclick="showAuthorView('guillem',event)">Guillem Varela Cors</a> i <a href="#" class="author-link" onclick="showAuthorView('yasser',event)">Yasser Chikhi Ourinich</a> i amb la col&#183;laboraci&#243; de <a href="#" class="author-link" onclick="showAuthorView('julian',event)">Juli&#225;n Navas Pa&#241;os</a></p>
     <div class="main-grid">
-      <div class="nav-card stagger-in" onclick="navTo('digestio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle blue"><iconify-icon icon="solar:stomach-bold-duotone"></iconify-icon></div><h2>Digestio</h2><p>El recorregut dels aliments pel teu cos</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('nutricio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle orange"><iconify-icon icon="solar:leaf-bold-duotone"></iconify-icon></div><h2>Nutricio</h2><p>Nutrients, vitamines i equilibri alimentari</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
+      <div class="nav-card stagger-in" onclick="navTo('digestio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle blue"><iconify-icon icon="solar:stomach-bold-duotone"></iconify-icon></div><h2>Digesti&#243;</h2><p>El recorregut dels aliments pel teu cos</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
+      <div class="nav-card stagger-in" onclick="navTo('nutricio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle orange"><iconify-icon icon="solar:leaf-bold-duotone"></iconify-icon></div><h2>Nutrici&#243;</h2><p>Nutrients, vitamines i equilibri alimentari</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
       <div class="nav-card stagger-in" onclick="navTo('cost',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle dark"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h2>Cost</h2><p>Ambiental, salut i impacte social</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('colaboradors',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle purple"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h2>Col.laboradors</h2><p>Professionals que han col.laborat</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
+      <div class="nav-card stagger-in" onclick="navTo('colaboradors',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle purple"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h2>Col&#183;laboradors</h2><p>Professionals que han col&#183;laborat</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
       <div class="nav-card stagger-in" onclick="navTo('veritat',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle amber"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h2>La veritat darrere del plat</h2><p>Detectius del menjar</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
       <div class="nav-card stagger-in" onclick="navTo('sortides',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle rose"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h2>Sortides</h2><p>Neteja de platja al Delta de l'Ebre</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('xarxa-trofica',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle green"><iconify-icon icon="solar:planet-3-bold-duotone"></iconify-icon></div><h2>Xarxa trofica</h2><p>Com flueix l'energia entre essers vius</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('making-off',event)" style="grid-column:span 2"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle cyan"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h2>Making off</h2><p>El proces creatiu del projecte</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
+      <div class="nav-card stagger-in" onclick="navTo('xarxa-trofica',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle green"><iconify-icon icon="solar:planet-3-bold-duotone"></iconify-icon></div><h2>Xarxa tr&#242;fica</h2><p>Com flueix l'energia entre &#233;ssers vius</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
+      <div class="nav-card stagger-in" onclick="navTo('making-off',event)" style="grid-column:span 2"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle cyan"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h2>Making of</h2><p>El proc&#233;s creatiu del projecte</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
     </div>
   </div>
 
   <div id="selection-view" class="view"><div id="selIconWrap"></div><h1 id="selTitle"></h1><p class="subtitle">Tria una activitat</p><div class="btn-group"><a id="linkTeoria" class="btn-action btn-teo" onclick="btnRipple(event)"><iconify-icon icon="solar:book-minimalistic-bold-duotone" width="22"></iconify-icon> Teoria</a><a id="linkJoc" class="btn-action btn-joc" onclick="btnRipple(event)"><iconify-icon icon="solar:gamepad-bold-duotone" width="22"></iconify-icon> Joc</a></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
-  <div id="cost-view" class="view"><div class="icon-circle dark" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h1 data-text="Cost">Cost</h1><p class="subtitle">Selecciona un tipus de cost</p><div class="cost-options-grid"><div class="cost-option-card c-dark" onclick="costNav('cost-ambiental',event)"><div class="opt-icon"><iconify-icon icon="solar:cloud-bolt-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost ambiental</h3><p>Emissions, aigua i recursos</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-blue" onclick="costNav('cost-salut',event)"><div class="opt-icon"><iconify-icon icon="solar:heart-pulse-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost de salut</h3><p>Impacte sobre l'organisme</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-green" onclick="costNav('cost-social',event)"><div class="opt-icon"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost social</h3><p>Consequencies per a la societat</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="cost-view" class="view"><div class="icon-circle dark" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h1 data-text="Cost">Cost</h1><p class="subtitle">Selecciona un tipus de cost</p><div class="cost-options-grid"><div class="cost-option-card c-dark" onclick="costNav('cost-ambiental',event)"><div class="opt-icon"><iconify-icon icon="solar:cloud-bolt-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost ambiental</h3><p>Emissions, aigua i recursos</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-blue" onclick="costNav('cost-salut',event)"><div class="opt-icon"><iconify-icon icon="solar:heart-pulse-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost de salut</h3><p>Impacte sobre l'organisme</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-green" onclick="costNav('cost-social',event)"><div class="opt-icon"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost social</h3><p>Conseq&#252;&#232;ncies per a la societat</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
-  <div id="colaboradors-view" class="view"><div class="icon-circle purple" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Col.laboradors">Col.laboradors</h1><p class="subtitle">Biologa marina Xenia</p><div class="gallery-grid cols-3 purple-theme"><div class="gallery-item gi-enter" onclick="openModal('col',0)"><img src="https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b" loading="lazy"><div class="gallery-number">1</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Analisi de peix</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',1)"><img src="https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba" loading="lazy"><div class="gallery-number">2</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Disseccio</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',2)"><img src="https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0" loading="lazy"><div class="gallery-number">3</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Taller</span></div></div></div><div class="gallery-counter purple"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 3 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="colaboradors-view" class="view"><div class="icon-circle purple" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Col&#183;laboradors">Col&#183;laboradors</h1><p class="subtitle">Bi&#242;loga marina Xenia</p><div class="gallery-grid cols-3 purple-theme"><div class="gallery-item gi-enter" onclick="openModal('col',0)"><img src="https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b" loading="lazy"><div class="gallery-number">1</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>An&#224;lisi de peix</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',1)"><img src="https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba" loading="lazy"><div class="gallery-number">2</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Dissecci&#243;</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',2)"><img src="https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0" loading="lazy"><div class="gallery-number">3</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Taller</span></div></div></div><div class="gallery-counter purple"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 3 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
-  <div id="sortides-view" class="view"><div class="icon-circle rose" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h1 data-text="Sortides">Sortides</h1><p class="subtitle">Delta de l'Ebre</p><div class="gallery-grid cols-2 rose-theme"><div class="gallery-item gi-enter" onclick="openModal('sor',0)"><img src="https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Neteja de platja</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',1)"><img src="https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Recollida residus</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',2)"><img src="https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Per un Delta net</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',3)"><img src="https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Dinar</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',4)"><img src="https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Apat en grup</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',5)"><img src="https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db" loading="lazy"><div class="gallery-number">6</div><div class="gallery-caption"><span>Resultats</span></div></div></div><div class="sortides-desc"><h3>Delta de l'Ebre</h3><p>Vam participar en la jornada de neteja de platja i gaudir d'un dinar de convivencia.</p></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="sortides-view" class="view"><div class="icon-circle rose" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h1 data-text="Sortides">Sortides</h1><p class="subtitle">Delta de l'Ebre</p><div class="gallery-grid cols-2 rose-theme"><div class="gallery-item gi-enter" onclick="openModal('sor',0)"><img src="https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Neteja de platja</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',1)"><img src="https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Recollida de residus</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',2)"><img src="https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Per un Delta net</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',3)"><img src="https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Dinar</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',4)"><img src="https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>&#192;pat en grup</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',5)"><img src="https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db" loading="lazy"><div class="gallery-number">6</div><div class="gallery-caption"><span>Resultats</span></div></div></div><div class="sortides-desc"><h3>Delta de l'Ebre</h3><p>Vam participar en la jornada de neteja de platja i gaudir d'un dinar de conviv&#232;ncia.</p></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
-  <div id="veritat-view" class="view"><div class="icon-circle amber" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h1 data-text="La veritat darrere del plat">La veritat darrere del plat</h1><p class="subtitle">Detectius del menjar</p><div class="veritat-view-content"><div class="veritat-phase-badge">Fase 1 - Real o Fake</div><div class="veritat-intro-box"><h3>Detectius del Menjar</h3><p>Les empreses fan servir tecniques de marketing per fer que els productes semblin mes saludables del que son.</p></div><div class="veritat-section-title">Tecniques de publicitat</div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">1</div><div class="tip-title">L'efecte "saludable"</div></div><div class="tip-body">Imatges de verdures en productes processats.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">2</div><div class="tip-title">Les paraules magiques</div></div><div class="tip-body">"Natural" o "artesa" no tenen definicio legal.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">3</div><div class="tip-title">Les racions enganyoses</div></div><div class="tip-body">Informacions per racions molt petites.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">4</div><div class="tip-title">Food styling</div></div><div class="tip-body">Fotos fetes amb trucs professionals.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">5</div><div class="tip-title">El marketing infantil</div></div><div class="tip-body">Dibuixos i regals per atrapar nens.</div></div><div class="veritat-section-title">Posa a prova els teus coneixements</div><div class="quiz-container" id="quizContainer"></div><div class="quiz-score-box" id="quizScoreBox"><div class="quiz-score-number" id="quizScoreNum">0/0</div><div class="quiz-score-label">Respostes correctes</div><div class="quiz-score-msg" id="quizScoreMsg"></div><button class="quiz-restart-btn" onclick="restartQuiz()">Tornar a intentar</button></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="veritat-view" class="view"><div class="icon-circle amber" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h1 data-text="La veritat darrere del plat">La veritat darrere del plat</h1><p class="subtitle">Detectius del menjar</p><div class="veritat-view-content"><div class="veritat-phase-badge">Fase 1 &#8212; Real o Fake</div><div class="veritat-intro-box"><h3>Detectius del Menjar</h3><p>Les empreses fan servir t&#232;cniques de marketing per fer que els productes semblin m&#233;s saludables del que s&#243;n.</p></div><div class="veritat-section-title">T&#232;cniques de publicitat</div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">1</div><div class="tip-title">L'efecte &#171;saludable&#187;</div></div><div class="tip-body">Imatges de verdures en productes processats.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">2</div><div class="tip-title">Les paraules m&#224;giques</div></div><div class="tip-body">&#171;Natural&#187; o &#171;artesa&#187; no tenen definici&#243; legal.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">3</div><div class="tip-title">Les racions enganyoses</div></div><div class="tip-body">Informaci&#243; per racions molt petites.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">4</div><div class="tip-title">Food styling</div></div><div class="tip-body">Fotos fetes amb trucs professionals.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">5</div><div class="tip-title">El marketing infantil</div></div><div class="tip-body">Dibuixos i regals per atrapar els nens.</div></div><div class="veritat-section-title">Posa a prova els teus coneixements</div><div class="quiz-container" id="quizContainer"></div><div class="quiz-score-box" id="quizScoreBox"><div class="quiz-score-number" id="quizScoreNum">0/0</div><div class="quiz-score-label">Respostes correctes</div><div class="quiz-score-msg" id="quizScoreMsg"></div><button class="quiz-restart-btn" onclick="restartQuiz()">Tornar a intentar</button></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
-  <div id="makingoff-view" class="view"><div class="icon-circle cyan" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h1 data-text="Making off">Making off</h1><p class="subtitle">El proces creatiu</p><div class="gallery-grid cols-2 cyan-theme"><div class="gallery-item gi-enter" onclick="openModal('mk',0)"><img src="https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Il.lustracions</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',1)"><img src="https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Presentacio</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',2)"><img src="https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Panell</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',3)"><img src="https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Preparacio</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',4)"><img src="https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Disseny 3D</span></div></div></div><div class="gallery-counter cyan"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 5 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="makingoff-view" class="view"><div class="icon-circle cyan" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h1 data-text="Making of">Making of</h1><p class="subtitle">El proc&#233;s creatiu</p><div class="gallery-grid cols-2 cyan-theme"><div class="gallery-item gi-enter" onclick="openModal('mk',0)"><img src="https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Il&#183;lustracions</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',1)"><img src="https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Presentaci&#243;</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',2)"><img src="https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Panell</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',3)"><img src="https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Preparaci&#243;</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',4)"><img src="https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Disseny 3D</span></div></div></div><div class="gallery-counter cyan"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 5 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
   <div id="guillem-view" class="view"><div class="icon-circle blue" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Guillem Varela Cors">Guillem Varela Cors</h1><p class="subtitle">Creador de la web</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
   <div id="yasser-view" class="view"><div class="icon-circle orange" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Yasser Chikhi Ourinich">Yasser Chikhi Ourinich</h1><p class="subtitle">Creador d'animacions</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-  <div id="julian-view" class="view"><div class="icon-circle green" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Julian Navas Paños">Julian Navas Paños</h1><p class="subtitle">Ajudant de codi</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+  <div id="julian-view" class="view"><div class="icon-circle green" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1 data-text="Juli&#225;n Navas Pa&#241;os">Juli&#225;n Navas Pa&#241;os</h1><p class="subtitle">Ajudant de codi</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
 
   <div id="photoModal" class="modal-overlay" onclick="closeModal()"><div class="modal-content" onclick="event.stopPropagation()"><button class="modal-close" onclick="closeModal()"><iconify-icon icon="solar:close-circle-bold-duotone" width="24"></iconify-icon></button><button class="modal-nav modal-prev" onclick="modalPrev(event)"><iconify-icon icon="solar:arrow-left-linear"></iconify-icon></button><button class="modal-nav modal-next" onclick="modalNext(event)"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button><img id="modalImage" src="" class="modal-image"><div class="modal-counter" id="modalCounter"></div></div></div>
 </div>
 
 <div class="music-player playing" id="musicPlayer" onclick="toggleMusic()"><iconify-icon icon="solar:pause-bold-duotone" id="musicIcon"></iconify-icon><span id="musicText">Chill</span><div class="music-eq"><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div><div class="music-bar"></div></div></div>
 <a href="https://www.instagram.com/institutescolaeltemple/" target="_blank" class="pill social-pill"><iconify-icon icon="solar:share-circle-bold-duotone"></iconify-icon> Segueix-nos</a>
-<a href="https://padlet.com/YTGuillemPRO/som-el-que-mengem-z20awkht9kpod76f" target="_blank" class="pill forum-pill"><iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon> Forum</a>
+<a href="https://padlet.com/YTGuillemPRO/som-el-que-mengem-z20awkht9kpod76f" target="_blank" class="pill forum-pill"><iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon> F&#242;rum</a>
 <a href="https://agora.xtec.cat/ietemple/" target="_blank" class="pill insti-pill"><iconify-icon icon="solar:buildings-3-bold-duotone"></iconify-icon> IE Temple</a>
 </div>
 
@@ -296,6 +297,7 @@ var ctx=canvas.getContext("2d");
 var startBtn=document.getElementById("startBtn");
 var skipBtn=document.getElementById("skipBtn");
 var overlay=document.getElementById("animOverlay");
+var mainSiteEl=document.getElementById("mainSite");
 var W,H,groundY;
 var started=false,done=false,time0=0;
 var impactDone=false,chordDone=false;
@@ -433,34 +435,6 @@ function drawSeed(t){
   ctx.restore();
 }
 
-function drawRain(t){
-  var ri=rainIntensity(t);
-  if(rainGain&&audioCtx){
-    try{rainGain.gain.linearRampToValueAtTime(clamp(ri*0.15,0,0.15),audioCtx.currentTime+0.1)}catch(e){}
-  }
-  if(ri>0){
-    for(var i=0;i<4;i++){
-      if(rainDrops.length<200) rainDrops.push({x:Math.random()*W,y:-20-Math.random()*50,sp:18+Math.random()*8,l:12+Math.random()*10});
-    }
-  }
-  ctx.strokeStyle="rgba(174,194,224,"+(ri*0.35)+")";ctx.lineWidth=1.5;ctx.beginPath();
-  for(var i=rainDrops.length-1;i>=0;i--){
-    var d=rainDrops[i];d.y+=d.sp;d.x-=3;
-    if(d.y>groundY){
-      if(splashDrops.length<40) splashDrops.push({x:d.x,y:groundY,vy:-2-Math.random()*2,life:1});
-      rainDrops.splice(i,1);continue;
-    }
-    ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2,d.y+d.l);
-  }
-  ctx.stroke();
-  ctx.fillStyle="rgba(174,194,224,"+(ri*0.4)+")";
-  for(var i=splashDrops.length-1;i>=0;i--){
-    var s=splashDrops[i];s.y+=s.vy;s.vy+=0.15;s.life-=0.06;
-    if(s.life<=0){splashDrops.splice(i,1);continue}
-    ctx.beginPath();ctx.arc(s.x,s.y,1.5,0,Math.PI*2);ctx.fill();
-  }
-}
-
 function drawPlant(t){
   if(t<2.5)return;
   var stemP=easeOut(clamp((t-2.5)/1.4,0,1));
@@ -471,7 +445,6 @@ function drawPlant(t){
   var magicP=easeOut(clamp((t-6)/1.5,0,1));
   var bx=W*0.5,sH=Math.min(H*0.45,380),topY=groundY-sH*stemP;
 
-  // Roots
   if(stemP>0.1){
     var rP=easeOut(clamp((t-2.8)/0.9,0,1));
     ctx.lineCap="round";ctx.strokeStyle="#2d4a1e";ctx.lineWidth=5;
@@ -479,7 +452,6 @@ function drawPlant(t){
     ctx.beginPath();ctx.moveTo(bx,groundY);ctx.quadraticCurveTo(bx+50*rP,groundY+30*rP,bx+95*rP,groundY+18*rP);ctx.stroke();
   }
 
-  // Stem
   if(stemP>0){
     ctx.lineCap="round";
     var sg=ctx.createLinearGradient(bx-8,groundY,bx+8,topY);
@@ -488,7 +460,6 @@ function drawPlant(t){
     ctx.beginPath();ctx.moveTo(bx,groundY);ctx.quadraticCurveTo(bx+20,groundY-sH*0.4*stemP,bx,topY);ctx.stroke();
   }
 
-  // Leaves
   if(leafP>0){
     var leaves=[
       {x:-8,y:0.72,sz:110,a:-0.5},{x:-6,y:0.48,sz:105,a:-0.62},{x:-5,y:0.28,sz:95,a:-0.72},
@@ -512,7 +483,6 @@ function drawPlant(t){
     }
   }
 
-  // Flower
   if(budP>0){
     ctx.save();ctx.translate(bx,topY);
     var fSz=Math.min(W*0.13,85);ctx.scale(budP,budP);
@@ -546,7 +516,6 @@ function drawPlant(t){
     ctx.restore();
   }
 
-  // Magic particles
   if(magicP>0&&t>6){
     if(magicDots.length<40&&Math.random()<0.3){
       magicDots.push({x:bx+(Math.random()-0.5)*100,y:topY+(Math.random()-0.5)*80,
@@ -576,15 +545,32 @@ function drawLogo(t){
   ctx.fillStyle=tg;ctx.fillText("Faig 2",bx,lY);ctx.restore();
 }
 
+/* ===== CLAU FIX: Robust reveal with forced styles ===== */
 function revealMainSite(){
-  if(done)return;done=true;
+  if(done)return;
+  done=true;
+  console.log("[Faig2] revealMainSite called");
+
+  // 1. Fade out overlay
   overlay.classList.add("fade-out");
-  document.getElementById("mainSite").classList.add("active");
+
+  // 2. Show main site
+  mainSiteEl.classList.add("active");
+
+  // 3. Force style as backup in case CSS transition fails
   setTimeout(function(){
-    overlay.classList.add("hidden");
+    overlay.style.opacity="0";
+    overlay.style.pointerEvents="none";
+    mainSiteEl.style.opacity="1";
+    mainSiteEl.style.pointerEvents="auto";
+  },2000);
+
+  // 4. After transition, fully hide overlay and init site
+  setTimeout(function(){
+    overlay.style.display="none";
     if(rainSource){try{rainSource.stop()}catch(e){}}
     initSiteFeatures();
-  },1800);
+  },2200);
 }
 
 function animFrame(ts){
@@ -607,6 +593,15 @@ startBtn.addEventListener("click",function(){
   rainDrops=[];splashDrops=[];magicDots=[];
 });
 skipBtn.addEventListener("click",revealMainSite);
+
+/* SAFETY: If for some reason the animation doesn't auto-reveal, force it after 15s */
+setTimeout(function(){
+  if(!done){
+    console.log("[Faig2] Safety timeout forcing reveal");
+    revealMainSite();
+  }
+},15000);
+
 requestAnimationFrame(animFrame);
 })();
 
@@ -614,7 +609,13 @@ requestAnimationFrame(animFrame);
 var siteInited=false;
 function initSiteFeatures(){
   if(siteInited)return;siteInited=true;
-  initBgCanvas();initFood();initParallax();initTilt();buildQuiz();startMusic();
+  console.log("[Faig2] initSiteFeatures called");
+  try{initBgCanvas()}catch(e){console.error("initBgCanvas error:",e)}
+  try{initFood()}catch(e){console.error("initFood error:",e)}
+  try{initParallax()}catch(e){console.error("initParallax error:",e)}
+  try{initTilt()}catch(e){console.error("initTilt error:",e)}
+  try{buildQuiz()}catch(e){console.error("buildQuiz error:",e)}
+  try{startMusic()}catch(e){console.error("startMusic error:",e)}
 }
 
 var bgC=document.getElementById("bgCanvas"),bgX=bgC.getContext("2d"),bW,bH,bgPts=[],bgMx=-1e3,bgMy=-1e3;
@@ -661,7 +662,7 @@ window.addEventListener("mousemove",function(e){
 
 function initFood(){
   var fl=document.getElementById("foodLayer");
-  var em=["🍎","🍊","🍋","🍇","🍓","🍑","🥝","🍌","🍉","🍒","🥦","🥕","🌽","🥬","🥑","🍄","🍔","🍕","🌮","🍣","🥩","🍗","🧀","🥚","🍝","🍞","🥐","🍪","🧁","🍩","🍰","🍫","🍬","🌿","🌱","🌾"];
+  var em=["\uD83C\uDF4E","\uD83C\uDF4A","\uD83C\uDF4B","\uD83C\uDF47","\uD83C\uDF53","\uD83C\uDF51","\uD83E\uDD5D","\uD83C\uDF4C","\uD83C\uDF49","\uD83C\uDF52","\uD83E\uDD66","\uD83E\uDD55","\uD83C\uDF3D","\uD83E\uDD6C","\uD83E\uDD51","\uD83C\uDF44","\uD83C\uDF54","\uD83C\uDF55","\uD83C\uDF2E","\uD83C\uDF63","\uD83E\uDD69","\uD83D\uDC57","\uD83E\uDDC0","\uD83E\uDD5A","\uD83C\uDF5D","\uD83C\uDF5E","\uD83E\uDD50","\uD83C\uDF6A","\uD83E\uDDC1","\uD83C\uDF69","\uD83C\uDF70","\uD83C\uDF6B","\uD83C\uDF6C","\uD83C\uDF3F","\uD83C\uDF31","\uD83C\uDF3E"];
   for(var i=0;i<40;i++){
     var el=document.createElement("span");el.className="food-item";
     el.textContent=em[Math.random()*em.length|0];
@@ -707,23 +708,23 @@ function btnRipple(e){
 
 var photoData={
   col:[
-    {src:"https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b",cap:"Analisi de peix"},
-    {src:"https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba",cap:"Disseccio"},
+    {src:"https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b",cap:"An\u00E0lisi de peix"},
+    {src:"https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba",cap:"Dissecci\u00F3"},
     {src:"https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0",cap:"Taller"}
   ],
   sor:[
     {src:"https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19",cap:"Neteja de platja"},
-    {src:"https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540",cap:"Recollida residus"},
+    {src:"https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540",cap:"Recollida de residus"},
     {src:"https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef",cap:"Per un Delta net"},
     {src:"https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe",cap:"Dinar"},
-    {src:"https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4",cap:"Apat en grup"},
+    {src:"https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4",cap:"\u00C0pat en grup"},
     {src:"https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db",cap:"Resultats"}
   ],
   mk:[
-    {src:"https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8",cap:"Il.lustracions"},
-    {src:"https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049",cap:"Presentacio"},
+    {src:"https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8",cap:"Il\u00B7lustracions"},
+    {src:"https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049",cap:"Presentaci\u00F3"},
     {src:"https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3",cap:"Panell"},
-    {src:"https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb",cap:"Preparacio"},
+    {src:"https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb",cap:"Preparaci\u00F3"},
     {src:"https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2",cap:"Disseny 3D"}
   ]
 };
@@ -733,13 +734,13 @@ function openModal(type,idx){
   modalType=type;modalIdx=idx;
   var ph=photoData[type],m=document.getElementById("photoModal"),
       img=document.getElementById("modalImage"),ct=document.getElementById("modalCounter");
-  img.src=ph[idx].src;ct.textContent=(idx+1)+"/"+ph.length+" - "+ph[idx].cap;
+  img.src=ph[idx].src;ct.textContent=(idx+1)+"/"+ph.length+" \u2014 "+ph[idx].cap;
   m.classList.add("active");document.body.style.overflow="hidden";
 }
 function closeModal(){document.getElementById("photoModal").classList.remove("active");document.body.style.overflow=""}
 function updateModal(){
   var ph=photoData[modalType],img=document.getElementById("modalImage"),ct=document.getElementById("modalCounter");
-  img.src=ph[modalIdx].src;ct.textContent=(modalIdx+1)+"/"+ph.length+" - "+ph[modalIdx].cap;
+  img.src=ph[modalIdx].src;ct.textContent=(modalIdx+1)+"/"+ph.length+" \u2014 "+ph[modalIdx].cap;
 }
 function modalPrev(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx-1+ph.length)%ph.length;updateModal()}
 function modalNext(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx+1)%ph.length;updateModal()}
@@ -756,9 +757,9 @@ var linkJoc=document.getElementById("linkJoc");
 var viewHistory=["home-view"];
 
 var sectionMeta={
-  digestio:{title:"Digestio",icon:"solar:stomach-bold-duotone",ic:"blue",t:"teoria-digestio.html",j:"activitats-digestio.html"},
-  nutricio:{title:"Nutricio",icon:"solar:leaf-bold-duotone",ic:"orange",t:"teoria-nutricio.html",j:"activitats-nutricio.html"},
-  "xarxa-trofica":{title:"Xarxa trofica",icon:"solar:planet-3-bold-duotone",ic:"green",t:"teoria-xarxatrofica.html",j:"activitats-xarxatrofica.html"},
+  digestio:{title:"Digesti\u00F3",icon:"solar:stomach-bold-duotone",ic:"blue",t:"teoria-digestio.html",j:"activitats-digestio.html"},
+  nutricio:{title:"Nutrici\u00F3",icon:"solar:leaf-bold-duotone",ic:"orange",t:"teoria-nutricio.html",j:"activitats-nutricio.html"},
+  "xarxa-trofica":{title:"Xarxa tr\u00F2fica",icon:"solar:planet-3-bold-duotone",ic:"green",t:"teoria-xarxatrofica.html",j:"activitats-xarxatrofica.html"},
   "cost-ambiental":{title:"Cost ambiental",icon:"solar:cloud-bolt-bold-duotone",ic:"blue",t:"teoria-costambiental.html",j:"activitats-costambiental.html"},
   "cost-salut":{title:"Cost de salut",icon:"solar:heart-pulse-bold-duotone",ic:"blue",t:"teoria-costsalut.html",j:"activitats-costsalut.html"},
   "cost-social":{title:"Cost social",icon:"solar:users-group-rounded-bold-duotone",ic:"green",t:"teoria-costsocial.html",j:"activitats-costsocial.html"}
@@ -807,11 +808,11 @@ function goBack(){viewHistory.pop();var prev=viewHistory[viewHistory.length-1]||
 function showAuthorView(who,e){e.preventDefault();viewHistory.push(who+"-view");showView(who+"-view")}
 
 var quizQuestions=[
-  {q:"Un iogurt amb imatges de fruites i '100% natural' conte realment:",o:["Nomes fruita i llet","Sucre afegit i aromes artificials","Fruites deshidratades naturals","Zero additius"],c:1,f:"Molts iogurts contenen mes sucre que fruita real."},
-  {q:"La paraula 'artesa' en un pa de supermercat significa:",o:["Fet a ma per un forner local","Fet en una fabrica industrial","No te definicio legal, qualsevol pot fer-la servir","Te un segell de qualitat"],c:2,f:"'Artesa' no esta regulat per llei."},
-  {q:"Una beguda 'sense sucre' pot contenir:",o:["Cap dolcor","Edulcorants artificials","Nomes sucre de fruita","Mel organica"],c:1,f:"'Sense sucre' no vol dir sense dolc."},
-  {q:"Les fotos dels hamburgueses dels anuncis:",o:["Son el que rebs al restaurant","Utilitzen trucs de food styling","Son generades per ordinador","Son exactes al producte"],c:1,f:"El food styling fa servir trucs per fer-los semblar millor."},
-  {q:"Els cereals per a nens amb dibuixos animats:",o:["Son els mes saludables","Tenen menys sucre","Sovint contenen mes sucre i additives","Tenen un segell especial"],c:2,f:"El marketing infantil amaga sucre i additives."}
+  {q:"Un iogurt amb imatges de fruites i \u00AB100% natural\u00BB cont\u00E9 realment:",o:["Nom\u00E9s fruita i llet","Sucre afegit i aromes artificials","Fruites deshidratades naturals","Zero additius"],c:1,f:"Molts iogurts contenen m\u00E9s sucre que fruita real."},
+  {q:"La paraula \u00ABartesa\u00BB en un pa de supermercat significa:",o:["Fet a m\u00E0 per un forner local","Fet en una f\u00E0brica industrial","No t\u00E9 definici\u00F3 legal, qualsevol pot fer-la servir","T\u00E9 un segell de qualitat"],c:2,f:"\u00ABArtesa\u00BB no est\u00E0 regulat per llei."},
+  {q:"Una beguda \u00ABsense sucre\u00BB pot contenir:",o:["Cap dol\u00E7or","Edulcorants artificials","Nom\u00E9s sucre de fruita","Mel org\u00E0nica"],c:1,f:"\u00ABSense sucre\u00BB no vol dir sense dol\u00E7."},
+  {q:"Les fotos de les hamburgueses dels anuncis:",o:["S\u00F3n el que rebs al restaurant","Utilitzen trucs de food styling","S\u00F3n generades per ordinador","S\u00F3n exactes al producte"],c:1,f:"El food styling fa servir trucs per fer-les semblar millor."},
+  {q:"Els cereals per a nens amb dibuixos animats:",o:["S\u00F3n els m\u00E9s saludables","Tenen menys sucre","Sovint contenen m\u00E9s sucre i additius","Tenen un segell especial"],c:2,f:"El marketing infantil amaga sucre i additius."}
 ];
 var quizScore=0,quizAnswered=0;
 
@@ -852,7 +853,7 @@ function answerQuiz(qi,oi,el){
     setTimeout(function(){
       var box=document.getElementById("quizScoreBox");
       document.getElementById("quizScoreNum").textContent=quizScore+"/"+quizQuestions.length;
-      var msg=quizScore===quizQuestions.length?"Perfecte!":quizScore>=3?"Be!":"Continua aprenent!";
+      var msg=quizScore===quizQuestions.length?"Perfecte!":quizScore>=3?"B\u00E9!":"Continua aprenent!";
       document.getElementById("quizScoreMsg").textContent=msg;box.classList.add("show");
     },600);
   }
