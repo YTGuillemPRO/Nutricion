@@ -11,47 +11,25 @@
 :root{--blue:#2563eb;--blue-light:#3b82f6;--blue-bg:rgba(37,99,235,.1);--blue-border:rgba(37,99,235,.25);--orange:#ea580c;--orange-light:#f97316;--orange-bg:rgba(234,88,12,.1);--orange-border:rgba(234,88,12,.25);--green:#059669;--green-light:#10b981;--green-bg:rgba(5,150,105,.1);--green-border:rgba(5,150,105,.25);--purple:#7c3aed;--purple-light:#8b5cf6;--purple-bg:rgba(124,58,237,.1);--purple-border:rgba(124,58,237,.25);--cyan:#06b6d4;--cyan-light:#22d3ee;--cyan-bg:rgba(6,182,212,.1);--cyan-border:rgba(6,182,212,.25);--amber:#d97706;--amber-light:#f59e0b;--amber-bg:rgba(217,119,6,.1);--amber-border:rgba(217,119,6,.25);--rose:#e11d48;--rose-light:#f43f5e;--rose-bg:rgba(225,29,72,.1);--rose-border:rgba(225,29,72,.25);--text-primary:#fff;--text-secondary:rgba(255,255,255,.82);--text-muted:rgba(255,255,255,.5);--card-bg:rgba(255,255,255,.04);--card-border:rgba(255,255,255,.06)}
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Plus Jakarta Sans',sans-serif}
 body{min-height:100vh;display:flex;justify-content:center;align-items:center;background:#050810;color:var(--text-primary);overflow-x:hidden;padding:40px 16px}
-
-/* ===== INTRO OVERLAY ===== */
 #animOverlay{position:fixed;inset:0;z-index:99999;background:#050810}
 #animOverlay.fade-out{animation:overlayFadeOut 1.6s ease forwards}
 #animOverlay.hidden{display:none!important}
 @keyframes overlayFadeOut{0%{opacity:1}100%{opacity:0;pointer-events:none}}
 #animCanvas{display:block;width:100%;height:100%}
-
-#startBtn{
-  position:fixed;inset:0;z-index:100000;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
-  background:rgba(5,8,16,.97);border:none;cursor:pointer;
-  transition:opacity .4s
-}
+#startBtn{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(5,8,16,.97);border:none;cursor:pointer;transition:opacity .4s}
 #startBtn.gone{opacity:0;pointer-events:none}
-#startBtnInner{
-  font-family:'Cinzel',serif;font-size:clamp(20px,4vw,36px);
-  letter-spacing:5px;color:#ffd700;text-transform:uppercase;
-  border:1px solid rgba(255,215,0,.3);padding:18px 48px;border-radius:50px;
-  transition:all .4s;background:transparent
-}
-#startBtn:hover #startBtnInner{background:rgba(255,215,0,.08);border-color:rgba(255,215,0,.7);box-shadow:0 0 40px rgba(255,215,0,.15)}
+#startBtnInner{font-family:'Cinzel',serif;font-size:clamp(20px,4vw,36px);letter-spacing:5px;color:#ffd700;text-transform:uppercase;border:1px solid rgba(255,215,0,.3);padding:18px 48px;border-radius:50px;transition:all .4s;background:linear-gradient(135deg,rgba(255,215,0,.12),rgba(255,255,255,.06));backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(255,255,255,.18) inset,0 -1px 0 rgba(0,0,0,.25) inset,0 8px 32px -4px rgba(255,215,0,.25),0 2px 8px rgba(0,0,0,.4);text-shadow:0 1px 2px rgba(0,0,0,.4),0 0 20px rgba(255,215,0,.3);transform:perspective(600px) translateZ(0)}
+#startBtn:hover #startBtnInner{background:linear-gradient(135deg,rgba(255,215,0,.2),rgba(255,255,255,.1));border-color:rgba(255,215,0,.6);box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 12px 48px -4px rgba(255,215,0,.35),0 0 60px rgba(255,215,0,.1);transform:perspective(600px) translateZ(12px) translateY(-3px)}
+#startBtn:active #startBtnInner{transform:perspective(600px) translateZ(-4px) translateY(1px);transition-duration:.1s}
 #startBtnHint{font-size:12px;color:rgba(255,255,255,.3);letter-spacing:2px}
-
-#skipBtn{
-  position:fixed;bottom:28px;right:28px;z-index:100001;
-  padding:10px 24px;border-radius:20px;border:1px solid rgba(255,255,255,.12);
-  background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);
-  font-size:12px;font-weight:600;cursor:pointer;display:none;
-  transition:all .3s;backdrop-filter:blur(10px)
-}
+#skipBtn{position:fixed;bottom:28px;right:28px;z-index:100001;padding:10px 24px;border-radius:20px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:rgba(255,255,255,.45);font-size:12px;font-weight:600;cursor:pointer;display:none;transition:all .3s;backdrop-filter:blur(10px)}
 #skipBtn:hover{background:rgba(255,255,255,.1);color:#fff}
 #skipBtn.visible{display:block}
-
-/* ===== MAIN SITE ===== */
 #mainSite{opacity:0;pointer-events:none;transition:opacity 1.4s ease}
 #mainSite.active{opacity:1;pointer-events:auto}
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
 .bg-scene{position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none}
-.aurora{position:absolute;inset:0;opacity:.3;filter:blur(80px);animation:auroraMove 12s ease-in-out infinite alternate;background:linear-gradient(180deg,transparent,rgba(16,185,129,.15) 30%,rgba(59,130,246,.12) 50%,rgba(124,58,237,.1) 70%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 20%,#000 60%,transparent);mask-image:linear-gradient(180deg,transparent,#000 20%,#000 60%,transparent)}
+.aurora{position:absolute;inset:0;opacity:.3;filter:blur(80px);animation:auroraMove 12s ease-in-out infinite alternate;background:linear-gradient(180deg,transparent,rgba(16,185,129,.15) 30%,rgba(59,130,246,.12) 50%,rgba(124,58,237,.1) 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 20%,#000 60%,transparent)}
 @keyframes auroraMove{0%{transform:translateX(-10%) skewX(-5deg);opacity:.2}50%{transform:translateX(10%) skewX(5deg);opacity:.4}100%{transform:translateX(-5%) skewX(-2deg);opacity:.25}}
 .bg-mesh{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 10% 20%,rgba(59,130,246,.15),transparent 50%),radial-gradient(ellipse 70% 50% at 90% 80%,rgba(251,191,36,.1),transparent 50%),radial-gradient(ellipse 60% 60% at 50% 50%,rgba(16,185,129,.1),transparent 50%);animation:meshShift 30s ease-in-out infinite alternate}
 @keyframes meshShift{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
@@ -60,15 +38,12 @@ body{min-height:100vh;display:flex;justify-content:center;align-items:center;bac
 .orb-2{width:700px;height:700px;background:radial-gradient(circle,rgba(16,185,129,.3),transparent 65%);bottom:-35%;right:-20%;animation-duration:28s;animation-delay:-8s}
 .orb-3{width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,.25),transparent 65%);top:40%;right:15%;animation-duration:24s;animation-delay:-14s}
 @keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(80px,-60px) scale(1.2)}66%{transform:translate(-50px,70px) scale(.8)}}
-
 .food-layer{position:fixed;inset:-10%;z-index:2;pointer-events:none;transition:transform .15s ease-out}
 .food-item{position:absolute;animation:foodFloat linear infinite;will-change:transform}
 @keyframes foodFloat{0%{transform:translateY(110vh) rotate(0);opacity:0}3%{opacity:.7}97%{opacity:.7}100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
 .bg-scene::after{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.025) .5px,transparent .5px);background-size:40px 40px;opacity:.2}
-
 .sparkle-trail{position:fixed;border-radius:50%;pointer-events:none;z-index:9999;animation:sparkleFade 1s ease-out forwards}
 @keyframes sparkleFade{0%{transform:scale(1);opacity:1}100%{transform:scale(0);opacity:0}}
-
 .glass-panel{position:relative;z-index:10;background:transparent;padding:48px;width:100%;max-width:860px;text-align:center;transition:transform .6s cubic-bezier(.16,1,.3,1),opacity .5s}
 h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spacing:-.04em;margin-bottom:10px;background:linear-gradient(105deg,#fff 0%,#fff 30%,#60a5fa 38%,#c084fc 44%,#34d399 50%,#fbbf24 56%,#fff 62%,#fff 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmerText 4s ease-in-out infinite}
 @keyframes shimmerText{0%{background-position:300% center}100%{background-position:-300% center}}
@@ -87,7 +62,6 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 @keyframes slideUp{to{opacity:1;transform:translateY(0)}}
 @keyframes cardEnter{to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes cardIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-
 .main-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:44px}
 .nav-card{position:relative;background:var(--card-bg);border-radius:22px;padding:34px 26px 30px;cursor:pointer;transition:all .5s cubic-bezier(.16,1,.3,1);text-align:left;overflow:hidden;backdrop-filter:blur(20px)}
 .nav-card .card-glow{position:absolute;inset:0;border-radius:22px;opacity:0;transition:opacity .5s;pointer-events:none;background:radial-gradient(600px circle at var(--mouse-x,50%) var(--mouse-y,50%),var(--glow-color,rgba(37,99,235,.15)),transparent 50%)}
@@ -110,20 +84,28 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .nav-card:hover p{color:var(--text-secondary)}
 .nav-card .arrow{position:absolute;bottom:26px;right:22px;color:var(--text-muted);transition:all .5s cubic-bezier(.34,1.56,.64,1);opacity:0;transform:translateX(-12px)}
 .nav-card:hover .arrow{opacity:1;transform:translateX(0)}
-
 .view{display:none;opacity:0;transform:translateY(28px) scale(.96);transition:opacity .5s ease,transform .5s cubic-bezier(.16,1,.3,1)}
 .view.active{display:block;opacity:1;transform:translateY(0) scale(1)}
 .btn-group{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
-.btn-action{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;padding:22px 28px;border-radius:18px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;transition:all .45s cubic-bezier(.16,1,.3,1);overflow:hidden}
-.btn-teo{background:linear-gradient(135deg,#1e40af,#2563eb 50%,#60a5fa);box-shadow:0 6px 24px -4px rgba(37,99,235,.45)}
-.btn-joc{background:linear-gradient(135deg,#c2410c,#ea580c 50%,#fb923c);box-shadow:0 6px 24px -4px rgba(234,88,12,.45)}
-.btn-action:hover{transform:translateY(-8px) scale(1.06)}
-.btn-action:active{transform:translateY(-2px) scale(.96);transition-duration:.1s}
-.back-btn{display:inline-flex;align-items:center;gap:6px;margin-top:30px;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);border:1px solid transparent}
-.back-btn:hover{color:var(--text-secondary);background:var(--card-bg);border-color:var(--card-border);transform:translateX(-8px)}
+.btn-action{position:relative;display:flex;align-items:center;justify-content:center;gap:10px;padding:22px 28px;border-radius:18px;font-size:16px;font-weight:700;color:#fff;text-decoration:none;transition:all .45s cubic-bezier(.16,1,.3,1);overflow:hidden;backdrop-filter:blur(24px) saturate(1.4);border:1px solid rgba(255,255,255,.15);transform:perspective(700px) translateZ(0);background-image:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.04) 40%,transparent 60%),linear-gradient(to bottom,rgba(255,255,255,.08),transparent 50%);background-color:transparent}
+.btn-action::before{content:'';position:absolute;inset:0;border-radius:18px;z-index:-1}
+.btn-teo::before{background:linear-gradient(135deg,#1e40af,#2563eb 50%,#60a5fa)}
+.btn-joc::before{background:linear-gradient(135deg,#c2410c,#ea580c 50%,#fb923c)}
+.btn-action::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);z-index:1;transition:opacity .4s}
+.btn-teo{box-shadow:0 1px 0 rgba(255,255,255,.15) inset,0 -2px 0 rgba(0,0,0,.2) inset,0 8px 32px -4px rgba(37,99,235,.5),0 4px 12px rgba(0,0,0,.35)}
+.btn-joc{box-shadow:0 1px 0 rgba(255,255,255,.15) inset,0 -2px 0 rgba(0,0,0,.2) inset,0 8px 32px -4px rgba(234,88,12,.5),0 4px 12px rgba(0,0,0,.35)}
+.btn-action:hover{transform:perspective(700px) translateZ(20px) translateY(-6px) scale(1.04)}
+.btn-teo:hover{border-color:rgba(96,165,250,.35);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 16px 56px -6px rgba(37,99,235,.55),0 0 40px rgba(37,99,235,.15)}
+.btn-joc:hover{border-color:rgba(251,146,60,.35);box-shadow:0 1px 0 rgba(255,255,255,.22) inset,0 16px 56px -6px rgba(234,88,12,.55),0 0 40px rgba(234,88,12,.15)}
+.btn-action:active{transform:perspective(700px) translateZ(-6px) translateY(2px) scale(.97);transition-duration:.1s}
+.btn-action .crystal-shine{position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent,rgba(255,255,255,.06),transparent,transparent);animation:none;pointer-events:none;z-index:0}
+.btn-action:hover .crystal-shine{animation:crystalRotate 3s linear infinite}
+@keyframes crystalRotate{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.back-btn{display:inline-flex;align-items:center;gap:6px;margin-top:30px;padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);border:1px solid rgba(255,255,255,.06);background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(255,255,255,.02));backdrop-filter:blur(16px);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 4px 14px rgba(0,0,0,.25);transform:perspective(500px) translateZ(0)}
+.back-btn:hover{color:var(--text-secondary);border-color:rgba(255,255,255,.15);background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.04));transform:perspective(500px) translateZ(8px) translateX(-6px)}
+.back-btn:active{transform:perspective(500px) translateZ(-3px);transition-duration:.1s}
 .author-link{color:var(--text-muted);text-decoration:none;font-weight:600;transition:all .3s}
 .author-link:hover{color:var(--purple-light)}
-
 .cost-options-grid{display:flex;flex-direction:column;gap:14px;margin-top:32px;max-width:440px;margin-left:auto;margin-right:auto}
 .cost-option-card{position:relative;display:flex;align-items:center;gap:16px;padding:22px 24px;border-radius:18px;cursor:pointer;transition:all .5s cubic-bezier(.16,1,.3,1);overflow:hidden;backdrop-filter:blur(20px)}
 .cost-option-card:hover{transform:translateY(-8px) scale(1.03)}
@@ -143,15 +125,14 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .cost-option-card.c-green{background:linear-gradient(135deg,rgba(4,20,14,.9),rgba(8,38,24,.8));border:1.5px solid var(--green-border)}
 .cost-option-card.c-green:hover{border-color:rgba(5,150,105,.5)}
 .cost-option-card.c-green .opt-icon{background:var(--green-bg);border:1px solid var(--green-border);color:var(--green-light)}
-
 .gallery-grid{display:grid;gap:14px;margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto}
 .gallery-grid.cols-3{grid-template-columns:repeat(3,1fr)}
 .gallery-grid.cols-2{grid-template-columns:1fr 1fr}
 .gallery-grid .gallery-item{position:relative;border-radius:18px;overflow:hidden;cursor:pointer;transition:all .5s cubic-bezier(.16,1,.3,1);opacity:0;transform:translateY(20px)}
 .gallery-grid .gallery-item:hover{transform:translateY(-8px) scale(1.03);animation:none!important;opacity:1}
-.gallery-grid .gallery-item img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.gallery-grid .gallery-item img{width:100%;height:200px;object-fit:cover;display:block;transition:transform .5s}
 .gallery-grid .gallery-item:hover img{transform:scale(1.08)}
-.gallery-grid .gallery-item .gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;z-index:3;opacity:0;transform:translateY(10px);transition:all .4s cubic-bezier(.16,1,.3,1)}
+.gallery-grid .gallery-item .gallery-caption{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;z-index:3;opacity:0;transform:translateY(10px);transition:all .4s}
 .gallery-grid .gallery-item:hover .gallery-caption{opacity:1;transform:translateY(0)}
 .gallery-grid .gallery-item .gallery-caption span{font-size:11px;font-weight:700;color:#fff}
 .gallery-grid .gallery-item .gallery-number{position:absolute;top:12px;left:12px;width:28px;height:28px;border-radius:8px;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:4;font-size:11px;font-weight:800}
@@ -179,11 +160,9 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .gallery-counter.purple{background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);color:var(--purple-light)}
 .gallery-counter.rose{background:rgba(225,29,72,.08);border:1px solid rgba(225,29,72,.15);color:var(--rose-light)}
 .gallery-counter.cyan{background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);color:var(--cyan-light)}
-
 .sortides-desc{max-width:560px;margin:20px auto 0;text-align:left;background:linear-gradient(135deg,rgba(30,8,14,.9),rgba(40,12,20,.8));border:1.5px solid rgba(225,29,72,.12);border-radius:20px;padding:24px}
 .sortides-desc h3{font-size:15px;font-weight:800;color:var(--rose-light);margin-bottom:8px}
 .sortides-desc p{font-size:13px;color:var(--text-secondary);line-height:1.6}
-
 .veritat-view-content{text-align:left;max-width:640px;margin:0 auto}
 .veritat-phase-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:12px;background:rgba(217,119,6,.1);border:1px solid rgba(217,119,6,.2);font-size:12px;font-weight:700;color:var(--amber-light);margin-bottom:20px;text-transform:uppercase}
 .veritat-intro-box{background:linear-gradient(135deg,rgba(30,18,4,.9),rgba(40,25,8,.8));border:1.5px solid rgba(217,119,6,.15);border-radius:20px;padding:28px;margin-bottom:28px}
@@ -196,7 +175,6 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .veritat-tip-card .tip-num{width:30px;height:30px;border-radius:9px;background:rgba(217,119,6,.12);border:1px solid rgba(217,119,6,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--amber-light);flex-shrink:0}
 .veritat-tip-card .tip-title{font-size:14px;font-weight:700}
 .veritat-tip-card .tip-body{font-size:13px;color:var(--text-muted);line-height:1.55;padding-left:42px}
-
 .quiz-container{margin-top:12px}
 .quiz-question-card{background:linear-gradient(135deg,rgba(20,14,4,.9),rgba(30,20,8,.85));border:1.5px solid rgba(217,119,6,.12);border-radius:20px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden}
 .quiz-question-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--amber),var(--amber-light));border-radius:4px 0 0 4px;opacity:.5}
@@ -207,7 +185,7 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .quiz-q-number{font-size:11px;font-weight:700;color:var(--amber-light);text-transform:uppercase;margin-bottom:10px}
 .quiz-q-text{font-size:15px;font-weight:700;margin-bottom:18px;line-height:1.45}
 .quiz-options{display:flex;flex-direction:column;gap:8px}
-.quiz-option{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.06);cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);font-size:14px;font-weight:500;color:var(--text-secondary);text-align:left}
+.quiz-option{display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:14px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);cursor:pointer;transition:all .35s;font-size:14px;font-weight:500;color:var(--text-secondary);text-align:left;backdrop-filter:blur(12px)}
 .quiz-option:hover:not(.disabled){background:rgba(217,119,6,.06);border-color:rgba(217,119,6,.2);transform:translateX(4px)}
 .quiz-option .opt-letter{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text-muted);flex-shrink:0}
 .quiz-option.correct{background:rgba(5,150,105,.1);border-color:rgba(5,150,105,.35);color:var(--green-light)}
@@ -225,9 +203,8 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .quiz-score-number{font-size:56px;font-weight:900;background:linear-gradient(135deg,var(--amber-light),var(--amber));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:8px}
 .quiz-score-label{font-size:14px;font-weight:600;color:var(--text-muted);margin-bottom:16px}
 .quiz-score-msg{font-size:15px;font-weight:600;color:var(--text-secondary);margin-bottom:20px}
-.quiz-restart-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:14px;background:linear-gradient(135deg,#b45309,#d97706,#f59e0b);border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .4s cubic-bezier(.16,1,.3,1);box-shadow:0 6px 24px -4px rgba(217,119,6,.45)}
+.quiz-restart-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:14px;background:linear-gradient(135deg,#b45309,#d97706,#f59e0b);border:none;color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:all .4s;box-shadow:0 8px 28px -4px rgba(217,119,6,.45)}
 .quiz-restart-btn:hover{transform:translateY(-4px) scale(1.05)}
-
 .modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.96);backdrop-filter:blur(24px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity .4s}
 .modal-overlay.active{display:flex;opacity:1}
 .modal-content{position:relative;max-width:90vw;max-height:90vh;transform:scale(.8);transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
@@ -240,8 +217,7 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .modal-prev{left:-60px}
 .modal-next{right:-60px}
 .modal-counter{position:absolute;bottom:-44px;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;color:var(--text-muted);white-space:nowrap}
-
-.pill{position:fixed;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);padding:14px 24px;border-radius:14px;font-size:13px;font-weight:600;text-decoration:none;z-index:999;transition:all .45s cubic-bezier(.16,1,.3,1);backdrop-filter:blur(24px)}
+.pill{position:fixed;display:flex;align-items:center;gap:9px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--text-secondary);padding:14px 24px;border-radius:14px;font-size:13px;font-weight:600;text-decoration:none;z-index:999;transition:all .45s;backdrop-filter:blur(24px)}
 .pill:hover{transform:translateY(-6px) scale(1.06)}
 .insti-pill{bottom:24px;right:24px}
 .insti-pill:hover{box-shadow:0 12px 40px -4px rgba(37,99,235,.4);color:var(--blue-light);background:rgba(37,99,235,.08)}
@@ -252,727 +228,43 @@ h1{font-size:clamp(28px,5.5vw,48px);font-weight:900;line-height:1.1;letter-spaci
 .social-pill{bottom:24px;left:24px}
 .social-pill:hover{box-shadow:0 12px 40px -4px rgba(124,58,237,.4);color:var(--purple-light);background:rgba(124,58,237,.08)}
 .social-pill iconify-icon{font-size:18px;color:var(--purple-light)}
-
 @keyframes rippleOut{to{transform:scale(4);opacity:0}}
 @media(max-width:640px){body{padding:20px 12px}.glass-panel{padding:32px 20px}.main-grid{grid-template-columns:1fr}.btn-group{grid-template-columns:1fr}.pill{padding:10px 14px;font-size:11px}.forum-pill{bottom:66px}.gallery-grid{grid-template-columns:1fr!important}.quiz-score-number{font-size:44px}.modal-prev{left:-4px}.modal-next{right:-4px}}
 </style>
 </head>
 <body>
-
-<!-- ANIMATION OVERLAY -->
-<div id="animOverlay">
-  <canvas id="animCanvas"></canvas>
-  <div id="startBtn">
-    <div id="startBtnInner">✦ Iniciar ✦</div>
-    <div id="startBtnHint">fes clic per començar</div>
-  </div>
-  <button id="skipBtn">Saltar →</button>
-</div>
-
-<!-- MAIN SITE -->
+<div id="animOverlay"><canvas id="animCanvas"></canvas><div id="startBtn"><div id="startBtnInner">✦ Iniciar ✦</div><div id="startBtnHint">fes clic per començar</div></div><button id="skipBtn">Saltar →</button></div>
 <div id="mainSite">
 <canvas id="bgCanvas"></canvas>
 <div class="bg-scene"><div class="aurora"></div><div class="bg-mesh"></div><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
 <div class="food-layer" id="foodLayer"></div>
 <div class="glass-panel" id="mainPanel">
-
-  <div id="home-view" class="view active">
-    <h1 class="title-anim">Quin és el veritable cost d'allò que menjo?</h1>
-    <p class="subtitle subtitle-anim">Fet per: <a href="#" class="author-link" onclick="showAuthorView('guillem',event)">Guillem Varela Cors</a>, <a href="#" class="author-link" onclick="showAuthorView('yasser',event)">Yasser Chikhi Ourinich</a> i <a href="#" class="author-link" onclick="showAuthorView('julian',event)">Julian Navas Pañas</a></p>
-    <div class="main-grid">
-      <div class="nav-card stagger-in" onclick="navTo('digestio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle blue"><iconify-icon icon="solar:stomach-bold-duotone"></iconify-icon></div><h2>Digestió</h2><p>El recorregut dels aliments pel teu cos</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('nutricio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle orange"><iconify-icon icon="solar:leaf-bold-duotone"></iconify-icon></div><h2>Nutrició</h2><p>Nutrients, vitamines i equilibri alimentari</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('cost',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle dark"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h2>Cost</h2><p>Ambiental, salut i impacte social</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('colaboradors',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle purple"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h2>Col·laboradors</h2><p>Professionals que han col·laborat</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('veritat',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle amber"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h2>La veritat darrere del plat</h2><p>Detectius del menjar</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('sortides',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle rose"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h2>Sortides</h2><p>Neteja de platja al Delta de l'Ebre</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('xarxa-trofica',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle green"><iconify-icon icon="solar:planet-3-bold-duotone"></iconify-icon></div><h2>Xarxa tròfica</h2><p>Com flueix l'energia entre éssers vius</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-      <div class="nav-card stagger-in" onclick="navTo('making-off',event)" style="grid-column:span 2"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle cyan"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h2>Making off</h2><p>El procés creatiu del projecte</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div>
-    </div>
-  </div>
-
-  <div id="selection-view" class="view"><div id="selIconWrap"></div><h1 id="selTitle"></h1><p class="subtitle">Tria una activitat</p><div class="btn-group"><a id="linkTeoria" class="btn-action btn-teo" onclick="btnRipple(event)"><iconify-icon icon="solar:book-minimalistic-bold-duotone" width="22"></iconify-icon> Teoria</a><a id="linkJoc" class="btn-action btn-joc" onclick="btnRipple(event)"><iconify-icon icon="solar:gamepad-bold-duotone" width="22"></iconify-icon> Joc</a></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="cost-view" class="view"><div class="icon-circle dark" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h1>Cost</h1><p class="subtitle">Selecciona un tipus de cost</p><div class="cost-options-grid"><div class="cost-option-card c-dark" onclick="costNav('cost-ambiental',event)"><div class="opt-icon"><iconify-icon icon="solar:cloud-bolt-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost ambiental</h3><p>Emissions, aigua i recursos</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-blue" onclick="costNav('cost-salut',event)"><div class="opt-icon"><iconify-icon icon="solar:heart-pulse-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost de salut</h3><p>Impacte sobre l'organisme</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-green" onclick="costNav('cost-social',event)"><div class="opt-icon"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost social</h3><p>Conseqüències per a la societat</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="colaboradors-view" class="view"><div class="icon-circle purple" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h1>Col·laboradors</h1><p class="subtitle">Biòloga marina Xenia</p><div class="gallery-grid cols-3 purple-theme"><div class="gallery-item gi-enter" onclick="openModal('col',0)"><img src="https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b" loading="lazy"><div class="gallery-number">1</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Anàlisi de peix</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',1)"><img src="https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba" loading="lazy"><div class="gallery-number">2</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Dissecció</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',2)"><img src="https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0" loading="lazy"><div class="gallery-number">3</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Taller</span></div></div></div><div class="gallery-counter purple"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 3 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="sortides-view" class="view"><div class="icon-circle rose" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h1>Sortides</h1><p class="subtitle">Delta de l'Ebre</p><div class="gallery-grid cols-2 rose-theme"><div class="gallery-item gi-enter" onclick="openModal('sor',0)"><img src="https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Neteja de platja</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',1)"><img src="https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Recollida de residus</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',2)"><img src="https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Per un Delta net</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',3)"><img src="https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Dinar</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',4)"><img src="https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Àpat en grup</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',5)"><img src="https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db" loading="lazy"><div class="gallery-number">6</div><div class="gallery-caption"><span>Resultats</span></div></div></div><div class="sortides-desc"><h3>Delta de l'Ebre</h3><p>Vam participar en la jornada de neteja de platja i gaudir d'un dinar de convivència.</p></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="veritat-view" class="view"><div class="icon-circle amber" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h1>La veritat darrere del plat</h1><p class="subtitle">Detectius del menjar</p><div class="veritat-view-content"><div class="veritat-phase-badge">Fase 1 — Real o Fake</div><div class="veritat-intro-box"><h3>Detectius del Menjar</h3><p>Les empreses fan servir tècniques de marketing per fer que els productes semblin més saludables del que són.</p></div><div class="veritat-section-title">Tècniques de publicitat</div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">1</div><div class="tip-title">L'efecte «saludable»</div></div><div class="tip-body">Imatges de verdures en productes processats.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">2</div><div class="tip-title">Les paraules màgiques</div></div><div class="tip-body">«Natural» o «artesà» no tenen definició legal.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">3</div><div class="tip-title">Les racions enganyoses</div></div><div class="tip-body">Informació per racions molt petites.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">4</div><div class="tip-title">Food styling</div></div><div class="tip-body">Fotos fetes amb trucs professionals.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">5</div><div class="tip-title">El marketing infantil</div></div><div class="tip-body">Dibuixos i regals per atrapar els nens.</div></div><div class="veritat-section-title">Posa a prova els teus coneixements</div><div class="quiz-container" id="quizContainer"></div><div class="quiz-score-box" id="quizScoreBox"><div class="quiz-score-number" id="quizScoreNum">0/0</div><div class="quiz-score-label">Respostes correctes</div><div class="quiz-score-msg" id="quizScoreMsg"></div><button class="quiz-restart-btn" onclick="restartQuiz()">Tornar a intentar</button></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="makingoff-view" class="view"><div class="icon-circle cyan" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h1>Making of</h1><p class="subtitle">El procés creatiu</p><div class="gallery-grid cols-2 cyan-theme"><div class="gallery-item gi-enter" onclick="openModal('mk',0)"><img src="https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Il·lustracions</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',1)"><img src="https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Presentació</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',2)"><img src="https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Panell</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',3)"><img src="https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Preparació</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',4)"><img src="https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Disseny 3D</span></div></div></div><div class="gallery-counter cyan"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 5 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="guillem-view" class="view"><div class="icon-circle blue" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Guillem Varela Cors</h1><p class="subtitle">Creador de la web</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-  <div id="yasser-view" class="view"><div class="icon-circle orange" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Yasser Chikhi Ourinich</h1><p class="subtitle">Creador d'animacions</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-  <div id="julian-view" class="view"><div class="icon-circle green" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Julian Navas Pañas</h1><p class="subtitle">Ajudant de codi</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
-
-  <div id="photoModal" class="modal-overlay" onclick="closeModal()"><div class="modal-content" onclick="event.stopPropagation()"><button class="modal-close" onclick="closeModal()"><iconify-icon icon="solar:close-circle-bold-duotone" width="24"></iconify-icon></button><button class="modal-nav modal-prev" onclick="modalPrev(event)"><iconify-icon icon="solar:arrow-left-linear"></iconify-icon></button><button class="modal-nav modal-next" onclick="modalNext(event)"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button><img id="modalImage" src="" class="modal-image"><div class="modal-counter" id="modalCounter"></div></div></div>
+<div id="home-view" class="view active"><h1 class="title-anim">Quin és el veritable cost d'allò que menjo?</h1><p class="subtitle subtitle-anim">Fet per: <a href="#" class="author-link" onclick="showAuthorView('guillem',event)">Guillem Varela Cors</a>, <a href="#" class="author-link" onclick="showAuthorView('yasser',event)">Yasser Chikhi Ourinich</a> i <a href="#" class="author-link" onclick="showAuthorView('julian',event)">Julian Navas Pañas</a></p><div class="main-grid"><div class="nav-card stagger-in" onclick="navTo('digestio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle blue"><iconify-icon icon="solar:stomach-bold-duotone"></iconify-icon></div><h2>Digestió</h2><p>El recorregut dels aliments pel teu cos</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('nutricio',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle orange"><iconify-icon icon="solar:leaf-bold-duotone"></iconify-icon></div><h2>Nutrició</h2><p>Nutrients, vitamines i equilibri alimentari</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('cost',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle dark"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h2>Cost</h2><p>Ambiental, salut i impacte social</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('colaboradors',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle purple"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h2>Col·laboradors</h2><p>Professionals que han col·laborat</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('veritat',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle amber"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h2>La veritat darrere del plat</h2><p>Detectius del menjar</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('sortides',event)"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle rose"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h2>Sortides</h2><p>Neteja de platja al Delta de l'Ebre</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('xarxa-trofica',event)" style="grid-column:span 2"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle green"><iconify-icon icon="solar:planet-3-bold-duotone"></iconify-icon></div><h2>Xarxa tròfica</h2><p>Com flueix l'energia entre éssers vius</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="nav-card stagger-in" onclick="navTo('making-off',event)" style="grid-column:span 2"><div class="card-glow"></div><div class="card-inner"><div class="icon-circle cyan"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h2>Making off</h2><p>El procés creatiu del projecte</p><span class="arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div></div></div>
+<div id="selection-view" class="view"><div id="selIconWrap"></div><h1 id="selTitle"></h1><p class="subtitle">Tria una activitat</p><div class="btn-group"><a id="linkTeoria" class="btn-action btn-teo" onclick="btnRipple(event)"><span class="crystal-shine"></span><iconify-icon icon="solar:book-minimalistic-bold-duotone" width="22" style="position:relative;z-index:2"></iconify-icon> <span style="position:relative;z-index:2">Teoria</span></a><a id="linkJoc" class="btn-action btn-joc" onclick="btnRipple(event)"><span class="crystal-shine"></span><iconify-icon icon="solar:gamepad-bold-duotone" width="22" style="position:relative;z-index:2"></iconify-icon> <span style="position:relative;z-index:2">Joc</span></a></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="cost-view" class="view"><div class="icon-circle dark" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:tag-price-bold-duotone"></iconify-icon></div><h1>Cost</h1><p class="subtitle">Selecciona un tipus de cost</p><div class="cost-options-grid"><div class="cost-option-card c-dark" onclick="costNav('cost-ambiental',event)"><div class="opt-icon"><iconify-icon icon="solar:cloud-bolt-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost ambiental</h3><p>Emissions, aigua i recursos</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-blue" onclick="costNav('cost-salut',event)"><div class="opt-icon"><iconify-icon icon="solar:heart-pulse-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost de salut</h3><p>Impacte sobre l'organisme</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div><div class="cost-option-card c-green" onclick="costNav('cost-social',event)"><div class="opt-icon"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><div class="opt-text"><h3>Cost social</h3><p>Conseqüències per a la societat</p></div><span class="opt-arrow"><iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon></span></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="colaboradors-view" class="view"><div class="icon-circle purple" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:users-group-rounded-bold-duotone"></iconify-icon></div><h1>Col·laboradors</h1><p class="subtitle">Biòloga marina Xenia</p><div class="gallery-grid cols-3 purple-theme"><div class="gallery-item gi-enter" onclick="openModal('col',0)"><img src="https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b" loading="lazy"><div class="gallery-number">1</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Anàlisi de peix</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',1)"><img src="https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba" loading="lazy"><div class="gallery-number">2</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Dissecció</span></div></div><div class="gallery-item gi-enter" onclick="openModal('col',2)"><img src="https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0" loading="lazy"><div class="gallery-number">3</div><div class="gallery-zoom"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone" width="16"></iconify-icon></div><div class="gallery-caption"><span>Taller</span></div></div></div><div class="gallery-counter purple"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 3 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="sortides-view" class="view"><div class="icon-circle rose" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:map-point-wave-bold-duotone"></iconify-icon></div><h1>Sortides</h1><p class="subtitle">Delta de l'Ebre</p><div class="gallery-grid cols-2 rose-theme"><div class="gallery-item gi-enter" onclick="openModal('sor',0)"><img src="https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Neteja de platja</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',1)"><img src="https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Recollida de residus</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',2)"><img src="https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Per un Delta net</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',3)"><img src="https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Dinar</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',4)"><img src="https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Àpat en grup</span></div></div><div class="gallery-item gi-enter" onclick="openModal('sor',5)"><img src="https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db" loading="lazy"><div class="gallery-number">6</div><div class="gallery-caption"><span>Resultats</span></div></div></div><div class="sortides-desc"><h3>Delta de l'Ebre</h3><p>Vam participar en la jornada de neteja de platja i gaudir d'un dinar de convivència.</p></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="veritat-view" class="view"><div class="icon-circle amber" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:magnifer-zoom-in-bold-duotone"></iconify-icon></div><h1>La veritat darrere del plat</h1><p class="subtitle">Detectius del menjar</p><div class="veritat-view-content"><div class="veritat-phase-badge">Fase 1 — Real o Fake</div><div class="veritat-intro-box"><h3>Detectius del Menjar</h3><p>Les empreses fan servir tècniques de marketing per fer que els productes semblin més saludables del que són.</p></div><div class="veritat-section-title">Tècniques de publicitat</div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">1</div><div class="tip-title">L'efecte «saludable»</div></div><div class="tip-body">Imatges de verdures en productes processats.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">2</div><div class="tip-title">Les paraules màgiques</div></div><div class="tip-body">«Natural» o «artesà» no tenen definició legal.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">3</div><div class="tip-title">Les racions enganyoses</div></div><div class="tip-body">Informació per racions molt petites.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">4</div><div class="tip-title">Food styling</div></div><div class="tip-body">Fotos fetes amb trucs professionals.</div></div><div class="veritat-tip-card"><div class="tip-header"><div class="tip-num">5</div><div class="tip-title">El marketing infantil</div></div><div class="tip-body">Dibuixos i regals per atrapar els nens.</div></div><div class="veritat-section-title">Posa a prova els teus coneixements</div><div class="quiz-container" id="quizContainer"></div><div class="quiz-score-box" id="quizScoreBox"><div class="quiz-score-number" id="quizScoreNum">0/0</div><div class="quiz-score-label">Respostes correctes</div><div class="quiz-score-msg" id="quizScoreMsg"></div><button class="quiz-restart-btn" onclick="restartQuiz()">Tornar a intentar</button></div></div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="makingoff-view" class="view"><div class="icon-circle cyan" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:clapperboard-bold-duotone"></iconify-icon></div><h1>Making of</h1><p class="subtitle">El procés creatiu</p><div class="gallery-grid cols-2 cyan-theme"><div class="gallery-item gi-enter" onclick="openModal('mk',0)"><img src="https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8" loading="lazy"><div class="gallery-number">1</div><div class="gallery-caption"><span>Il·lustracions</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',1)"><img src="https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049" loading="lazy"><div class="gallery-number">2</div><div class="gallery-caption"><span>Presentació</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',2)"><img src="https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3" loading="lazy"><div class="gallery-number">3</div><div class="gallery-caption"><span>Panell</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',3)"><img src="https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb" loading="lazy"><div class="gallery-number">4</div><div class="gallery-caption"><span>Preparació</span></div></div><div class="gallery-item gi-enter" onclick="openModal('mk',4)"><img src="https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2" loading="lazy"><div class="gallery-number">5</div><div class="gallery-caption"><span>Disseny 3D</span></div></div></div><div class="gallery-counter cyan"><iconify-icon icon="solar:camera-bold-duotone"></iconify-icon> 5 fotos</div><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="guillem-view" class="view"><div class="icon-circle blue" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Guillem Varela Cors</h1><p class="subtitle">Creador de la web</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="yasser-view" class="view"><div class="icon-circle orange" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Yasser Chikhi Ourinich</h1><p class="subtitle">Creador d'animacions</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="julian-view" class="view"><div class="icon-circle green" style="width:64px;height:64px;border-radius:18px;font-size:28px;margin:0 auto 18px;display:inline-flex;align-items:center;justify-content:center"><iconify-icon icon="solar:user-rounded-bold-duotone"></iconify-icon></div><h1>Julian Navas Pañas</h1><p class="subtitle">Ajudant de codi</p><div class="back-btn" onclick="goBack()"><iconify-icon icon="solar:arrow-left-linear" width="16"></iconify-icon> Tornar</div></div>
+<div id="photoModal" class="modal-overlay" onclick="closeModal()"><div class="modal-content" onclick="event.stopPropagation()"><button class="modal-close" onclick="closeModal()"><iconify-icon icon="solar:close-circle-bold-duotone" width="24"></iconify-icon></button><button class="modal-nav modal-prev" onclick="modalPrev(event)"><iconify-icon icon="solar:arrow-left-linear"></iconify-icon></button><button class="modal-nav modal-next" onclick="modalNext(event)"><iconify-icon icon="solar:arrow-right-linear"></iconify-icon></button><img id="modalImage" src="" class="modal-image"><div class="modal-counter" id="modalCounter"></div></div></div>
 </div>
-
 <a href="https://www.instagram.com/institutescolaeltemple/" target="_blank" class="pill social-pill"><iconify-icon icon="solar:share-circle-bold-duotone"></iconify-icon> Segueix-nos</a>
 <a href="https://padlet.com/YTGuillemPRO/som-el-que-mengem-z20awkht9kpod76f" target="_blank" class="pill forum-pill"><iconify-icon icon="solar:chat-round-dots-bold-duotone"></iconify-icon> Fòrum</a>
 <a href="https://agora.xtec.cat/ietemple/" target="_blank" class="pill insti-pill"><iconify-icon icon="solar:buildings-3-bold-duotone"></iconify-icon> IE Temple</a>
-
 <script>
-/* ============================================================
-   INTRO ANIMATION — millora visual completa
-   ============================================================ */
-(function(){
-  var canvas  = document.getElementById('animCanvas');
-  var ctx     = canvas.getContext('2d');
-  var startEl = document.getElementById('startBtn');
-  var skipEl  = document.getElementById('skipBtn');
-  var overlay = document.getElementById('animOverlay');
-  var main    = document.getElementById('mainSite');
+(function(){var canvas=document.getElementById('animCanvas'),ctx=canvas.getContext('2d'),skipEl=document.getElementById('skipBtn'),overlay=document.getElementById('animOverlay'),main=document.getElementById('mainSite');var W,H,gY,started=false,done=false,t0=0,impactFired=false,chordFired=false;var rain=[],splashes=[],magic=[];var ac=null;function initAC(){try{if(!ac)ac=new(window.AudioContext||window.webkitAudioContext)();if(ac.state==='suspended')ac.resume()}catch(e){ac=null}}function playImpact(){if(!ac)return;try{var n=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.setValueAtTime(90,n);o.frequency.exponentialRampToValueAtTime(22,n+.45);g.gain.setValueAtTime(.55,n);g.gain.exponentialRampToValueAtTime(.001,n+.45);o.connect(g);g.connect(ac.destination);o.start(n);o.stop(n+.45)}catch(e){}}function playChord(){if(!ac)return;try{var n=ac.currentTime,freqs=[523.25,659.25,783.99,1046.5];freqs.forEach(function(f,i){var o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f;var s=n+i*.07;g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.055,s+.06);g.gain.linearRampToValueAtTime(0,s+1.4);o.connect(g);g.connect(ac.destination);o.start(s);o.stop(s+1.4)})}catch(e){}}var rainNode=null,rainGain=null;function startRainAudio(){if(!ac||rainNode)return;try{var buf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),d=buf.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;rainNode=ac.createBufferSource();rainNode.buffer=buf;rainNode.loop=true;var f=ac.createBiquadFilter();f.type='highpass';f.frequency.value=4800;rainGain=ac.createGain();rainGain.gain.value=0;rainNode.connect(f);f.connect(rainGain);rainGain.connect(ac.destination);rainNode.start()}catch(e){}}function eO(t){return 1-Math.pow(1-t,3)}function eOE(t){if(t===0||t===1)return t;return Math.pow(2,-10*t)*Math.sin((t*10-.75)*(2*Math.PI)/3)+1}function cl(v,a,b){return v<a?a:v>b?b:v}function lr(a,b,t){return a+(b-a)*t}function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;gY=H*.73}window.addEventListener('resize',resize);resize();function ri(t){if(t<1.9)return 0;if(t<2.8)return(t-1.9)/.9;if(t<6.2)return 1;if(t<7.8)return 1-(t-6.2)/1.6;return 0}var stars=[];for(var i=0;i<120;i++)stars.push({x:Math.random()*2-.5,y:Math.random()*.72,r:Math.random()*1.1+.15,tw:Math.random()*Math.PI*2,spd:.4+Math.random()*1.8});function drawBg(t){var rn=ri(t),gp=cl(t/8,0,1),sky=ctx.createLinearGradient(0,0,0,gY);var r1=Math.round(lr(8,18,gp)-rn*6),g1=Math.round(lr(12,24,gp)-rn*5),b1=Math.round(lr(24,55,gp)-rn*5);sky.addColorStop(0,'rgb('+r1+','+g1+','+b1+')');sky.addColorStop(1,'rgb('+(r1-4)+','+(g1-4)+','+(b1-8)+')');ctx.fillStyle=sky;ctx.fillRect(0,0,W,gY);if(t>5.4){var bp=eO(cl((t-5.4)/2.2,0,1)),bl=ctx.createRadialGradient(W*.5,gY*.18,0,W*.5,gY*.18,H*.58);bl.addColorStop(0,'rgba(255,130,190,'+.1*bp+')');bl.addColorStop(.6,'rgba(200,90,200,'+.05*bp+')');bl.addColorStop(1,'transparent');ctx.fillStyle=bl;ctx.fillRect(0,0,W,gY)}var gnd=ctx.createLinearGradient(0,gY,0,H);gnd.addColorStop(0,'#1c0e08');gnd.addColorStop(1,'#090504');ctx.fillStyle=gnd;ctx.fillRect(0,gY,W,H-gY);ctx.beginPath();ctx.moveTo(0,gY);ctx.lineTo(W,gY);ctx.strokeStyle='rgba(90,55,25,0.5)';ctx.lineWidth=1.2;ctx.stroke()}function drawStars(t){var fade=cl(1-ri(t)*2.5,0,1);if(fade<.01)return;for(var i=0;i<stars.length;i++){var s=stars[i],tw=.1+Math.sin(s.tw+t*s.spd)*.12;ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);ctx.fillStyle='rgba(200,215,255,'+(tw*fade)+')';ctx.fill()}}function drawRain(t){var intensity=ri(t);if(rainGain&&ac){try{rainGain.gain.linearRampToValueAtTime(cl(intensity*.14,0,.14),ac.currentTime+.1)}catch(e){}}if(intensity>.05){for(var i=0;i<Math.round(intensity*5);i++){if(rain.length>=240)break;rain.push({x:Math.random()*W+80,y:-20-Math.random()*60,sp:15+Math.random()*10,len:13+Math.random()*12})}}ctx.save();ctx.strokeStyle='rgba(155,185,225,'+intensity*.28+')';ctx.lineWidth=1.3;ctx.beginPath();for(var i=rain.length-1;i>=0;i--){var d=rain[i];d.y+=d.sp;d.x-=2.8;if(d.y>gY){splashes.push({x:d.x,y:gY,vy:-1.8-Math.random()*2,vx:(Math.random()-.5)*2.5,life:1});rain.splice(i,1);continue}ctx.moveTo(d.x,d.y);ctx.lineTo(d.x-2,d.y+d.len)}ctx.stroke();for(var i=splashes.length-1;i>=0;i--){var s=splashes[i];s.x+=s.vx;s.y+=s.vy;s.vy+=.18;s.life-=.07;if(s.life<=0){splashes.splice(i,1);continue}ctx.beginPath();ctx.arc(s.x,s.y,1.3*s.life,0,Math.PI*2);ctx.fillStyle='rgba(160,200,240,'+(intensity*s.life)+')';ctx.fill()}ctx.restore()}function drawSeed(t){if(t>3.6)return;var sy,rot=0,sc=1,al=1;if(t<1.6){var p=eO(t/1.6);sy=lr(-90,gY-26,p);rot=(1-p)*14}else if(t<2.15){var p=(t-1.6)/.55;sy=lr(gY-26,gY+16,eO(p));sc=lr(1,.2,eO(p));al=lr(1,.15,eO(p));if(!impactFired){impactFired=true;playImpact()}if(p>.65){var sw=(p-.65)/.35;ctx.beginPath();ctx.ellipse(W*.5,gY,sw*55,sw*14,0,0,Math.PI*2);ctx.strokeStyle='rgba(200,130,50,'+(1-sw)*.45+')';ctx.lineWidth=2;ctx.stroke()}}else{var p=(t-2.15)/1.45;sy=gY+16;sc=lr(.2,0,eO(p));al=lr(.15,0,eO(p))}if(sc<.01||al<.01)return;ctx.save();ctx.globalAlpha=al;ctx.translate(W*.5,sy);ctx.rotate(rot*Math.PI/180);ctx.scale(sc,sc);ctx.beginPath();ctx.ellipse(0,30,18,5,0,0,Math.PI*2);ctx.fillStyle='rgba(0,0,0,0.3)';ctx.fill();var sg=ctx.createLinearGradient(-12,-18,12,28);sg.addColorStop(0,'#f0c05a');sg.addColorStop(.45,'#c08820');sg.addColorStop(1,'#6a4010');ctx.fillStyle=sg;ctx.beginPath();ctx.moveTo(0,-18);ctx.bezierCurveTo(-15,-5,-15,16,0,28);ctx.bezierCurveTo(15,16,15,-5,0,-18);ctx.fill();ctx.beginPath();ctx.moveTo(-3,-13);ctx.bezierCurveTo(-10,-4,-10,5,-4,12);ctx.strokeStyle='rgba(255,235,140,0.38)';ctx.lineWidth=2.2;ctx.lineCap='round';ctx.stroke();var cap=ctx.createLinearGradient(-17,-30,17,-12);cap.addColorStop(0,'#4a2810');cap.addColorStop(1,'#7a4820');ctx.fillStyle=cap;ctx.beginPath();ctx.ellipse(0,-20,18,11,0,0,Math.PI);ctx.fill();ctx.beginPath();ctx.moveTo(0,-28);ctx.lineTo(2.5,-39);ctx.strokeStyle='#3a2010';ctx.lineWidth=2.8;ctx.stroke();ctx.restore()}
+function drawPlant(t){if(t<2.5)return;var bx=W*.5,stemH=Math.min(H*.47,370),stemP=eO(cl((t-2.5)/1.5,0,1)),leafP=eO(cl((t-3.7)/1.1,0,1)),budP=eO(cl((t-4.8)/.9,0,1)),openP=eO(cl((t-5.5)/1.4,0,1)),magicP=eO(cl((t-6.3)/1.8,0,1)),topY=gY-stemH*stemP,wind=Math.sin(t*1.7)*.02,sway=Math.sin(t*.85)*5*stemP;if(stemP>.08){var rP=eO(cl((t-2.9)/.9,0,1));ctx.save();ctx.lineCap='round';ctx.strokeStyle='#281808';ctx.lineWidth=3;for(var i=0;i<5;i++){var a=(i-2)*.32;ctx.beginPath();ctx.moveTo(bx,gY+2);ctx.quadraticCurveTo(bx+Math.sin(a)*42*rP,gY+22+Math.cos(a*2)*10*rP,bx+Math.sin(a)*72*rP,gY+34+i*3*rP);ctx.globalAlpha=.45*rP;ctx.stroke()}ctx.globalAlpha=1;ctx.restore()}ctx.save();ctx.lineCap='round';var sg=ctx.createLinearGradient(bx-8,gY,bx+8,topY);sg.addColorStop(0,'#1c5010');sg.addColorStop(.3,'#2e7c20');sg.addColorStop(.7,'#4aaa35');sg.addColorStop(1,'#3a9028');ctx.strokeStyle=sg;ctx.lineWidth=11;ctx.beginPath();ctx.moveTo(bx,gY);ctx.quadraticCurveTo(bx+sway*.5,gY-stemH*.45*stemP,bx+sway,topY);ctx.stroke();ctx.strokeStyle='rgba(120,230,80,0.1)';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(bx-2,gY);ctx.quadraticCurveTo(bx-2+sway*.5,gY-stemH*.45*stemP,bx-2+sway,topY);ctx.stroke();ctx.restore();if(leafP>0){var lDefs=[{py:.74,side:-1,ang:-.55,sz:115},{py:.50,side:-1,ang:-.70,sz:108},{py:.28,side:-1,ang:-.85,sz:95},{py:.70,side:1,ang:.55,sz:118},{py:.46,side:1,ang:.68,sz:110},{py:.24,side:1,ang:.80,sz:98}];for(var li=0;li<lDefs.length;li++){var l=lDefs[li],ly=lr(gY,topY,l.py),lx=bx+sway*l.py+l.side*6*leafP,sz=l.sz*leafP;ctx.save();ctx.translate(lx,ly);ctx.rotate(l.ang+wind*l.side);ctx.fillStyle='rgba(0,0,0,0.12)';ctx.beginPath();ctx.moveTo(2,sz*.17);ctx.bezierCurveTo(-sz*.28,-sz*.03,-sz*.23,-sz*.53,-sz*.03,-sz*.93);ctx.quadraticCurveTo(2,-sz*1.03,sz*.07,-sz*.93);ctx.bezierCurveTo(sz*.27,-sz*.53,sz*.32,-sz*.03,2,sz*.17);ctx.fill();var lg=ctx.createLinearGradient(0,sz*.1,0,-sz);lg.addColorStop(0,'#144a0e');lg.addColorStop(.3,'#267518');lg.addColorStop(.7,'#42b832');lg.addColorStop(1,'#60e048');ctx.fillStyle=lg;ctx.beginPath();ctx.moveTo(0,sz*.15);ctx.bezierCurveTo(-sz*.3,-sz*.05,-sz*.25,-sz*.55,-sz*.05,-sz*.95);ctx.quadraticCurveTo(0,-sz*1.05,sz*.05,-sz*.95);ctx.bezierCurveTo(sz*.25,-sz*.55,sz*.3,-sz*.05,0,sz*.15);ctx.fill();ctx.strokeStyle='rgba(20,70,15,0.5)';ctx.lineWidth=1.8;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(0,sz*.1);ctx.lineTo(0,-sz*.9);ctx.stroke();ctx.lineWidth=1;for(var v=0;v<5;v++){var vy=-sz*(.15+v*.16),vw=sz*.15*(1-v*.12);ctx.beginPath();ctx.moveTo(0,vy);ctx.quadraticCurveTo(-vw*.6,vy-sz*.03,-vw,vy-sz*.07);ctx.stroke();ctx.beginPath();ctx.moveTo(0,vy);ctx.quadraticCurveTo(vw*.6,vy-sz*.03,vw,vy-sz*.07);ctx.stroke()}ctx.beginPath();ctx.moveTo(-sz*.04,-sz*.2);ctx.bezierCurveTo(-sz*.13,-sz*.36,-sz*.11,-sz*.56,-sz*.04,-sz*.74);ctx.strokeStyle='rgba(200,255,160,0.2)';ctx.lineWidth=2.5;ctx.stroke();ctx.restore()}}if(budP>0){var fx=bx+sway,fy=topY,fSz=Math.min(W*.12,80)*budP;ctx.save();ctx.translate(fx,fy);if(openP<.22){var bg=ctx.createLinearGradient(0,fSz*.1,0,-fSz);bg.addColorStop(0,'#c02868');bg.addColorStop(1,'#ff88b8');ctx.fillStyle=bg;ctx.beginPath();ctx.ellipse(0,-fSz*.42,fSz*.3,fSz*.62,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#ff70a8';ctx.beginPath();ctx.ellipse(0,-fSz*.86,fSz*.13,fSz*.17,0,0,Math.PI*2);ctx.fill()}else{var op=cl((openP-.22)/.78,0,1);function dP(ang,len,w,curl,c0,c1,c2){ctx.save();ctx.rotate(ang+curl);var pg=ctx.createLinearGradient(0,0,0,-len);pg.addColorStop(0,c0);pg.addColorStop(.5,c1);pg.addColorStop(1,c2);ctx.fillStyle=pg;ctx.beginPath();ctx.moveTo(0,fSz*.05);ctx.bezierCurveTo(-w,-len*.3,-w*.8,-len*.8,0,-len);ctx.bezierCurveTo(w*.8,-len*.8,w,-len*.3,0,fSz*.05);ctx.fill();ctx.beginPath();ctx.moveTo(-w*.15,-len*.2);ctx.bezierCurveTo(-w*.3,-len*.5,-w*.2,-len*.75,-w*.05,-len*.9);ctx.strokeStyle='rgba(255,245,255,0.25)';ctx.lineWidth=1.5;ctx.stroke();ctx.restore()}for(var pi=0;pi<8;pi++){dP((pi/8)*Math.PI*2+t*.2+Math.sin(t*.5+pi)*.03,fSz*1.4*op,fSz*.38*op,op*.65,'#c82468','#ff5aa4','#ffe0ef')}for(var pi=0;pi<8;pi++){dP((pi/8)*Math.PI*2+.25+t*.15,fSz*1.1*op,fSz*.3*op,op*.45,'#d83888','#ff7ab8','#fff0f5')}for(var pi=0;pi<6;pi++){dP((pi/6)*Math.PI*2+.5+t*.1,fSz*.8*op,fSz*.22*op,op*.3,'#ff60a0','#ff90c0','#ffffff')}var cg=ctx.createRadialGradient(0,0,0,0,0,fSz*.4);cg.addColorStop(0,'#fff8d0');cg.addColorStop(.4,'#ffc830');cg.addColorStop(.85,'#e88010');cg.addColorStop(1,'#c06008');ctx.fillStyle=cg;ctx.beginPath();ctx.arc(0,0,fSz*.4,0,Math.PI*2);ctx.fill();for(var si=0;si<14;si++){var da=(si/14)*Math.PI*2,dr=fSz*.3;ctx.beginPath();ctx.arc(Math.cos(da)*dr,Math.sin(da)*dr,2.5,0,Math.PI*2);ctx.fillStyle='#ff9020';ctx.fill();ctx.beginPath();ctx.arc(Math.cos(da)*dr,Math.sin(da)*dr,1,0,Math.PI*2);ctx.fillStyle='#ffe880';ctx.fill()}if(op>.45){if(!chordFired){chordFired=true;playChord()}var hg=ctx.createRadialGradient(0,0,fSz*.35,0,0,fSz*1.1);hg.addColorStop(0,'rgba(255,200,60,'+(.22*op)+')');hg.addColorStop(1,'transparent');ctx.fillStyle=hg;ctx.beginPath();ctx.arc(0,0,fSz*1.1,0,Math.PI*2);ctx.fill()}}ctx.restore()}if(magicP>0&&t>6.3){if(magic.length<70&&Math.random()<.45){var a=Math.random()*Math.PI*2,sp=1+Math.random()*2.2;magic.push({x:bx+sway+(Math.random()-.5)*90,y:topY+(Math.random()-.5)*75,vx:Math.cos(a)*sp*.65,vy:-sp-Math.random()*1.8,sz:1.8+Math.random()*3.5,life:1,hue:Math.random()<.5?300+Math.random()*65:35+Math.random()*35,tw:Math.random()*Math.PI*2})}for(var mi=magic.length-1;mi>=0;mi--){var p=magic[mi];p.x+=p.vx;p.y+=p.vy;p.vy+=.026;p.vx*=.98;p.life-=.013;p.tw+=.22;if(p.life<=0){magic.splice(mi,1);continue}var twk=.55+Math.sin(p.tw)*.45;ctx.save();ctx.globalAlpha=p.life*magicP*.9*twk;ctx.fillStyle='hsl('+p.hue+',100%,72%)';ctx.beginPath();for(var si=0;si<8;si++){var sa=(si/8)*Math.PI*2+p.tw*.28,sr=si%2===0?p.sz*1.5:p.sz*.55;if(si===0)ctx.moveTo(Math.cos(sa)*sr+p.x,Math.sin(sa)*sr+p.y);else ctx.lineTo(Math.cos(sa)*sr+p.x,Math.sin(sa)*sr+p.y)}ctx.closePath();ctx.fill();ctx.beginPath();ctx.arc(p.x,p.y,p.sz*.5,0,Math.PI*2);ctx.fillStyle='hsl('+p.hue+',70%,95%)';ctx.fill();ctx.restore()}}}
+function drawTitle(t){var p=eOE(cl((t-7)/1.7,0,1));if(p<=.01)return;var bx=W*.5,stemH=Math.min(H*.47,370),topY=gY-stemH,ty=topY-stemH*.42,fs=Math.min(68,W*.09);ctx.save();ctx.globalAlpha=cl(p*1.5,0,1);var gh=ctx.createRadialGradient(bx,ty,0,bx,ty,130);gh.addColorStop(0,'rgba(255,195,50,'+(.18*p)+')');gh.addColorStop(1,'transparent');ctx.fillStyle=gh;ctx.beginPath();ctx.arc(bx,ty,130,0,Math.PI*2);ctx.fill();ctx.font='900 '+fs+'px Cinzel, Georgia, serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='rgba(255,180,30,0.45)';ctx.shadowBlur=22*p;var tg=ctx.createLinearGradient(bx-90,ty-22,bx+90,ty+22);tg.addColorStop(0,'#9e6402');tg.addColorStop(.2,'#d09c0e');tg.addColorStop(.4,'#ffd700');tg.addColorStop(.6,'#ffe898');tg.addColorStop(.8,'#d09c0e');tg.addColorStop(1,'#9e6402');ctx.fillStyle=tg;ctx.fillText('Faig 2',bx,ty);ctx.shadowBlur=0;ctx.restore();var subP=cl((t-8)/1.4,0,1);if(subP>0){ctx.save();ctx.globalAlpha=subP;ctx.font='400 '+Math.min(13,W*.018)+'px Plus Jakarta Sans, sans-serif';ctx.fillStyle='rgba(255,255,255,0.48)';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText("Quin és el veritable cost d'allò que menjo?",bx,ty+fs*.82);ctx.restore()}}
+var siteInited=false;function revealMain(){if(done)return;done=true;skipEl.style.display='none';if(rainNode){try{rainNode.stop()}catch(e){}}overlay.classList.add('fade-out');main.classList.add('active');setTimeout(function(){overlay.classList.add('hidden');if(!siteInited){siteInited=true;initSiteFeatures()}},1700)}
+function frame(ts){if(done)return;requestAnimationFrame(frame);ctx.clearRect(0,0,W,H);if(!started){drawBg(0);drawStars(ts/1000);return}if(t0===0)t0=ts;var t=(ts-t0)/1000;drawBg(t);drawStars(t);drawRain(t);drawSeed(t);drawPlant(t);drawTitle(t);if(t>2&&!skipEl.classList.contains('visible'))skipEl.classList.add('visible');if(t>10.5)revealMain()}
+document.getElementById('startBtn').addEventListener('click',function(){this.classList.add('gone');initAC();setTimeout(startRainAudio,80);started=true;t0=0;impactFired=false;chordFired=false;rain=[];splashes=[];magic=[]});skipEl.addEventListener('click',revealMain);setTimeout(function(){if(!done)revealMain()},18000);requestAnimationFrame(frame)})();
 
-  var W, H, gY; // groundY
-  var started = false, done = false;
-  var t0 = 0;
-  var impactFired = false, chordFired = false;
-
-  // Particle pools
-  var rain=[], splashes=[], magic=[];
-
-  // ---- audio ----
-  var ac = null;
-  function initAC(){
-    try{ if(!ac) ac=new(window.AudioContext||window.webkitAudioContext)();
-      if(ac.state==='suspended') ac.resume(); }catch(e){ac=null;}
-  }
-  function playImpact(){
-    if(!ac)return;
-    try{
-      var n=ac.currentTime, o=ac.createOscillator(), g=ac.createGain();
-      o.type='sine'; o.frequency.setValueAtTime(90,n); o.frequency.exponentialRampToValueAtTime(22,n+0.45);
-      g.gain.setValueAtTime(0.55,n); g.gain.exponentialRampToValueAtTime(0.001,n+0.45);
-      o.connect(g); g.connect(ac.destination); o.start(n); o.stop(n+0.45);
-    }catch(e){}
-  }
-  function playChord(){
-    if(!ac)return;
-    try{
-      var n=ac.currentTime, freqs=[523.25,659.25,783.99,1046.5];
-      freqs.forEach(function(f,i){
-        var o=ac.createOscillator(), g=ac.createGain();
-        o.type='sine'; o.frequency.value=f;
-        var s=n+i*0.07;
-        g.gain.setValueAtTime(0,s); g.gain.linearRampToValueAtTime(0.055,s+0.06); g.gain.linearRampToValueAtTime(0,s+1.4);
-        o.connect(g); g.connect(ac.destination); o.start(s); o.stop(s+1.4);
-      });
-    }catch(e){}
-  }
-
-  var rainNode=null, rainGain=null;
-  function startRainAudio(){
-    if(!ac||rainNode)return;
-    try{
-      var buf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate);
-      var d=buf.getChannelData(0); for(var i=0;i<d.length;i++) d[i]=Math.random()*2-1;
-      rainNode=ac.createBufferSource(); rainNode.buffer=buf; rainNode.loop=true;
-      var f=ac.createBiquadFilter(); f.type='highpass'; f.frequency.value=4800;
-      rainGain=ac.createGain(); rainGain.gain.value=0;
-      rainNode.connect(f); f.connect(rainGain); rainGain.connect(ac.destination);
-      rainNode.start();
-    }catch(e){}
-  }
-
-  // ---- helpers ----
-  function eOut(t){ return 1-Math.pow(1-t,3); }
-  function eOutElastic(t){
-    if(t===0||t===1)return t;
-    return Math.pow(2,-10*t)*Math.sin((t*10-0.75)*(2*Math.PI)/3)+1;
-  }
-  function clamp(v,lo,hi){ return v<lo?lo:v>hi?hi:v; }
-  function lerp(a,b,t){ return a+(b-a)*t; }
-
-  function resize(){
-    W=canvas.width=window.innerWidth;
-    H=canvas.height=window.innerHeight;
-    gY=H*0.73;
-  }
-  window.addEventListener('resize',resize);
-  resize();
-
-  // ---- rain intensity curve ----
-  function ri(t){
-    if(t<1.9)return 0;
-    if(t<2.8)return(t-1.9)/0.9;
-    if(t<6.2)return 1;
-    if(t<7.8)return 1-(t-6.2)/1.6;
-    return 0;
-  }
-
-  // ---- stars (pre-generate) ----
-  var stars=[];
-  for(var i=0;i<120;i++) stars.push({
-    x:Math.random()*2-0.5, y:Math.random()*0.72,
-    r:Math.random()*1.1+0.15,
-    tw:Math.random()*Math.PI*2,
-    spd:0.4+Math.random()*1.8
-  });
-
-  // ---- draw functions ----
-  function drawBg(t){
-    var rain=ri(t), growP=clamp(t/8,0,1);
-    // sky
-    var sky=ctx.createLinearGradient(0,0,0,gY);
-    var r1=Math.round(lerp(8,18,growP)-rain*6);
-    var g1=Math.round(lerp(12,24,growP)-rain*5);
-    var b1=Math.round(lerp(24,55,growP)-rain*5);
-    sky.addColorStop(0,'rgb('+r1+','+g1+','+b1+')');
-    sky.addColorStop(1,'rgb('+(r1-4)+','+(g1-4)+','+(b1-8)+')');
-    ctx.fillStyle=sky; ctx.fillRect(0,0,W,gY);
-
-    // bloom when flower opens
-    if(t>5.4){
-      var bp=eOut(clamp((t-5.4)/2.2,0,1));
-      var bloom=ctx.createRadialGradient(W*.5,gY*.18,0,W*.5,gY*.18,H*.58);
-      bloom.addColorStop(0,'rgba(255,130,190,'+0.1*bp+')');
-      bloom.addColorStop(0.6,'rgba(200,90,200,'+0.05*bp+')');
-      bloom.addColorStop(1,'transparent');
-      ctx.fillStyle=bloom; ctx.fillRect(0,0,W,gY);
-    }
-
-    // ground
-    var gnd=ctx.createLinearGradient(0,gY,0,H);
-    gnd.addColorStop(0,'#1c0e08'); gnd.addColorStop(1,'#090504');
-    ctx.fillStyle=gnd; ctx.fillRect(0,gY,W,H-gY);
-    // ground line
-    ctx.beginPath(); ctx.moveTo(0,gY); ctx.lineTo(W,gY);
-    ctx.strokeStyle='rgba(90,55,25,0.5)'; ctx.lineWidth=1.2; ctx.stroke();
-  }
-
-  function drawStars(t){
-    var fade=clamp(1-ri(t)*2.5,0,1);
-    if(fade<0.01)return;
-    for(var i=0;i<stars.length;i++){
-      var s=stars[i];
-      var tw=0.1+Math.sin(s.tw+t*s.spd)*0.12;
-      ctx.beginPath();
-      ctx.arc(s.x*W,s.y*H,s.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(200,215,255,'+(tw*fade)+')';
-      ctx.fill();
-    }
-  }
-
-  function drawRain(t){
-    var intensity=ri(t);
-    if(rainGain&&ac){
-      try{ rainGain.gain.linearRampToValueAtTime(clamp(intensity*0.14,0,0.14),ac.currentTime+0.1); }catch(e){}
-    }
-    // spawn
-    if(intensity>0.05){
-      for(var i=0;i<Math.round(intensity*5);i++){
-        if(rain.length>=240) break;
-        rain.push({x:Math.random()*W+80,y:-20-Math.random()*60,sp:15+Math.random()*10,len:13+Math.random()*12});
-      }
-    }
-    // draw drops
-    ctx.save();
-    ctx.strokeStyle='rgba(155,185,225,'+intensity*0.28+')';
-    ctx.lineWidth=1.3; ctx.beginPath();
-    for(var i=rain.length-1;i>=0;i--){
-      var d=rain[i]; d.y+=d.sp; d.x-=2.8;
-      if(d.y>gY){
-        splashes.push({x:d.x,y:gY,vy:-1.8-Math.random()*2,vx:(Math.random()-0.5)*2.5,life:1});
-        rain.splice(i,1); continue;
-      }
-      ctx.moveTo(d.x,d.y); ctx.lineTo(d.x-2,d.y+d.len);
-    }
-    ctx.stroke();
-    // splashes
-    for(var i=splashes.length-1;i>=0;i--){
-      var s=splashes[i];
-      s.x+=s.vx; s.y+=s.vy; s.vy+=0.18; s.life-=0.07;
-      if(s.life<=0){splashes.splice(i,1);continue;}
-      ctx.beginPath(); ctx.arc(s.x,s.y,1.3*s.life,0,Math.PI*2);
-      ctx.fillStyle='rgba(160,200,240,'+(intensity*s.life)+')';
-      ctx.fill();
-    }
-    // ground ripples
-    if(intensity>0.25){
-      for(var i=0;i<4;i++){
-        var rx=W*(0.2+i*0.17), rAge=((t*1.9+i*1.2)%1.6)/1.6;
-        var rr=rAge*30;
-        ctx.beginPath(); ctx.ellipse(rx,gY+4,rr,rr*0.22,0,0,Math.PI*2);
-        ctx.strokeStyle='rgba(120,165,215,'+((1-rAge)*intensity*0.22)+')';
-        ctx.lineWidth=0.8; ctx.stroke();
-      }
-    }
-    ctx.restore();
-  }
-
-  function drawSeed(t){
-    if(t>3.6) return;
-    var sy, rot=0, sc=1, al=1;
-    if(t<1.6){
-      var p=eOut(t/1.6); sy=lerp(-90,gY-26,p); rot=(1-p)*14;
-    } else if(t<2.15){
-      var p=(t-1.6)/0.55;
-      sy=lerp(gY-26,gY+16,eOut(p));
-      sc=lerp(1,0.2,eOut(p)); al=lerp(1,0.15,eOut(p));
-      if(!impactFired){impactFired=true;playImpact();}
-      // impact shockwave
-      if(p>0.65){
-        var sw=(p-0.65)/0.35;
-        ctx.beginPath(); ctx.ellipse(W*.5,gY,sw*55,sw*14,0,0,Math.PI*2);
-        ctx.strokeStyle='rgba(200,130,50,'+(1-sw)*0.45+')'; ctx.lineWidth=2; ctx.stroke();
-      }
-    } else {
-      var p=(t-2.15)/1.45; sy=gY+16; sc=lerp(0.2,0,eOut(p)); al=lerp(0.15,0,eOut(p));
-    }
-    if(sc<0.01||al<0.01) return;
-    ctx.save();
-    ctx.globalAlpha=al;
-    ctx.translate(W*.5,sy);
-    ctx.rotate(rot*Math.PI/180);
-    ctx.scale(sc,sc);
-    // shadow
-    ctx.beginPath(); ctx.ellipse(0,30,18,5,0,0,Math.PI*2);
-    ctx.fillStyle='rgba(0,0,0,0.3)'; ctx.fill();
-    // body
-    var sg=ctx.createLinearGradient(-12,-18,12,28);
-    sg.addColorStop(0,'#f0c05a'); sg.addColorStop(0.45,'#c08820'); sg.addColorStop(1,'#6a4010');
-    ctx.fillStyle=sg;
-    ctx.beginPath(); ctx.moveTo(0,-18);
-    ctx.bezierCurveTo(-15,-5,-15,16,0,28); ctx.bezierCurveTo(15,16,15,-5,0,-18);
-    ctx.fill();
-    // highlight
-    ctx.beginPath(); ctx.moveTo(-3,-13); ctx.bezierCurveTo(-10,-4,-10,5,-4,12);
-    ctx.strokeStyle='rgba(255,235,140,0.38)'; ctx.lineWidth=2.2; ctx.lineCap='round'; ctx.stroke();
-    // cap
-    var cap=ctx.createLinearGradient(-17,-30,17,-12);
-    cap.addColorStop(0,'#4a2810'); cap.addColorStop(1,'#7a4820');
-    ctx.fillStyle=cap;
-    ctx.beginPath(); ctx.ellipse(0,-20,18,11,0,0,Math.PI); ctx.fill();
-    // stem nub
-    ctx.beginPath(); ctx.moveTo(0,-28); ctx.lineTo(2.5,-39);
-    ctx.strokeStyle='#3a2010'; ctx.lineWidth=2.8; ctx.stroke();
-    ctx.restore();
-  }
-
-  function drawPlant(t){
-    if(t<2.5) return;
-    var bx=W*.5;
-    var stemH=Math.min(H*.47,370);
-    var stemP=eOut(clamp((t-2.5)/1.5,0,1));
-    var leafP=eOut(clamp((t-3.7)/1.1,0,1));
-    var budP=eOut(clamp((t-4.8)/0.9,0,1));
-    var openP=eOut(clamp((t-5.5)/1.4,0,1));
-    var magicP=eOut(clamp((t-6.3)/1.8,0,1));
-
-    var topY=gY-stemH*stemP;
-    var wind=Math.sin(t*1.7)*0.02;
-    var sway=Math.sin(t*.85)*5*stemP;
-
-    // roots
-    if(stemP>0.08){
-      var rP=eOut(clamp((t-2.9)/.9,0,1));
-      ctx.save(); ctx.lineCap='round'; ctx.strokeStyle='#281808'; ctx.lineWidth=3;
-      for(var i=0;i<5;i++){
-        var a=(i-2)*0.32;
-        ctx.beginPath(); ctx.moveTo(bx,gY+2);
-        ctx.quadraticCurveTo(bx+Math.sin(a)*42*rP,gY+22+Math.cos(a*2)*10*rP,bx+Math.sin(a)*72*rP,gY+34+i*3*rP);
-        ctx.globalAlpha=0.45*rP; ctx.stroke();
-      }
-      ctx.globalAlpha=1; ctx.restore();
-    }
-
-    // side runners
-    if(stemP>0.22){
-      var tP=eOut(clamp((t-3.0)/1.0,0,1));
-      ctx.save(); ctx.lineCap='round'; ctx.lineWidth=4; ctx.strokeStyle='#2d5a1e'; ctx.globalAlpha=0.65*tP;
-      ctx.beginPath(); ctx.moveTo(bx-3,gY-stemH*0.36*stemP);
-      ctx.quadraticCurveTo(bx-52*tP,gY-stemH*0.30*stemP+14*tP,bx-88*tP,gY-stemH*0.33*stemP+7*tP);
-      ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(bx+3,gY-stemH*0.54*stemP);
-      ctx.quadraticCurveTo(bx+58*tP,gY-stemH*0.47*stemP+18*tP,bx+98*tP,gY-stemH*0.51*stemP+10*tP);
-      ctx.stroke();
-      ctx.globalAlpha=1; ctx.restore();
-    }
-
-    // main stem
-    ctx.save(); ctx.lineCap='round';
-    var sg=ctx.createLinearGradient(bx-8,gY,bx+8,topY);
-    sg.addColorStop(0,'#1c5010'); sg.addColorStop(0.3,'#2e7c20'); sg.addColorStop(0.7,'#4aaa35'); sg.addColorStop(1,'#3a9028');
-    ctx.strokeStyle=sg; ctx.lineWidth=11;
-    ctx.beginPath(); ctx.moveTo(bx,gY);
-    ctx.quadraticCurveTo(bx+sway*.5,gY-stemH*.45*stemP,bx+sway,topY);
-    ctx.stroke();
-    // highlight on stem
-    ctx.strokeStyle='rgba(120,230,80,0.1)'; ctx.lineWidth=3;
-    ctx.beginPath(); ctx.moveTo(bx-2,gY);
-    ctx.quadraticCurveTo(bx-2+sway*.5,gY-stemH*.45*stemP,bx-2+sway,topY);
-    ctx.stroke();
-    ctx.restore();
-
-    // leaves
-    if(leafP>0){
-      var lDefs=[
-        {py:.71,side:-1,ang:-.52,sz:108},{py:.48,side:-1,ang:-.64,sz:102},
-        {py:.26,side:-1,ang:-.76,sz:90},{py:.67,side:1,ang:.50,sz:112},
-        {py:.44,side:1,ang:.61,sz:106},{py:.22,side:1,ang:.73,sz:93}
-      ];
-      for(var li=0;li<lDefs.length;li++){
-        var l=lDefs[li];
-        var ly=lerp(gY,topY,l.py);
-        var lx=bx+sway*l.py+l.side*6*leafP;
-        var sz=l.sz*leafP;
-        ctx.save(); ctx.translate(lx,ly); ctx.rotate(l.ang+wind*l.side);
-        var lg=ctx.createLinearGradient(0,sz*.1,0,-sz);
-        lg.addColorStop(0,'#164010'); lg.addColorStop(0.35,'#2a7820'); lg.addColorStop(.7,'#50c040'); lg.addColorStop(1,'#70e050');
-        ctx.fillStyle=lg;
-        ctx.beginPath(); ctx.moveTo(0,sz*.1);
-        ctx.bezierCurveTo(-sz*.24,-sz*.1,-sz*.22,-sz*.52,-sz*.1,-sz*.84);
-        ctx.quadraticCurveTo(-sz*.03,-sz*.96,0,-sz);
-        ctx.quadraticCurveTo(sz*.03,-sz*.96,sz*.1,-sz*.84);
-        ctx.bezierCurveTo(sz*.22,-sz*.52,sz*.24,-sz*.1,0,sz*.1);
-        ctx.fill();
-        // vein
-        ctx.strokeStyle='rgba(30,100,20,0.45)'; ctx.lineWidth=1.5; ctx.lineCap='round';
-        ctx.beginPath(); ctx.moveTo(0,sz*.08); ctx.lineTo(0,-sz*.95); ctx.stroke();
-        // sheen
-        ctx.beginPath(); ctx.moveTo(-sz*.04,-sz*.2);
-        ctx.bezierCurveTo(-sz*.13,-sz*.36,-sz*.11,-sz*.56,-sz*.04,-sz*.74);
-        ctx.strokeStyle='rgba(200,255,160,0.16)'; ctx.lineWidth=2.5; ctx.stroke();
-        ctx.restore();
-      }
-    }
-
-    // bud / flower
-    if(budP>0){
-      var fx=bx+sway, fy=topY;
-      var fSz=Math.min(W*.12,80)*budP;
-      ctx.save(); ctx.translate(fx,fy);
-
-      if(openP<0.22){
-        // closed bud
-        var bg=ctx.createLinearGradient(0,fSz*.1,0,-fSz);
-        bg.addColorStop(0,'#c02868'); bg.addColorStop(1,'#ff88b8');
-        ctx.fillStyle=bg;
-        ctx.beginPath(); ctx.ellipse(0,-fSz*.42,fSz*.3,fSz*.62,0,0,Math.PI*2); ctx.fill();
-        ctx.fillStyle='#ff70a8';
-        ctx.beginPath(); ctx.ellipse(0,-fSz*.86,fSz*.13,fSz*.17,0,0,Math.PI*2); ctx.fill();
-      } else {
-        var op=clamp((openP-.22)/.78,0,1);
-        var PC=9;
-        // outer petals
-        for(var pi=0;pi<PC;pi++){
-          var ang=(pi/PC)*Math.PI*2+t*.22+Math.sin(t*.5+pi)*.04;
-          ctx.save(); ctx.rotate(ang+op*.65);
-          var pg=ctx.createLinearGradient(0,0,0,-fSz*1.38);
-          pg.addColorStop(0,'#c82468'); pg.addColorStop(0.5,'#ff5aa4'); pg.addColorStop(1,'#ffe0ef');
-          ctx.fillStyle=pg;
-          ctx.beginPath(); ctx.moveTo(0,fSz*.05);
-          ctx.bezierCurveTo(-fSz*.36*op,-fSz*.24,-fSz*.3*op,-fSz*1.06,0,-fSz*1.3);
-          ctx.bezierCurveTo(fSz*.3*op,-fSz*1.06,fSz*.36*op,-fSz*.24,0,fSz*.05);
-          ctx.fill();
-          // sheen
-          ctx.beginPath(); ctx.moveTo(-fSz*.06*op,-fSz*.22);
-          ctx.bezierCurveTo(-fSz*.14*op,-fSz*.52,-fSz*.1*op,-fSz*.82,-fSz*.04*op,-fSz*1.1);
-          ctx.strokeStyle='rgba(255,245,255,0.2)'; ctx.lineWidth=1.5; ctx.stroke();
-          ctx.restore();
-        }
-        // inner petals
-        for(var pi=0;pi<PC;pi++){
-          var ang=(pi/PC)*Math.PI*2+0.19+t*.16;
-          ctx.save(); ctx.rotate(ang+op*.45);
-          ctx.fillStyle='rgba(255,165,205,'+0.65*op+')';
-          ctx.beginPath(); ctx.ellipse(0,-fSz*.5,fSz*.17*op,fSz*.35*op,0,0,Math.PI*2);
-          ctx.fill(); ctx.restore();
-        }
-        // centre
-        var cg=ctx.createRadialGradient(0,0,0,0,0,fSz*.38);
-        cg.addColorStop(0,'#fff8d0'); cg.addColorStop(.4,'#ffc830'); cg.addColorStop(.85,'#e88010'); cg.addColorStop(1,'#c06008');
-        ctx.fillStyle=cg; ctx.beginPath(); ctx.arc(0,0,fSz*.38,0,Math.PI*2); ctx.fill();
-        // stamens
-        for(var si=0;si<12;si++){
-          var da=(si/12)*Math.PI*2, dr=fSz*.27;
-          ctx.beginPath(); ctx.arc(Math.cos(da)*dr,Math.sin(da)*dr,2.5,0,Math.PI*2);
-          ctx.fillStyle='#ff9020'; ctx.fill();
-          ctx.beginPath(); ctx.arc(Math.cos(da)*dr,Math.sin(da)*dr,1,0,Math.PI*2);
-          ctx.fillStyle='#ffe880'; ctx.fill();
-        }
-        // glow halo
-        if(op>0.45){
-          if(!chordFired){chordFired=true;playChord();}
-          var hg=ctx.createRadialGradient(0,0,fSz*.35,0,0,fSz*.95);
-          hg.addColorStop(0,'rgba(255,200,60,'+(0.18*op)+')'); hg.addColorStop(1,'transparent');
-          ctx.fillStyle=hg; ctx.beginPath(); ctx.arc(0,0,fSz*.95,0,Math.PI*2); ctx.fill();
-        }
-      }
-      ctx.restore();
-    }
-
-    // magic particles
-    if(magicP>0&&t>6.3){
-      if(magic.length<70&&Math.random()<0.45){
-        var a=Math.random()*Math.PI*2, sp=1+Math.random()*2.2;
-        magic.push({
-          x:bx+sway+(Math.random()-.5)*90, y:topY+(Math.random()-.5)*75,
-          vx:Math.cos(a)*sp*.65, vy:-sp-Math.random()*1.8,
-          sz:1.8+Math.random()*3.5, life:1,
-          hue:Math.random()<.5?300+Math.random()*65:35+Math.random()*35,
-          tw:Math.random()*Math.PI*2
-        });
-      }
-      for(var mi=magic.length-1;mi>=0;mi--){
-        var p=magic[mi];
-        p.x+=p.vx; p.y+=p.vy; p.vy+=0.026; p.vx*=.98;
-        p.life-=0.013; p.tw+=0.22;
-        if(p.life<=0){magic.splice(mi,1);continue;}
-        var twk=0.55+Math.sin(p.tw)*0.45;
-        ctx.save(); ctx.globalAlpha=p.life*magicP*.9*twk;
-        // 4-point star
-        ctx.fillStyle='hsl('+p.hue+',100%,72%)';
-        ctx.beginPath();
-        for(var si=0;si<8;si++){
-          var sa=(si/8)*Math.PI*2+p.tw*.28;
-          var sr=si%2===0?p.sz*1.5:p.sz*0.55;
-          if(si===0) ctx.moveTo(Math.cos(sa)*sr+p.x,Math.sin(sa)*sr+p.y);
-          else ctx.lineTo(Math.cos(sa)*sr+p.x,Math.sin(sa)*sr+p.y);
-        }
-        ctx.closePath(); ctx.fill();
-        // core glow dot
-        ctx.beginPath(); ctx.arc(p.x,p.y,p.sz*.5,0,Math.PI*2);
-        ctx.fillStyle='hsl('+p.hue+',70%,95%)'; ctx.fill();
-        ctx.restore();
-      }
-    }
-  }
-
-  function drawTitle(t){
-    var p=eOutElastic(clamp((t-7.0)/1.7,0,1));
-    if(p<=0.01) return;
-    var bx=W*.5;
-    var stemH=Math.min(H*.47,370);
-    var topY=gY-stemH;
-    var ty=topY-stemH*.42;
-    var fs=Math.min(68,W*.09);
-
-    ctx.save(); ctx.globalAlpha=clamp(p*1.5,0,1);
-    // glow halo
-    var ghalo=ctx.createRadialGradient(bx,ty,0,bx,ty,130);
-    ghalo.addColorStop(0,'rgba(255,195,50,'+(0.18*p)+')'); ghalo.addColorStop(1,'transparent');
-    ctx.fillStyle=ghalo; ctx.beginPath(); ctx.arc(bx,ty,130,0,Math.PI*2); ctx.fill();
-    // text
-    ctx.font='900 '+fs+'px Cinzel, Georgia, serif';
-    ctx.textAlign='center'; ctx.textBaseline='middle';
-    ctx.shadowColor='rgba(255,180,30,0.45)'; ctx.shadowBlur=22*p;
-    var tg=ctx.createLinearGradient(bx-90,ty-22,bx+90,ty+22);
-    tg.addColorStop(0,'#9e6402'); tg.addColorStop(0.2,'#d09c0e'); tg.addColorStop(0.4,'#ffd700');
-    tg.addColorStop(0.6,'#ffe898'); tg.addColorStop(0.8,'#d09c0e'); tg.addColorStop(1,'#9e6402');
-    ctx.fillStyle=tg; ctx.fillText('Faig 2',bx,ty);
-    ctx.shadowBlur=0;
-    ctx.restore();
-
-    // subtitle
-    var subP=clamp((t-8.0)/1.4,0,1);
-    if(subP>0){
-      ctx.save(); ctx.globalAlpha=subP;
-      ctx.font='400 '+Math.min(13,W*.018)+'px Plus Jakarta Sans, sans-serif';
-      ctx.fillStyle='rgba(255,255,255,0.48)';
-      ctx.textAlign='center'; ctx.textBaseline='middle';
-      ctx.fillText("Quin és el veritable cost d'allò que menjo?",bx,ty+fs*.82);
-      ctx.restore();
-    }
-  }
-
-  // ---- reveal lobby ----
-  var siteInited=false;
-  function revealMain(){
-    if(done) return;
-    done=true;
-    skipEl.style.display='none';
-    // stop rain audio
-    if(rainNode){try{rainNode.stop();}catch(e){}}
-    // fade overlay out
-    overlay.classList.add('fade-out');
-    main.classList.add('active');
-    setTimeout(function(){
-      overlay.classList.add('hidden');
-      if(!siteInited){siteInited=true;initSiteFeatures();}
-    },1700);
-  }
-
-  // ---- main loop ----
-  function frame(ts){
-    if(done){return;}
-    requestAnimationFrame(frame);
-    ctx.clearRect(0,0,W,H);
-    if(!started){
-      // idle — gentle star field
-      drawBg(0); drawStars(ts/1000);
-      return;
-    }
-    if(t0===0) t0=ts;
-    var t=(ts-t0)/1000;
-    drawBg(t); drawStars(t); drawRain(t); drawSeed(t); drawPlant(t); drawTitle(t);
-    if(t>2&&!skipEl.classList.contains('visible')) skipEl.classList.add('visible');
-    if(t>10.5) revealMain();
-  }
-
-  // ---- events ----
-  document.getElementById('startBtn').addEventListener('click',function(){
-    this.classList.add('gone');
-    initAC();
-    setTimeout(startRainAudio,80);
-    started=true; t0=0;
-    impactFired=false; chordFired=false;
-    rain=[]; splashes=[]; magic=[];
-  });
-  skipEl.addEventListener('click',revealMain);
-  setTimeout(function(){if(!done) revealMain();},18000);
-
-  requestAnimationFrame(frame);
-})();
-
-/* ============================================================
-   MAIN SITE FEATURES
-   ============================================================ */
-var siteInited=false;
-function initSiteFeatures(){
-  if(siteInited) return; siteInited=true;
-  try{initBgCanvas();}catch(e){}
-  try{initFood();}catch(e){}
-  try{initParallax();}catch(e){}
-  try{initTilt();}catch(e){}
-  try{buildQuiz();}catch(e){}
-}
-
-// bg particle canvas
-var bgC=document.getElementById('bgCanvas'),bgX=bgC.getContext('2d'),bW,bH,bgPts=[],bgMx=-1e3,bgMy=-1e3;
-function resizeBg(){bgC.width=bW=innerWidth;bgC.height=bH=innerHeight;}
-resizeBg(); window.addEventListener('resize',resizeBg);
-function BgPt(){this.x=Math.random()*bW;this.y=Math.random()*bH;this.sz=Math.random()*1.2+0.3;this.sx=(Math.random()-.5)*.3;this.sy=(Math.random()-.5)*.3;this.op=Math.random()*.25+.05;this.hue=Math.random()*60+200;}
-BgPt.prototype.update=function(){this.x+=this.sx;this.y+=this.sy;var dx=bgMx-this.x,dy=bgMy-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<140){var f=(140-d)/140;this.x-=dx*f*.015;this.y-=dy*f*.015;}if(this.x<-10||this.x>bW+10||this.y<-10||this.y>bH+10){this.x=Math.random()*bW;this.y=Math.random()*bH;}};
-BgPt.prototype.draw=function(){bgX.beginPath();bgX.arc(this.x,this.y,this.sz,0,Math.PI*2);bgX.fillStyle='hsla('+this.hue+',60%,65%,'+this.op+')';bgX.fill();};
-for(var i=0;i<70;i++) bgPts.push(new BgPt());
-function initBgCanvas(){(function loop(){bgX.clearRect(0,0,bW,bH);bgPts.forEach(function(p){p.update();p.draw();});requestAnimationFrame(loop);})();}
-window.addEventListener('mousemove',function(e){bgMx=e.clientX;bgMy=e.clientY;});
-
-// sparkle trail
-var spkTimer=0,spkColors=['#60a5fa','#c084fc','#34d399','#f97316','#22d3ee','#fbbf24','#f472b6'];
-window.addEventListener('mousemove',function(e){spkTimer++;if(spkTimer%4)return;var s=document.createElement('div');s.className='sparkle-trail';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';var c=spkColors[Math.random()*spkColors.length|0];s.style.background=c;s.style.boxShadow='0 0 8px '+c;var sz=2+Math.random()*5;s.style.width=s.style.height=sz+'px';document.body.appendChild(s);setTimeout(function(){s.remove();},1000);});
-
-function initFood(){var fl=document.getElementById('foodLayer');var em=['🍎','🍊','🍋','🍇','🍓','🍑','🥝','🍌','🍒','🍅','🥦','🥕','🌽','🥬','🥑','🍄','🍔','🍕','🌮','🍣','🥩','🧀','🥚','🍝','🍞','🥐','🍩','🧁','🍰','🍫','🍭','🌿','🌱','🌾'];for(var i=0;i<40;i++){var el=document.createElement('span');el.className='food-item';el.textContent=em[Math.random()*em.length|0];el.style.cssText='left:'+Math.random()*100+'%;font-size:'+(16+Math.random()*28)+'px;animation-duration:'+(22+Math.random()*28)+'s;animation-delay:'+(Math.random()*-55)+'s;opacity:'+(0.04+Math.random()*.08);fl.appendChild(el);}}
-
-function initParallax(){var mx=0,my=0,cx=0,cy=0;window.addEventListener('mousemove',function(e){mx=(e.clientX/innerWidth-.5)*30;my=(e.clientY/innerHeight-.5)*30;});(function loop(){cx+=(mx-cx)*.04;cy+=(my-cy)*.04;document.getElementById('foodLayer').style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();}
-
-function initTilt(){document.querySelectorAll('.nav-card,.cost-option-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;card.style.setProperty('--rx',((y-r.height/2)/(r.height/2))*-10+'deg');card.style.setProperty('--ry',((x-r.width/2)/(r.width/2))*10+'deg');card.style.setProperty('--mouse-x',x/r.width*100+'%');card.style.setProperty('--mouse-y',y/r.height*100+'%');});card.addEventListener('mouseleave',function(){card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');card.style.transform='';});});}
-
-function btnRipple(e){var btn=e.currentTarget,r=btn.getBoundingClientRect();var p=document.createElement('span');p.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rippleOut .5s ease-out forwards;pointer-events:none';var sz=Math.max(r.width,r.height)*2;p.style.width=p.style.height=sz+'px';p.style.left=(e.clientX-r.left-sz/2)+'px';p.style.top=(e.clientY-r.top-sz/2)+'px';btn.appendChild(p);p.addEventListener('animationend',function(){p.remove();});}
-
-var photoData={
-  col:[{src:'https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b',cap:'Anàlisi de peix'},{src:'https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba',cap:'Dissecció'},{src:'https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0',cap:'Taller'}],
-  sor:[{src:'https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19',cap:'Neteja de platja'},{src:'https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540',cap:'Recollida de residus'},{src:'https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef',cap:'Per un Delta net'},{src:'https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe',cap:'Dinar'},{src:'https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4',cap:'Àpat en grup'},{src:'https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db',cap:'Resultats'}],
-  mk:[{src:'https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8',cap:'Il·lustracions'},{src:'https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049',cap:'Presentació'},{src:'https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3',cap:'Panell'},{src:'https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb',cap:'Preparació'},{src:'https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2',cap:'Disseny 3D'}]
-};
-
-var modalType=null,modalIdx=0;
-function openModal(type,idx){modalType=type;modalIdx=idx;var ph=photoData[type],m=document.getElementById('photoModal'),img=document.getElementById('modalImage'),ct=document.getElementById('modalCounter');img.src=ph[idx].src;ct.textContent=(idx+1)+'/'+ph.length+' — '+ph[idx].cap;m.classList.add('active');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('photoModal').classList.remove('active');document.body.style.overflow='';}
-function updateModal(){var ph=photoData[modalType],img=document.getElementById('modalImage'),ct=document.getElementById('modalCounter');img.src=ph[modalIdx].src;ct.textContent=(modalIdx+1)+'/'+ph.length+' — '+ph[modalIdx].cap;}
-function modalPrev(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx-1+ph.length)%ph.length;updateModal();}
-function modalNext(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx+1)%ph.length;updateModal();}
-window.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();if(document.getElementById('photoModal').classList.contains('active')){if(e.key==='ArrowLeft')modalPrev(e);if(e.key==='ArrowRight')modalNext(e);}});
-
-var mainPanel=document.getElementById('mainPanel'),linkTeoria=document.getElementById('linkTeoria'),linkJoc=document.getElementById('linkJoc'),viewHistory=['home-view'];
-var sectionMeta={
-  digestio:{title:'Digestió',t:'teoria-digestio.html',j:'activitats-digestio.html'},
-  nutricio:{title:'Nutrició',t:'teoria-nutricio.html',j:'activitats-nutricio.html'},
-  'xarxa-trofica':{title:'Xarxa tròfica',t:'teoria-xarxatrofica.html',j:'activitats-xarxatrofica.html'},
-  'cost-ambiental':{title:'Cost ambiental',t:'teoria-costambiental.html',j:'activitats-costambiental.html'},
-  'cost-salut':{title:'Cost de salut',t:'teoria-costsalut.html',j:'activitats-costsalut.html'},
-  'cost-social':{title:'Cost social',t:'teoria-costsocial.html',j:'activitats-costsocial.html'}
-};
-
-function showView(vid){
-  mainPanel.style.transform='scale(.93) translateY(14px)';
-  mainPanel.style.opacity='0';
-  setTimeout(function(){
-    document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-    document.getElementById(vid).classList.add('active');
-    mainPanel.style.transform='scale(1) translateY(0)';
-    mainPanel.style.opacity='1';
-    initTilt();
-  },340);
-}
-function navTo(type,e){
-  if(type==='colaboradors'){viewHistory.push('colaboradors-view');showView('colaboradors-view');return;}
-  if(type==='sortides'){viewHistory.push('sortides-view');showView('sortides-view');return;}
-  if(type==='cost'){viewHistory.push('cost-view');showView('cost-view');return;}
-  if(type==='veritat'){viewHistory.push('veritat-view');showView('veritat-view');return;}
-  if(type==='making-off'){viewHistory.push('makingoff-view');showView('makingoff-view');return;}
-  var m=sectionMeta[type]; if(!m)return;
-  viewHistory.push('selection-view');
-  setTimeout(function(){
-    document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-    document.getElementById('selection-view').classList.add('active');
-    document.getElementById('selTitle').innerText=m.title;
-    linkTeoria.href=m.t; linkJoc.href=m.j;
-    mainPanel.style.transform='scale(1) translateY(0)';
-    mainPanel.style.opacity='1';
-  },340);
-}
-function costNav(type,e){
-  var m=sectionMeta[type]; if(!m)return;
-  viewHistory.push('selection-view');
-  setTimeout(function(){
-    document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-    document.getElementById('selection-view').classList.add('active');
-    document.getElementById('selTitle').innerText=m.title;
-    linkTeoria.href=m.t; linkJoc.href=m.j;
-    mainPanel.style.transform='scale(1) translateY(0)';
-    mainPanel.style.opacity='1';
-  },340);
-}
-function goBack(){viewHistory.pop();var prev=viewHistory[viewHistory.length-1]||'home-view';showView(prev);}
-function showAuthorView(who,e){e.preventDefault();viewHistory.push(who+'-view');showView(who+'-view');}
-
-var quizQuestions=[
-  {q:'Un iogurt amb imatges de fruites i «100% natural» conté realment:',o:['Només fruita i llet','Sucre afegit i aromes artificials','Fruites deshidratades naturals','Zero additius'],c:1,f:'Molts iogurts contenen més sucre que fruita real.'},
-  {q:'La paraula «artesà» en un pa de supermercat significa:',o:['Fet a mà per un forner local','Fet en una fàbrica industrial','No té definició legal, qualsevol pot fer-la servir','Té un segell de qualitat'],c:2,f:'«Artesà» no està regulat per llei.'},
-  {q:'Una beguda «sense sucre» pot contenir:',o:['Cap dolçor','Edulcorants artificials','Només sucre de fruita','Mel orgànica'],c:1,f:'«Sense sucre» no vol dir sense dolç.'},
-  {q:'Les fotos de les hamburgueses dels anuncis:',o:['Són el que rebs al restaurant','Utilitzen trucs de food styling','Són generades per ordinador','Són exactes al producte'],c:1,f:'El food styling fa servir trucs per fer-les semblar millor.'},
-  {q:'Els cereals per a nens amb dibuixos animats:',o:['Són els més saludables','Tenen menys sucre','Sovint contenen més sucre i additius','Tenen un segell especial'],c:2,f:'El marketing infantil amaga sucre i additius.'}
-];
-var quizScore=0,quizAnswered=0;
-function buildQuiz(){
-  var container=document.getElementById('quizContainer');
-  container.innerHTML=''; quizScore=0; quizAnswered=0;
-  document.getElementById('quizScoreBox').classList.remove('show');
-  var letters=['A','B','C','D'];
-  quizQuestions.forEach(function(q,qi){
-    var card=document.createElement('div'); card.className='quiz-question-card'; card.id='qq-'+qi;
-    var optsHTML='';
-    q.o.forEach(function(opt,oi){
-      optsHTML+='<div class="quiz-option" onclick="answerQuiz('+qi+','+oi+',this)" id="qo-'+qi+'-'+oi+'"><span class="opt-letter">'+letters[oi]+'</span><span>'+opt+'</span></div>';
-    });
-    card.innerHTML='<div class="quiz-q-number">Pregunta '+(qi+1)+' de '+quizQuestions.length+'</div><div class="quiz-q-text">'+q.q+'</div><div class="quiz-options">'+optsHTML+'</div><div class="quiz-feedback" id="qf-'+qi+'"></div>';
-    container.appendChild(card);
-  });
-}
-function answerQuiz(qi,oi,el){
-  var q=quizQuestions[qi], card=document.getElementById('qq-'+qi);
-  if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;
-  quizAnswered++;
-  var fb=document.getElementById('qf-'+qi);
-  if(oi===q.c){quizScore++;card.classList.add('answered-correct');el.classList.add('correct');fb.className='quiz-feedback correct-fb show';fb.textContent='✅ Correcte! '+q.f;}
-  else{card.classList.add('answered-wrong');el.classList.add('wrong');document.getElementById('qo-'+qi+'-'+q.c).classList.add('correct');fb.className='quiz-feedback wrong-fb show';fb.textContent='❌ Incorrecte. '+q.f;}
-  q.o.forEach(function(_,i){var op=document.getElementById('qo-'+qi+'-'+i);if(i!==oi&&i!==q.c)op.classList.add('disabled');op.style.pointerEvents='none';});
-  if(quizAnswered===quizQuestions.length){
-    setTimeout(function(){
-      var box=document.getElementById('quizScoreBox');
-      document.getElementById('quizScoreNum').textContent=quizScore+'/'+quizQuestions.length;
-      var msg=quizScore===quizQuestions.length?'Perfecte! 🌟':quizScore>=3?'Molt bé! 👍':'Continua aprenent! 📚';
-      document.getElementById('quizScoreMsg').textContent=msg;
-      box.classList.add('show');
-    },600);
-  }
-}
-function restartQuiz(){buildQuiz();}
+var siteInited=false;function initSiteFeatures(){if(siteInited)return;siteInited=true;try{initBgCanvas()}catch(e){}try{initFood()}catch(e){}try{initParallax()}catch(e){}try{initTilt()}catch(e){}try{buildQuiz()}catch(e){}}
+var bgC=document.getElementById('bgCanvas'),bgX=bgC.getContext('2d'),bW,bH,bgPts=[],bgMx=-1e3,bgMy=-1e3;function resizeBg(){bgC.width=bW=innerWidth;bgC.height=bH=innerHeight}resizeBg();window.addEventListener('resize',resizeBg);function BgPt(){this.x=Math.random()*bW;this.y=Math.random()*bH;this.sz=Math.random()*1.2+.3;this.sx=(Math.random()-.5)*.3;this.sy=(Math.random()-.5)*.3;this.op=Math.random()*.25+.05;this.hue=Math.random()*60+200}BgPt.prototype.update=function(){this.x+=this.sx;this.y+=this.sy;var dx=bgMx-this.x,dy=bgMy-this.y,d=Math.sqrt(dx*dx+dy*dy);if(d<140){var f=(140-d)/140;this.x-=dx*f*.015;this.y-=dy*f*.015}if(this.x<-10||this.x>bW+10||this.y<-10||this.y>bH+10){this.x=Math.random()*bW;this.y=Math.random()*bH}};BgPt.prototype.draw=function(){bgX.beginPath();bgX.arc(this.x,this.y,this.sz,0,Math.PI*2);bgX.fillStyle='hsla('+this.hue+',60%,65%,'+this.op+')';bgX.fill()};for(var i=0;i<70;i++)bgPts.push(new BgPt());function initBgCanvas(){(function loop(){bgX.clearRect(0,0,bW,bH);bgPts.forEach(function(p){p.update();p.draw()});requestAnimationFrame(loop)})()}window.addEventListener('mousemove',function(e){bgMx=e.clientX;bgMy=e.clientY});var spkTimer=0,spkColors=['#60a5fa','#c084fc','#34d399','#f97316','#22d3ee','#fbbf24','#f472b6'];window.addEventListener('mousemove',function(e){spkTimer++;if(spkTimer%4)return;var s=document.createElement('div');s.className='sparkle-trail';s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';var c=spkColors[Math.random()*spkColors.length|0];s.style.background=c;s.style.boxShadow='0 0 8px '+c;var sz=2+Math.random()*5;s.style.width=s.style.height=sz+'px';document.body.appendChild(s);setTimeout(function(){s.remove()},1000)});function initFood(){var fl=document.getElementById('foodLayer'),em=['🍎','🍊','🍋','🍇','🍓','🍑','🥝','🍌','🍒','🍅','🥦','🥕','🌽','🥬','🥑','🍄','🍔','🍕','🌮','🍣','🥩','🧀','🥚','🍝','🍞','🥐','🍩','🧁','🍰','🍫','🍭','🌿','🌱','🌾'];for(var i=0;i<40;i++){var el=document.createElement('span');el.className='food-item';el.textContent=em[Math.random()*em.length|0];el.style.cssText='left:'+Math.random()*100+'%;font-size:'+(16+Math.random()*28)+'px;animation-duration:'+(22+Math.random()*28)+'s;animation-delay:'+(Math.random()*-55)+'s;opacity:'+(0.04+Math.random()*.08);fl.appendChild(el)}}function initParallax(){var mx=0,my=0,cx=0,cy=0;window.addEventListener('mousemove',function(e){mx=(e.clientX/innerWidth-.5)*30;my=(e.clientY/innerHeight-.5)*30});(function loop(){cx+=(mx-cx)*.04;cy+=(my-cy)*.04;document.getElementById('foodLayer').style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop)})()}function initTilt(){document.querySelectorAll('.nav-card,.cost-option-card').forEach(function(card){card.addEventListener('mousemove',function(e){var r=card.getBoundingClientRect(),x=e.clientX-r.left,y=e.clientY-r.top;card.style.setProperty('--rx',((y-r.height/2)/(r.height/2))*-10+'deg');card.style.setProperty('--ry',((x-r.width/2)/(r.width/2))*10+'deg');card.style.setProperty('--mouse-x',x/r.width*100+'%');card.style.setProperty('--mouse-y',y/r.height*100+'%')});card.addEventListener('mouseleave',function(){card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');card.style.transform=''})})}function btnRipple(e){var btn=e.currentTarget,r=btn.getBoundingClientRect(),p=document.createElement('span');p.style.cssText='position:absolute;border-radius:50%;background:rgba(255,255,255,.3);transform:scale(0);animation:rippleOut .5s ease-out forwards;pointer-events:none;z-index:5';var sz=Math.max(r.width,r.height)*2;p.style.width=p.style.height=sz+'px';p.style.left=(e.clientX-r.left-sz/2)+'px';p.style.top=(e.clientY-r.top-sz/2)+'px';btn.appendChild(p);p.addEventListener('animationend',function(){p.remove()})}var photoData={col:[{src:'https://z-cdn-media.chatglm.cn/files/83896458-9c81-472e-9989-189c7db30351.jpg?auth_key=1878233079-96a1e08ae7e14474bc1ec02cdf76db9b-0-6b7d3e501bd4375a5d67f7d9cbe3791b',cap:'Anàlisi de peix'},{src:'https://z-cdn-media.chatglm.cn/files/b1df8579-2096-472a-9fb0-91b7dba02a22.jpg?auth_key=1878233079-896cc46346384db18ce9ac6b601b75c8-0-ed76a3135bd2d90453a05545ce588fba',cap:'Dissecció'},{src:'https://z-cdn-media.chatglm.cn/files/c179bf9e-7982-4bc2-9b94-48ba832564a6.jpg?auth_key=1878233079-4ddeeecf29fa4987b35a00cb049a4189-0-1d3e33bcf85253c48e43854034fe16d0',cap:'Taller'}],sor:[{src:'https://z-cdn-media.chatglm.cn/files/eb63880c-bc74-4c25-8aeb-bdc087243490.jpg?auth_key=1878851546-3b810cffe49b4ee0920697502bbc8d0b-0-758f9f45d210101ae4247c91c27e4b19',cap:'Neteja de platja'},{src:'https://z-cdn-media.chatglm.cn/files/c0fcc228-ed90-439d-8e92-828871c4d817.jpg?auth_key=1878851546-2624bd6c265f4d89859c88c4a7aa6cca-0-906eaaf5da88dd185cc9d4d27b716540',cap:'Recollida de residus'},{src:'https://z-cdn-media.chatglm.cn/files/2fbcfeb3-036d-471e-84f7-55d8389583cd.jpg?auth_key=1878851546-2163cb69a82348a1b84d711c9cab923e-0-03e9092de28b194f8dae7315b7175aef',cap:'Per un Delta net'},{src:'https://z-cdn-media.chatglm.cn/files/34ef94da-748e-45f7-97ee-354c3a60b8ea.jpg?auth_key=1878851546-216a014034674200b0dde46db15cd72b-0-0e8fa877822c441128af6de788cd63fe',cap:'Dinar'},{src:'https://z-cdn-media.chatglm.cn/files/546709d3-853a-49bf-adfc-d5ce139534d2.jpg?auth_key=1878851546-a7cd7f46eb7243159bde2cf7efbc3600-0-a6465f0f1c71feb2fcf23782e2614ce4',cap:'Àpat en grup'},{src:'https://z-cdn-media.chatglm.cn/files/d55eae20-25aa-4e7d-ba10-23282409c8d3.jpg?auth_key=1878851546-1ea1a3e91d884f5cb1af23eda776e528-0-25543a353173e764ed73462094af79db',cap:'Resultats'}],mk:[{src:'https://z-cdn-media.chatglm.cn/files/abd3e375-0c44-4233-86f7-a6ce7e8282a8.jpg?auth_key=1877556428-185a9899a482477eb2efbc0da5bf9877-0-5131ab320a1bf4ca8de7f835908cf3b8',cap:'Il·lustracions'},{src:'https://z-cdn-media.chatglm.cn/files/5b28e170-853f-4367-b86e-57d32150daad.jpg?auth_key=1877556428-bae80ec78f324c7a9f794c6ac6031a40-0-0503ec4262499a3c1a7b3da245939049',cap:'Presentació'},{src:'https://z-cdn-media.chatglm.cn/files/cdb407b0-86ca-4bc7-8206-b1eab6228e28.jpg?auth_key=1877556428-719fadceccd44fec9c094438c5cdbe32-0-4fbb26992ccb9e6d918d266a2e8271e3',cap:'Panell'},{src:'https://z-cdn-media.chatglm.cn/files/b213d0ac-92dd-4151-9eb4-b1a3efa62c97.jpg?auth_key=1877556428-0e708a09c80c4c08979364a3462011f8-0-86e57e35322fd8eab12ddbac3e3670fb',cap:'Preparació'},{src:'https://z-cdn-media.chatglm.cn/files/0ff36fb8-8a35-459b-9183-d337d6433412.jpg?auth_key=1877556428-d0e95057c5d8490db608e373c49af7c7-0-79fc64cb6f4efa0ca35da46f403d14d2',cap:'Disseny 3D'}]};var modalType=null,modalIdx=0;function openModal(type,idx){modalType=type;modalIdx=idx;var ph=photoData[type],m=document.getElementById('photoModal'),img=document.getElementById('modalImage'),ct=document.getElementById('modalCounter');img.src=ph[idx].src;ct.textContent=(idx+1)+'/'+ph.length+' — '+ph[idx].cap;m.classList.add('active');document.body.style.overflow='hidden'}function closeModal(){document.getElementById('photoModal').classList.remove('active');document.body.style.overflow=''}function updateModal(){var ph=photoData[modalType],img=document.getElementById('modalImage'),ct=document.getElementById('modalCounter');img.src=ph[modalIdx].src;ct.textContent=(modalIdx+1)+'/'+ph.length+' — '+ph[modalIdx].cap}function modalPrev(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx-1+ph.length)%ph.length;updateModal()}function modalNext(e){e.stopPropagation();var ph=photoData[modalType];modalIdx=(modalIdx+1)%ph.length;updateModal()}window.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();if(document.getElementById('photoModal').classList.contains('active')){if(e.key==='ArrowLeft')modalPrev(e);if(e.key==='ArrowRight')modalNext(e)}});
+var mainPanel=document.getElementById('mainPanel'),linkTeoria=document.getElementById('linkTeoria'),linkJoc=document.getElementById('linkJoc'),viewHistory=['home-view'];var sectionMeta={digestio:{title:'Digestió',t:'teoria-digestio.html',j:'activitats-digestio.html'},nutricio:{title:'Nutrició',t:'teoria-nutricio.html',j:'activitats-nutricio.html'},'xarxa-trofica':{title:'Xarxa tròfica',t:'teoria-xarxatrofica.html',j:'activitats-xarxatrofica.html'},'cost-ambiental':{title:'Cost ambiental',t:'teoria-costambiental.html',j:'activitats-costambiental.html'},'cost-salut':{title:'Cost de salut',t:'teoria-costsalut.html',j:'activitats-costsalut.html'},'cost-social':{title:'Cost social',t:'teoria-costsocial.html',j:'activitats-costsocial.html'}};function showView(vid){mainPanel.style.transform='scale(.93) translateY(14px)';mainPanel.style.opacity='0';setTimeout(function(){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});document.getElementById(vid).classList.add('active');mainPanel.style.transform='scale(1) translateY(0)';mainPanel.style.opacity='1';initTilt()},340)}function navTo(type,e){if(type==='colaboradors'){viewHistory.push('colaboradors-view');showView('colaboradors-view');return}if(type==='sortides'){viewHistory.push('sortides-view');showView('sortides-view');return}if(type==='cost'){viewHistory.push('cost-view');showView('cost-view');return}if(type==='veritat'){viewHistory.push('veritat-view');showView('veritat-view');return}if(type==='making-off'){viewHistory.push('makingoff-view');showView('makingoff-view');return}var m=sectionMeta[type];if(!m)return;viewHistory.push('selection-view');setTimeout(function(){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});document.getElementById('selection-view').classList.add('active');document.getElementById('selTitle').innerText=m.title;linkTeoria.href=m.t;linkJoc.href=m.j;mainPanel.style.transform='scale(1) translateY(0)';mainPanel.style.opacity='1'},340)}function costNav(type,e){var m=sectionMeta[type];if(!m)return;viewHistory.push('selection-view');setTimeout(function(){document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active')});document.getElementById('selection-view').classList.add('active');document.getElementById('selTitle').innerText=m.title;linkTeoria.href=m.t;linkJoc.href=m.j;mainPanel.style.transform='scale(1) translateY(0)';mainPanel.style.opacity='1'},340)}function goBack(){viewHistory.pop();var prev=viewHistory[viewHistory.length-1]||'home-view';showView(prev)}function showAuthorView(who,e){e.preventDefault();viewHistory.push(who+'-view');showView(who+'-view')}var quizQuestions=[{q:'Un iogurt amb imatges de fruites i «100% natural» conté realment:',o:['Només fruita i llet','Sucre afegit i aromes artificials','Fruites deshidratades naturals','Zero additius'],c:1,f:'Molts iogurts contenen més sucre que fruita real.'},{q:'La paraula «artesà» en un pa de supermercat significa:',o:['Fet a mà per un forner local','Fet en una fàbrica industrial','No té definició legal, qualsevol pot fer-la servir','Té un segell de qualitat'],c:2,f:'«Artesà» no està regulat per llei.'},{q:'Una beguda «sense sucre» pot contenir:',o:['Cap dolçor','Edulcorants artificials','Només sucre de fruita','Mel orgànica'],c:1,f:'«Sense sucre» no vol dir sense dolç.'},{q:'Les fotos de les hamburgueses dels anuncis:',o:['Són el que rebs al restaurant','Utilitzen trucs de food styling','Són generades per ordinador','Són exactes al producte'],c:1,f:'El food styling fa servir trucs per fer-les semblar millor.'},{q:'Els cereals per a nens amb dibuixos animats:',o:['Són els més saludables','Tenen menys sucre','Sovint contenen més sucre i additius','Tenen un segell especial'],c:2,f:'El marketing infantil amaga sucre i additius.'}];var quizScore=0,quizAnswered=0;function buildQuiz(){var container=document.getElementById('quizContainer');container.innerHTML='';quizScore=0;quizAnswered=0;document.getElementById('quizScoreBox').classList.remove('show');var letters=['A','B','C','D'];quizQuestions.forEach(function(q,qi){var card=document.createElement('div');card.className='quiz-question-card';card.id='qq-'+qi;var optsHTML='';q.o.forEach(function(opt,oi){optsHTML+='<div class="quiz-option" onclick="answerQuiz('+qi+','+oi+',this)" id="qo-'+qi+'-'+oi+'"><span class="opt-letter">'+letters[oi]+'</span><span>'+opt+'</span></div>'});card.innerHTML='<div class="quiz-q-number">Pregunta '+(qi+1)+' de '+quizQuestions.length+'</div><div class="quiz-q-text">'+q.q+'</div><div class="quiz-options">'+optsHTML+'</div><div class="quiz-feedback" id="qf-'+qi+'"></div>';container.appendChild(card)})}function answerQuiz(qi,oi,el){var q=quizQuestions[qi],card=document.getElementById('qq-'+qi);if(card.classList.contains('answered-correct')||card.classList.contains('answered-wrong'))return;quizAnswered++;var fb=document.getElementById('qf-'+qi);if(oi===q.c){quizScore++;card.classList.add('answered-correct');el.classList.add('correct');fb.className='quiz-feedback correct-fb show';fb.textContent='✅ Correcte! '+q.f}else{card.classList.add('answered-wrong');el.classList.add('wrong');document.getElementById('qo-'+qi+'-'+q.c).classList.add('correct');fb.className='quiz-feedback wrong-fb show';fb.textContent='❌ Incorrecte. '+q.f}q.o.forEach(function(_,i){var op=document.getElementById('qo-'+qi+'-'+i);if(i!==oi&&i!==q.c)op.classList.add('disabled');op.style.pointerEvents='none'});if(quizAnswered===quizQuestions.length){setTimeout(function(){var box=document.getElementById('quizScoreBox');document.getElementById('quizScoreNum').textContent=quizScore+'/'+quizQuestions.length;var msg=quizScore===quizQuestions.length?'Perfecte! 🌟':quizScore>=3?'Molt bé! 👍':'Continua aprenent! 📚';document.getElementById('quizScoreMsg').textContent=msg;box.classList.add('show')},600)}}function restartQuiz(){buildQuiz()}
 </script>
 </body>
 </html>
