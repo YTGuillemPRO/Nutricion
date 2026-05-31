@@ -217,6 +217,15 @@
   }
   .btn-primary:hover{box-shadow:0 10px 30px rgba(74,222,128,0.45), inset 0 -3px 0 rgba(0,0,0,0.15);transform:translateY(-2px) scale(1.03)}
   .btn-primary:disabled{opacity:0.35;pointer-events:none;transform:none}
+
+  /* ★ Nou: Botó per tornar a la web */
+  .btn-web{
+    background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;
+    box-shadow:0 6px 20px rgba(167,139,250,0.3), inset 0 -3px 0 rgba(0,0,0,0.15);
+    text-decoration:none;
+  }
+  .btn-web:hover{box-shadow:0 10px 30px rgba(167,139,250,0.5), inset 0 -3px 0 rgba(0,0,0,0.15);transform:translateY(-2px) scale(1.03);color:#fff}
+
   .btn-quiz{
     background:linear-gradient(145deg,var(--glass),rgba(107,203,119,0.05));
     border:1.5px solid var(--card-border);color:var(--fg);padding:10px 18px;border-radius:16px;
@@ -269,7 +278,7 @@
 
   /* Feeding Game */
   .feeding-game{position:relative;overflow:hidden}
-  .feeding-game::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--purple),var(--blue),var(--green-neon))}
+  .feeding-game::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pink),var(--purple),var(--green-neon))}
   .animal-stage{
     display:flex;justify-content:center;align-items:stretch;gap:16px;margin:20px 0;flex-wrap:wrap;
     padding:20px;background:rgba(0,0,0,0.15);border-radius:var(--radius-sm);border:1.5px dashed rgba(255,217,61,0.1);
@@ -359,6 +368,8 @@
   .modal-stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--card-border);font-weight:700;font-size:0.95rem}
   .modal-stat:last-of-type{border-bottom:none}
   .modal-stat span:last-child{color:var(--accent);font-family:'Fredoka',sans-serif;font-size:1.1rem}
+  .modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+  .modal-actions .btn{width:100%;margin-top:0}
 
   .footer-note{text-align:center;color:var(--fg-muted);font-size:0.8rem;margin-top:30px;opacity:0.5;padding:16px;font-weight:600}
 
@@ -383,7 +394,10 @@
   <div class="modal-box">
     <h2 id="modalTitle">🏆 Enhorabona!</h2>
     <div id="modalStats"></div>
-    <button class="btn btn-primary" style="margin-top:20px;width:100%" onclick="tancarModal()"><i class="fa-solid fa-redo"></i> Tornar a jugar</button>
+    <div class="modal-actions">
+      <a href="https://example.com" id="btnTornarWeb" class="btn btn-web"><i class="fa-solid fa-arrow-left"></i> Tornar a la web</a>
+      <button class="btn btn-primary" onclick="tancarModal()"><i class="fa-solid fa-redo"></i> Tornar a jugar</button>
+    </div>
   </div>
 </div>
 
@@ -500,6 +514,9 @@ let puntuacio = { correctes: 0, incorrectes: 0, total: 0 };
 let completades = new Set();
 let combo = 0, maxCombo = 0;
 
+/* ===== CANVIAR AQUESTA URL PER LA TEVA WEB ===== */
+const WEB_URL = "https://example.com";
+
 /* ===== FONS ===== */
 const bg = document.getElementById('bgAurora');
 const emjs = ['🌿','🌱','🍃','🦋','🐛','🌸','🍀','🌻','🐰','🦊','🌳','🍎','🌊'];
@@ -592,7 +609,6 @@ document.querySelectorAll('.drag-item').forEach(item => {
 function handleItemClick(e) {
   const item = e.currentTarget;
 
-  // Si toquem un element que ja està colocat dins una zona -> el retornem a la safata
   if (item.classList.contains('placed')) {
     const zone = item.closest('.drop-zone');
     if (!zone) return;
@@ -604,7 +620,6 @@ function handleItemClick(e) {
     document.getElementById('dragItems').appendChild(item);
     zone.classList.remove('correct-zone', 'wrong-zone');
     
-    // Desseleccionem qualsevol altre element actiu a la safata per evitar confusions
     if (selectedItem) {
       selectedItem.classList.remove('selected-drag');
       selectedItem = null;
@@ -612,7 +627,6 @@ function handleItemClick(e) {
     return;
   }
 
-  // Selecció d'element a la safata (Si ja estava seleccionat, el desmarca; si no, el marca i desmarca l'anterior)
   if (selectedItem === item) {
     item.classList.remove('selected-drag');
     selectedItem = null;
@@ -637,35 +651,30 @@ function colocar(item, zone) {
   const isCorrect = item.dataset.answer === zt;
 
   if (isCorrect) {
-    // CORRECTE: Es queda a la zona
     zone.appendChild(item);
     item.classList.add('placed', 'correct-item');
     placedItems[zt]++;
     document.getElementById(`count${zt.charAt(0).toUpperCase()+zt.slice(1)}`).textContent=`${placedItems[zt]}/2`;
     zone.classList.add('correct-zone');
   } else {
-    // INCORRECTE: Error i retorn automàtic a la safata
     item.classList.add('wrong-item');
     zone.classList.add('wrong-zone');
     
     ko('fbDrag','❌ Aquest organisme no va aquí! Torna a intentar-ho.');
     actualizarUI();
     
-    // Retornem l'element a la safata breument després de l'animació d'error
     setTimeout(() => {
       item.classList.remove('wrong-item');
       zone.classList.remove('wrong-zone');
     }, 500);
   }
 
-  // Comprovar si ja s'han colocat tots correctament
   if(Object.values(placedItems).reduce((a,b)=>a+b,0)>=6) {
     setTimeout(comprovarDrag,400);
   }
 }
 
 function comprovarDrag(){
-  // Com que els incorrectes ja tornen enrere, si hi ha 6 colocats vol dir que tots són correctes.
   document.getElementById('btnDrag').disabled = true;
   completar('drag','fbDrag','🎯 Tots ben classificats!',30);
   unlock('quiz');
@@ -783,6 +792,8 @@ function mostrarFinal(){
   let tier='🌱 Aprenent';if(puntuacio.total>=150)tier='🏆 Mestre';else if(puntuacio.total>=80)tier='⭐ Expert';
   t.textContent=tier+" de l'ecosistema!";
   s.innerHTML=`<div class="modal-stat"><span>✅ Correctes</span><span>${puntuacio.correctes}</span></div><div class="modal-stat"><span>❌ Errors</span><span>${puntuacio.incorrectes}</span></div><div class="modal-stat"><span>🏆 Puntuació</span><span>${puntuacio.total}</span></div><div class="modal-stat"><span>🔥 Combo màxim</span><span>x${maxCombo}</span></div>`;
+  /* Actualitzar l'enllaç del botó Tornar a la web */
+  document.getElementById('btnTornarWeb').href = WEB_URL;
   m.classList.add('show');llancarConfeti('epic');
 }
 function tancarModal(){
