@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Xarxa Tròfica — Aventura Ecosistèmica 🌿</title>
+<title>Xarxa tròfica — Aventura ecosistèmica 🌿</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
@@ -26,12 +26,13 @@
     --radius: 28px;
     --radius-sm: 18px;
   }
-  * { margin:0; padding:0; box-sizing:border-box; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
   html { scroll-behavior:smooth; overflow-x:hidden; }
   body {
     font-family:'Nunito',sans-serif;
     background:var(--bg); color:var(--fg);
     overflow-x:hidden; line-height:1.6; min-height:100vh; padding-bottom:60px;
+    touch-action: manipulation;
   }
 
   /* Fons Aurora */
@@ -168,7 +169,6 @@
     border:2.5px dashed var(--card-border);border-radius:var(--radius-sm);min-height:110px;padding:12px;
     transition:all 0.3s;display:flex;flex-direction:column;gap:6px;background:rgba(0,0,0,0.15);
   }
-  .drop-zone.drag-over{border-color:var(--green-neon);background:rgba(74,222,128,0.08);box-shadow:0 0 20px rgba(74,222,128,0.15)}
   .drop-zone.correct-zone{border-color:var(--correct);border-style:solid;background:rgba(74,222,128,0.05)}
   .drop-zone.wrong-zone{border-color:var(--incorrect);animation:zoneWrong 0.4s ease}
   @keyframes zoneWrong{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
@@ -186,14 +186,19 @@
   .drag-item{
     display:inline-flex;align-items:center;gap:7px;
     background:linear-gradient(145deg,rgba(107,203,119,0.12),rgba(107,203,119,0.03));
-    border:1.5px solid var(--card-border);border-radius:25px;padding:8px 14px;cursor:grab;
+    border:1.5px solid var(--card-border);border-radius:25px;padding:8px 14px;cursor:pointer;
     font-size:0.85rem;font-weight:700;color:var(--fg);transition:all 0.3s;user-select:none;
+    touch-action:manipulation;
   }
   .drag-item:hover{background:rgba(107,203,119,0.2);transform:translateY(-2px) scale(1.04);border-color:var(--green-neon)}
-  .drag-item:active{cursor:grabbing;transform:scale(0.95)}
-  .drag-item.placed{opacity:0.35;pointer-events:none;transform:scale(0.88)}
+  .drag-item:active{transform:scale(0.95)}
+  .drag-item.placed{opacity:1;pointer-events:auto;transform:scale(1)}
   .drag-item.correct-item{border-color:var(--correct)!important;background:rgba(74,222,128,0.15)!important;animation:itemOk 0.4s ease}
   .drag-item.wrong-item{border-color:var(--incorrect)!important;background:rgba(255,107,107,0.15)!important;animation:zoneWrong 0.4s ease}
+  .drag-item.selected-drag{
+    border-color:var(--accent)!important;background:rgba(255,217,61,0.2)!important;
+    transform:scale(1.05);box-shadow:0 0 15px rgba(255,217,61,0.3);
+  }
   @keyframes itemOk{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(0.88)}}
   .drag-item .di-emoji{font-size:1.1rem}
   .drop-zone .drag-item{font-size:0.8rem;padding:6px 10px;margin:2px 0}
@@ -203,7 +208,7 @@
     display:inline-flex;align-items:center;justify-content:center;gap:7px;
     padding:12px 24px;border:none;border-radius:50px;font-family:'Nunito',sans-serif;
     font-size:0.9rem;font-weight:800;cursor:pointer;transition:all 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    outline:none;text-transform:uppercase;letter-spacing:1px;margin-top:10px;
+    outline:none;text-transform:uppercase;letter-spacing:1px;margin-top:10px;touch-action:manipulation;user-select:none;
   }
   .btn:active{transform:scale(0.96)}
   .btn-primary{
@@ -216,6 +221,7 @@
     background:linear-gradient(145deg,var(--glass),rgba(107,203,119,0.05));
     border:1.5px solid var(--card-border);color:var(--fg);padding:10px 18px;border-radius:16px;
     font-size:0.88rem;font-weight:700;transition:all 0.3s;margin:4px;cursor:pointer;font-family:'Nunito',sans-serif;
+    touch-action:manipulation;user-select:none;
   }
   .btn-quiz:hover:not(:disabled){background:rgba(107,203,119,0.15);border-color:var(--green-neon);transform:translateY(-2px)}
   .btn-quiz.correct-answer{background:rgba(74,222,128,0.2)!important;border-color:var(--correct)!important;color:var(--correct)!important}
@@ -255,7 +261,7 @@
     display:inline-flex;align-items:center;gap:6px;padding:10px 18px;
     background:linear-gradient(145deg,rgba(255,217,61,0.08),rgba(255,217,61,0.02));
     border:1.5px solid rgba(255,217,61,0.25);border-radius:25px;font-size:0.9rem;font-weight:700;
-    color:var(--fg);cursor:pointer;transition:all 0.3s;user-select:none;
+    color:var(--fg);cursor:pointer;transition:all 0.3s;user-select:none;touch-action:manipulation;
   }
   .chain-opt:hover{transform:translateY(-2px) scale(1.05);border-color:var(--accent);box-shadow:0 6px 18px rgba(0,0,0,0.2);background:rgba(255,217,61,0.12)}
   .chain-opt:active{transform:scale(0.95)}
@@ -272,7 +278,7 @@
     display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px;flex:1;min-width:110px;max-width:150px;
     background:linear-gradient(160deg,var(--glass),rgba(107,203,119,0.03));
     border:2px solid var(--card-border);border-radius:20px;transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-    cursor:pointer;position:relative;
+    cursor:pointer;position:relative;touch-action:manipulation;user-select:none;
   }
   .animal-card:hover{transform:translateY(-4px) scale(1.03);border-color:var(--green-neon);box-shadow:0 10px 25px rgba(0,0,0,0.2)}
   .animal-card.selected{border-color:var(--accent);box-shadow:0 0 25px rgba(255,217,61,0.2);transform:scale(1.06);animation:selectedPulse 1.2s ease-in-out infinite}
@@ -300,7 +306,7 @@
   .food-item{
     display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 14px;
     background:var(--glass);border:1.5px solid var(--card-border);border-radius:14px;cursor:pointer;
-    transition:all 0.3s;user-select:none;
+    transition:all 0.3s;user-select:none;touch-action:manipulation;
   }
   .food-item:hover{transform:translateY(-3px) scale(1.05) rotate(2deg);border-color:var(--accent);box-shadow:0 6px 18px rgba(0,0,0,0.2)}
   .food-item:active{transform:scale(0.93)}
@@ -383,9 +389,9 @@
 
 <div class="wrapper">
   <header class="hero">
-    <div class="hero-badge"><i class="fas fa-leaf"></i> Joc Educatiu</div>
-    <h1><span>Xarxa Tròfica</span></h1>
-    <p>Aprendeix sobre ecosistemes jugant. Completa els 4 reptes!</p>
+    <div class="hero-badge"><i class="fas fa-leaf"></i> Joc educatiu</div>
+    <h1><span>Xarxa tròfica</span></h1>
+    <p>Aprèn sobre ecosistemes jugant. Completa els 4 reptes!</p>
   </header>
 
   <div class="level-indicator" id="levelIndicator">
@@ -425,29 +431,29 @@
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
   </div>
 
-  <!-- N1: DRAG & DROP -->
+  <!-- N1: TAP & PLACE -->
   <section id="secDrag">
     <div class="section-tag"><i class="fa-solid fa-hand-pointer"></i> Nivell 1</div>
-    <h2>Classifica els Organismes <span class="diff-badge diff-easy"><i class="fa-solid fa-seedling"></i> Fàcil</span></h2>
-    <p style="color:var(--fg-muted);margin-bottom:12px;font-weight:600;font-size:0.9rem;">Arrossega cada ésser viu al seu grup correcte!</p>
+    <h2>Classifica els organismes <span class="diff-badge diff-easy"><i class="fa-solid fa-seedling"></i> Fàcil</span></h2>
+    <p style="color:var(--fg-muted);margin-bottom:12px;font-weight:600;font-size:0.9rem;">Toca un ésser viu i després la seva zona. Si t'equivoques, tornarà aquí!</p>
     <div class="drag-zones">
       <div class="drop-zone" data-zone="productor" id="zoneProductor">
         <div class="drop-zone-title"><i class="fa-solid fa-seedling" style="color:var(--green-neon)"></i> Productors <span class="zone-count" id="countProductor">0/2</span></div>
       </div>
       <div class="drop-zone" data-zone="primari" id="zonePrimari">
-        <div class="drop-zone-title"><i class="fa-solid fa-carrot" style="color:var(--accent)"></i> Mengen Plantes <span class="zone-count" id="countPrimari">0/2</span></div>
+        <div class="drop-zone-title"><i class="fa-solid fa-carrot" style="color:var(--accent)"></i> Mengen plantes <span class="zone-count" id="countPrimari">0/2</span></div>
       </div>
       <div class="drop-zone" data-zone="secundari" id="zoneSecundari">
-        <div class="drop-zone-title"><i class="fa-solid fa-drumstick-bite" style="color:var(--incorrect)"></i> Mengen Animals <span class="zone-count" id="countSecundari">0/2</span></div>
+        <div class="drop-zone-title"><i class="fa-solid fa-drumstick-bite" style="color:var(--incorrect)"></i> Mengen animals <span class="zone-count" id="countSecundari">0/2</span></div>
       </div>
     </div>
     <div class="drag-items" id="dragItems">
-      <div class="drag-item" draggable="true" data-answer="productor" id="itemPlanta"><span class="di-emoji">🌱</span> Planta</div>
-      <div class="drag-item" draggable="true" data-answer="primari" id="itemConill"><span class="di-emoji">🐰</span> Conill</div>
-      <div class="drag-item" draggable="true" data-answer="secundari" id="itemGuineu"><span class="di-emoji">🦊</span> Guineu</div>
-      <div class="drag-item" draggable="true" data-answer="productor" id="itemAlga"><span class="di-emoji">🌿</span> Alga</div>
-      <div class="drag-item" draggable="true" data-answer="primari" id="itemCabra"><span class="di-emoji">🐐</span> Cabra</div>
-      <div class="drag-item" draggable="true" data-answer="secundari" id="itemLlop"><span class="di-emoji">🐺</span> Llop</div>
+      <div class="drag-item" data-answer="productor" id="itemPlanta"><span class="di-emoji">🌱</span> Planta</div>
+      <div class="drag-item" data-answer="primari" id="itemConill"><span class="di-emoji">🐰</span> Conill</div>
+      <div class="drag-item" data-answer="secundari" id="itemGuineu"><span class="di-emoji">🦊</span> Guineu</div>
+      <div class="drag-item" data-answer="productor" id="itemAlga"><span class="di-emoji">🌿</span> Alga</div>
+      <div class="drag-item" data-answer="primari" id="itemCabra"><span class="di-emoji">🐐</span> Cabra</div>
+      <div class="drag-item" data-answer="secundari" id="itemLlop"><span class="di-emoji">🐺</span> Llop</div>
     </div>
     <button class="btn btn-primary" id="btnDrag" onclick="comprovarDrag()"><i class="fa-solid fa-check-double"></i> Comprovar</button>
     <div class="feedback" id="fbDrag"></div>
@@ -456,7 +462,7 @@
   <!-- N2: QUIZ -->
   <section id="secQuiz" class="locked">
     <div class="section-tag"><i class="fa-solid fa-circle-question"></i> Nivell 2</div>
-    <h2>Quiz Ràpid <span class="diff-badge diff-easy"><i class="fa-solid fa-brain"></i> Fàcil</span></h2>
+    <h2>Qüestionari ràpid <span class="diff-badge diff-easy"><i class="fa-solid fa-brain"></i> Fàcil</span></h2>
     <p style="color:var(--fg-muted);margin-bottom:14px;font-weight:600;font-size:0.9rem;" id="quizPregunta">Completa el nivell anterior...</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;" id="quizButtons"></div>
     <div class="feedback" id="fbQuiz"></div>
@@ -465,7 +471,7 @@
   <!-- N3: CADENES -->
   <section id="secCadena" class="locked">
     <div class="section-tag"><i class="fa-solid fa-link"></i> Nivell 3</div>
-    <h2>Cadenes Alimentàries <span class="diff-badge diff-easy"><i class="fa-solid fa-puzzle-piece"></i> Clica</span></h2>
+    <h2>Cadenes alimentàries <span class="diff-badge diff-easy"><i class="fa-solid fa-puzzle-piece"></i> Tria</span></h2>
     <p style="color:var(--fg-muted);margin-bottom:4px;font-weight:600;font-size:0.9rem;">Tria l'animal correcte per completar la cadena!</p>
     <div class="chain-container"><div class="chain-visual" id="chainVisual"></div></div>
     <div class="chain-options" id="chainOptions"></div>
@@ -475,8 +481,8 @@
   <!-- N4: ALIMENTA -->
   <section id="secFeeding" class="locked feeding-game">
     <div class="section-tag"><i class="fa-solid fa-utensils"></i> Nivell 4</div>
-    <h2>Alimenta l'Ecosistema <span class="diff-badge diff-fun"><i class="fa-solid fa-wand-magic-sparkles"></i> Divertit</span></h2>
-    <p class="feeding-instructions"><i class="fa-solid fa-hand-point-up"></i> Selecciona un animal i després la seva comida!</p>
+    <h2>Alimenta l'ecosistema <span class="diff-badge diff-fun"><i class="fa-solid fa-wand-magic-sparkles"></i> Divertit</span></h2>
+    <p class="feeding-instructions"><i class="fa-solid fa-hand-point-up"></i> Toca un animal i després el seu menjar!</p>
     <div class="animal-stage" id="animalStage"></div>
     <div class="food-tray" id="foodTray"></div>
     <div class="feeding-progress">
@@ -485,7 +491,7 @@
     <div class="feedback" id="fbFeeding"></div>
   </section>
 
-  <footer class="footer-note">Xarxa Tròfica — Aventura Ecosistèmica<br><small>Après jugant es més divertit!</small></footer>
+  <footer class="footer-note">Xarxa tròfica — Aventura ecosistèmica<br><small>Aprenent jugant és més divertit!</small></footer>
 </div>
 
 <script>
@@ -514,7 +520,7 @@ document.querySelectorAll('section').forEach(s => obs.observe(s));
 function showToast(msg, tipus) {
   const c = document.getElementById('toastContainer');
   const t = document.createElement('div');
-  const ic = {success:'fa-circle-check',error:'fa-circle-xmark',combo:'fa-fire',fun:'fa-sparkles'};
+  const ic = {success:'fa-circle-check',error:'fa-circle-xmark',combo:'fa-fire',fun:'fa-wand-magic-sparkles'};
   t.className = `toast ${tipus}`;
   t.innerHTML = `<i class="fa-solid ${ic[tipus]||'fa-circle-info'}"></i> ${msg}`;
   c.appendChild(t); setTimeout(()=>t.remove(), 2800);
@@ -575,42 +581,101 @@ function unlock(nivell){
   showToast(`🔓 Nivell ${{quiz:2,cadena:3,feeding:4}[nivell]} desbloquejat!`,'fun');llancarConfeti('normal');scrollTO(sId);
 }
 
-/* ===== N1: DRAG ===== */
-let dragActiu=null, placedItems={productor:0,primari:0,secundari:0};
-document.querySelectorAll('.drag-item').forEach(item=>{
-  item.addEventListener('dragstart',e=>{dragActiu=item;e.dataTransfer.setData('text/plain',item.id);item.style.opacity='0.4';});
-  item.addEventListener('dragend',()=>{if(dragActiu){dragActiu.style.opacity='1';dragActiu=null;}document.querySelectorAll('.drop-zone').forEach(z=>z.classList.remove('drag-over'));});
-  item.addEventListener('click',()=>{if(item.classList.contains('placed'))return;document.querySelectorAll('.drag-item').forEach(d=>d.style.borderColor='');item.style.borderColor='var(--accent)';dragActiu=item;showToast('👆 Ara clica una zona!','fun');});
+/* ===== N1: TAP & PLACE (Tàctil/Mobil) ===== */
+let selectedItem = null;
+let placedItems = {productor:0,primari:0,secundari:0};
+
+document.querySelectorAll('.drag-item').forEach(item => {
+  item.addEventListener('click', handleItemClick);
 });
-document.querySelectorAll('.drop-zone').forEach(zone=>{
-  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag-over');});
-  zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));
-  zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');if(!dragActiu||dragActiu.classList.contains('placed'))return;colocar(dragActiu,zone);});
-  zone.addEventListener('click',()=>{if(dragActiu&&!dragActiu.classList.contains('placed')){dragActiu.style.borderColor='';colocar(dragActiu,zone);dragActiu=null;}});
-});
-function colocar(item,zone){
-  zone.appendChild(item);item.classList.add('placed');item.setAttribute('draggable','false');
-  const zt=zone.dataset.zone;placedItems[zt]++;
-  document.getElementById(`count${zt.charAt(0).toUpperCase()+zt.slice(1)}`).textContent=`${placedItems[zt]}/2`;
-  item.classList.add(item.dataset.answer===zt?'correct-item':'wrong-item');
-  if(Object.values(placedItems).reduce((a,b)=>a+b,0)>=6)setTimeout(comprovarDrag,400);
+
+function handleItemClick(e) {
+  const item = e.currentTarget;
+
+  // Si toquem un element que ja està colocat dins una zona -> el retornem a la safata
+  if (item.classList.contains('placed')) {
+    const zone = item.closest('.drop-zone');
+    if (!zone) return;
+    const zt = zone.dataset.zone;
+    placedItems[zt]--;
+    document.getElementById(`count${zt.charAt(0).toUpperCase()+zt.slice(1)}`).textContent=`${placedItems[zt]}/2`;
+    
+    item.classList.remove('placed', 'correct-item', 'wrong-item');
+    document.getElementById('dragItems').appendChild(item);
+    zone.classList.remove('correct-zone', 'wrong-zone');
+    
+    // Desseleccionem qualsevol altre element actiu a la safata per evitar confusions
+    if (selectedItem) {
+      selectedItem.classList.remove('selected-drag');
+      selectedItem = null;
+    }
+    return;
+  }
+
+  // Selecció d'element a la safata (Si ja estava seleccionat, el desmarca; si no, el marca i desmarca l'anterior)
+  if (selectedItem === item) {
+    item.classList.remove('selected-drag');
+    selectedItem = null;
+  } else {
+    if (selectedItem) selectedItem.classList.remove('selected-drag');
+    selectedItem = item;
+    item.classList.add('selected-drag');
+  }
 }
-function comprovarDrag(){
-  let okAll=true;
-  document.querySelectorAll('.drop-zone').forEach(zone=>{
-    const zt=zone.dataset.zone;
-    zone.querySelectorAll('.drag-item').forEach(item=>{if(item.dataset.answer!==zt){okAll=false;zone.classList.add('wrong-zone');setTimeout(()=>zone.classList.remove('wrong-zone'),400);}else zone.classList.add('correct-zone');});
+
+document.querySelectorAll('.drop-zone').forEach(zone => {
+  zone.addEventListener('click', () => {
+    if (!selectedItem) return;
+    colocar(selectedItem, zone);
+    selectedItem.classList.remove('selected-drag');
+    selectedItem = null;
   });
-  if(document.querySelectorAll('.drag-item:not(.placed)').length>0)okAll=false;
-  if(okAll){document.getElementById('btnDrag').disabled=true;completar('drag','fbDrag','🎯 Tots ben classificats!',30);unlock('quiz');}
-  else{ko('fbDrag','🔄 Revisa... algun organisme no és al lloc correcte!');actualizarUI();}
+});
+
+function colocar(item, zone) {
+  const zt = zone.dataset.zone;
+  const isCorrect = item.dataset.answer === zt;
+
+  if (isCorrect) {
+    // CORRECTE: Es queda a la zona
+    zone.appendChild(item);
+    item.classList.add('placed', 'correct-item');
+    placedItems[zt]++;
+    document.getElementById(`count${zt.charAt(0).toUpperCase()+zt.slice(1)}`).textContent=`${placedItems[zt]}/2`;
+    zone.classList.add('correct-zone');
+  } else {
+    // INCORRECTE: Error i retorn automàtic a la safata
+    item.classList.add('wrong-item');
+    zone.classList.add('wrong-zone');
+    
+    ko('fbDrag','❌ Aquest organisme no va aquí! Torna a intentar-ho.');
+    actualizarUI();
+    
+    // Retornem l'element a la safata breument després de l'animació d'error
+    setTimeout(() => {
+      item.classList.remove('wrong-item');
+      zone.classList.remove('wrong-zone');
+    }, 500);
+  }
+
+  // Comprovar si ja s'han colocat tots correctament
+  if(Object.values(placedItems).reduce((a,b)=>a+b,0)>=6) {
+    setTimeout(comprovarDrag,400);
+  }
+}
+
+function comprovarDrag(){
+  // Com que els incorrectes ja tornen enrere, si hi ha 6 colocats vol dir que tots són correctes.
+  document.getElementById('btnDrag').disabled = true;
+  completar('drag','fbDrag','🎯 Tots ben classificats!',30);
+  unlock('quiz');
 }
 
 /* ===== N2: QUIZ ===== */
 const preguntes=[
   {text:'Quin animal menja plantes?',opcions:[{text:'🦁 Lleó',c:false},{text:'🐰 Conill',c:true},{text:'🦅 Àguila',c:false}],exp:'El conill menja plantes i verdures!'},
   {text:'Qui crea el seu aliment amb la llum del sol?',opcions:[{text:'🍄 Fong',c:false},{text:'🌿 Planta',c:true},{text:'🐺 Llop',c:false}],exp:'Les plantes fan la fotosíntesi!'},
-  {text:"D'on ve l'energia de l'ecosistema?",opcions:[{text:'☀️ El Sol',c:true},{text:'💧 L\'aigua',c:false},{text:'🪨 Les roques',c:false}],exp:'El Sol és la font d\'energia principal!'}
+  {text:"D'on ve l'energia de l'ecosistema?",opcions:[{text:'☀️ El Sol',c:true},{text:"💧 L'aigua",c:false},{text:'🪨 Les roques',c:false}],exp:"El Sol és la font d'energia principal!"}
 ];
 let quizIdx=0,quizFet=false;
 function renderQuiz(){
@@ -657,8 +722,8 @@ function verCad(id,btn){
     sl.innerHTML=`<span class="cn-emoji">${cad.emojiC}</span><span class="cn-label">${btn.textContent.trim()}</span>`;
     ok('fbCadena',`🔗 ${cad.inici.nom} → ${btn.textContent.trim()} → ${cad.final.nom}`,25);actualizarUI();cadIdx++;
     if(cadIdx<cadenes.length)setTimeout(renderCadena,1200);
-    else if(!cadFeta){cadFeta=true;completar('cadena','fbCadena','🔗 Totes les cadenes completes!',30);unlock('feeding');}
-  }else{btn.style.borderColor='var(--incorrect)';btn.style.opacity='0.35';ko('fbCadena','❌ No és aquest! Prova\'n un altre.');actualizarUI();setTimeout(()=>document.querySelectorAll('.chain-opt').forEach(o=>o.style.pointerEvents=''),700);}
+    else if(!cadFeta){cadFeta=true;completar('cadena','fbCadena','🔗 Totes les cadenes completades!',30);unlock('feeding');}
+  }else{btn.style.borderColor='var(--incorrect)';btn.style.opacity='0.35';ko('fbCadena',"❌ No és aquest! Prova'n un altre.");actualizarUI();setTimeout(()=>document.querySelectorAll('.chain-opt').forEach(o=>o.style.pointerEvents=''),700);}
 }
 
 /* ===== N4: ALIMENTA ===== */
@@ -700,7 +765,7 @@ function selFood(id){
     an.fed=true;fo.used=true;feedSt.fed++;
     ok('fbFeeding',`${an.emoji} ${an.name} adora ${fo.emoji} ${fo.name}!`,15);actualizarUI();
     document.getElementById('fedCount').textContent=feedSt.fed;
-    const sp=document.getElementById(`sp-${an.id}`);if(sp){sp.textContent=['😋 Ñam!','🤤 Ric!','😊 Gràcies!'][Math.floor(Math.random()*3)];sp.classList.add('show');}
+    const sp=document.getElementById(`sp-${an.id}`);if(sp){sp.textContent=['Nyam!','🤤 Ric!','😊 Gràcies!'][Math.floor(Math.random()*3)];sp.classList.add('show');}
     if(feedSt.fed>=feedSt.animals.length&&!feedSt.done){feedSt.done=true;setTimeout(()=>{completar('feeding','fbFeeding','🎉 Tots alimentats! Ets un expert!',40);llancarConfeti('epic');setTimeout(mostrarFinal,1500);},500);}
     else setTimeout(()=>{renderAS();renderFT();},800);
   }else{
@@ -716,15 +781,15 @@ function selFood(id){
 function mostrarFinal(){
   const m=document.getElementById('finalModal'),t=document.getElementById('modalTitle'),s=document.getElementById('modalStats');
   let tier='🌱 Aprenent';if(puntuacio.total>=150)tier='🏆 Mestre';else if(puntuacio.total>=80)tier='⭐ Expert';
-  t.textContent=tier+" de l'Ecosistema!";
+  t.textContent=tier+" de l'ecosistema!";
   s.innerHTML=`<div class="modal-stat"><span>✅ Correctes</span><span>${puntuacio.correctes}</span></div><div class="modal-stat"><span>❌ Errors</span><span>${puntuacio.incorrectes}</span></div><div class="modal-stat"><span>🏆 Puntuació</span><span>${puntuacio.total}</span></div><div class="modal-stat"><span>🔥 Combo màxim</span><span>x${maxCombo}</span></div>`;
   m.classList.add('show');llancarConfeti('epic');
 }
 function tancarModal(){
   document.getElementById('finalModal').classList.remove('show');
   puntuacio={correctes:0,incorrectes:0,total:0};completades.clear();combo=0;maxCombo=0;quizIdx=0;quizFet=false;cadIdx=0;cadFeta=false;
-  placedItems={productor:0,primari:0,secundari:0};actualizarUI();
-  const dc=document.getElementById('dragItems');document.querySelectorAll('.drag-item').forEach(item=>{item.classList.remove('placed','correct-item','wrong-item');item.setAttribute('draggable','true');dc.appendChild(item);});
+  placedItems={productor:0,primari:0,secundari:0};selectedItem=null;actualizarUI();
+  const dc=document.getElementById('dragItems');document.querySelectorAll('.drag-item').forEach(item=>{item.classList.remove('placed','correct-item','wrong-item','selected-drag');dc.appendChild(item);});
   ['Productor','Primari','Secundari'].forEach(z=>{document.getElementById(`count${z}`).textContent='0/2';document.getElementById(`zone${z}`).classList.remove('correct-zone','wrong-zone');});
   document.getElementById('btnDrag').disabled=false;document.getElementById('fbDrag').classList.remove('show');
   ['secQuiz','secCadena','secFeeding'].forEach(id=>{const s=document.getElementById(id);s.classList.add('locked');s.classList.remove('visible','completed');});
