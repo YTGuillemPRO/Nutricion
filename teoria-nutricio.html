@@ -796,7 +796,7 @@
     <!-- MITES -->
     <div class="section-title" data-section><i class="fa-solid fa-question-circle" style="color:var(--red)"></i> Joc: Veritat o Fals? 🎮</div>
     <div class="myths-section" data-section>
-        <h3>🚨 Saps distinguir veritats de mentires?</h3>
+        <h3>🚨 Saps distingir veritats de mentires?</h3>
         <p>Totes són <strong style="color:var(--green-light)">FALSES</strong> (mentides)! Et surten totes?</p>
 
         <div class="myth-grid" id="mythGrid">
@@ -1284,22 +1284,36 @@ function drawStars() {
 drawStars();
 
 /* ========== SCROLL ANIMACIONS ========== */
-var sectionObs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            sectionObs.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+var alreadyAnimated = sessionStorage.getItem('nutricio_animated') === 'true';
 
-document.querySelectorAll('[data-section]').forEach(function(el, i) {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease ' + (i * 0.04) + 's, transform 0.6s ease ' + (i * 0.04) + 's';
-    sectionObs.observe(el);
-});
+if (alreadyAnimated) {
+    /* Si ja ha visitat la pàgina en aquesta sessió, tot visible sense animacions */
+    document.querySelectorAll('[data-section]').forEach(function(el) {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+        el.style.transition = 'none';
+    });
+} else {
+    /* Primera visita: animació per scroll */
+    sessionStorage.setItem('nutricio_animated', 'true');
+
+    var sectionObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                sectionObs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('[data-section]').forEach(function(el, i) {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease ' + (i * 0.04) + 's, transform 0.6s ease ' + (i * 0.04) + 's';
+        sectionObs.observe(el);
+    });
+}
 </script>
 </body>
 </html>
