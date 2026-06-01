@@ -253,7 +253,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line
 
 <!-- ORGANS -->
 <div class="stitle" data-sec><i class="fa-solid fa-route" style="color:var(--emerald)"></i> Les 6 Etapes del Viatge Digestiu</div>
-<p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:18px">👇 <strong>Clica cada òrgan</strong> per descobrir com funciona!</p>
+<p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:18px" data-sec>👇 <strong>Clica cada òrgan</strong> per descobrir com funciona!</p>
 
 <div class="organs" id="organs" data-sec>
 
@@ -359,9 +359,9 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line
       <div class="organ-details">
         <h4>✨ Parts i funcions</h4>
         <ul>
-          <li><strong>Duode (30 cm):</strong> rep bilis i sucs pancreàtics 🔄</li>
-          <li><strong>Jeú (2.5 m):</strong> absorció principal de nutrients ⭐</li>
-          <li><strong>Ile (3.5 m):</strong> absorció de vitamina B12 💊</li>
+          <li><strong>Duodè (30 cm):</strong> rep bilis i sucs pancreàtics 🔄</li>
+          <li><strong>Jejú (2.5 m):</strong> absorció principal de nutrients ⭐</li>
+          <li><strong>Ili (3.5 m):</strong> absorció de vitamina B12 💊</li>
           <li>Nutrients → Sang (glucosa) i Limfa (greixos) 🩸💧</li>
         </ul>
       </div>
@@ -389,7 +389,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line
           <li><strong>Cec i apèndix:</strong> inici del colon (apèndix = defenses!) 🛡️</li>
           <li><strong>Colon:</strong> absorció d'aigua i minerals 🔄</li>
           <li><strong>Recte:</strong> emmagatzematge temporal de femta 📦</li>
-          <li>Més de <strong>1000 espècies</strongies bacterianes simbiòtiques! 🧫</li>
+          <li>Més de <strong>1000 espècies</strong> bacterianes simbiòtiques! 🧫</li>
         </ul>
       </div>
     </div>
@@ -467,7 +467,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line
   </div>
   <div class="fact" data-fact>
     <div class="fact-head"><span class="fact-emoji">💧</span><h3>Fàbrica d'Aigua</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
-    <div class="fact-answer">L'intestí gros absorba 1.5 litres d'aigua al dia — com 6 ampolletes! Sense això, la femta seria líquida! 🚰</div>
+    <div class="fact-answer">L'intestí gros absorbeix 1.5 litres d'aigua al dia — com 6 ampolletes! Sense això, la femta seria líquida! 🚰</div>
   </div>
 </div>
 
@@ -696,14 +696,35 @@ function drawS(){sx.clearRect(0,0,sW,sH);sArr.forEach(function(s){s.p+=.012;s.y-
 drawS();
 
 /* === SCROLL ANIM === */
-var secObs=new IntersectionObserver(function(entries){
-  entries.forEach(function(en){if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';secObs.unobserve(en.target)}});
-},{threshold:.06,rootMargin:'0px 0px -20px 0px'});
-document.querySelectorAll('[data-sec]').forEach(function(el,i){
-  el.style.opacity='0';el.style.transform='translateY(25px)';
-  el.style.transition='opacity .55s ease '+(i*.04)+'s, transform .55s ease '+(i*.04)+'s';
-  secObs.observe(el);
+var alreadySeen = sessionStorage.getItem('digestio_seen');
+
+var secObs = new IntersectionObserver(function(entries) {
+  entries.forEach(function(en) {
+    if (en.isIntersecting) {
+      en.target.style.opacity = '1';
+      en.target.style.transform = 'translateY(0)';
+      secObs.unobserve(en.target);
+    }
+  });
+}, {threshold: .06, rootMargin: '0px 0px -20px 0px'});
+
+document.querySelectorAll('[data-sec]').forEach(function(el, i) {
+  if (alreadySeen) {
+    // Ja ha visitat la pàgina: sense animació, tot visible
+    el.style.opacity = '1';
+    el.style.transform = 'translateY(0)';
+    el.style.transition = 'none';
+  } else {
+    // Primera visita: animació progressiva
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(25px)';
+    el.style.transition = 'opacity .55s ease ' + (i * .04) + 's, transform .55s ease ' + (i * .04) + 's';
+    secObs.observe(el);
+  }
 });
+
+// Marquem la pàgina com a visitada per a aquesta sessió
+if (!alreadySeen) sessionStorage.setItem('digestio_seen', '1');
 </script>
 </body>
 </html>
