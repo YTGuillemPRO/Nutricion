@@ -141,34 +141,51 @@
 </head>
 <body>
     <div class="game-card" id="game-card">
-        <h1>El Cami del Menjar</h1>
-        <p class="desc">Clica els organs en l'ordre correcte del recorregut digestiu.</p>
-        <div class="food-status" id="food-icon">🌭</div>
-        <div class="organ-list" id="organ-list">
-            <button class="organ-btn" data-step="2">Esòfag</button>
-            <button class="organ-btn" data-step="5">Intestí Gros</button>
-            <button class="organ-btn" data-step="1">Boca</button>
-            <button class="organ-btn" data-step="4">Intestí Prim</button>
-            <button class="organ-btn" data-step="3">Estòmac</button>
-            <button class="organ-btn" data-step="6">Recte / Anus</button>
-        </div>
-        <div class="progress-bar"><div id="progress-fill"></div></div>
-        <div class="step-counter" id="step-counter">Pas 1 de 6</div>
-        <a href="index.html" class="back-link">← Tornar al inici</a>
+        <!-- El contingut s'omple dinàmicament des del JavaScript -->
     </div>
 
     <script>
         let currentStep = 1;
         const totalSteps = 6;
         const foodIcons = ["🌭", "👄", "⬇️", "🔄", "🧪", "💩", "✅"];
+        
+        // Referències al DOM
+        let organListEl, foodIconEl, progressFill, stepCounterEl, gameCard;
 
-        const organListEl = document.getElementById('organ-list');
-        const foodIconEl = document.getElementById('food-icon');
-        const progressFill = document.getElementById('progress-fill');
-        const stepCounterEl = document.getElementById('step-counter');
-        const gameCard = document.getElementById('game-card');
+        // Funció per inicialitzar/reiniciar el joc
+        function initGame() {
+            gameCard = document.getElementById('game-card');
+            
+            // Si la card ja existeix (reinici), només canviem l'HTML intern
+            gameCard.innerHTML = `
+                <h1>El Cami del Menjar</h1>
+                <p class="desc">Clica els organs en l'ordre correcte del recorregut digestiu.</p>
+                <div class="food-status" id="food-icon">🌭</div>
+                <div class="organ-list" id="organ-list">
+                    <button class="organ-btn" data-step="2">Esòfag</button>
+                    <button class="organ-btn" data-step="5">Intestí Gros</button>
+                    <button class="organ-btn" data-step="1">Boca</button>
+                    <button class="organ-btn" data-step="4">Intestí Prim</button>
+                    <button class="organ-btn" data-step="3">Estòmac</button>
+                    <button class="organ-btn" data-step="6">Recte / Anus</button>
+                </div>
+                <div class="progress-bar"><div id="progress-fill"></div></div>
+                <div class="step-counter" id="step-counter">Pas 1 de 6</div>
+                <a href="index.html" class="back-link">← Tornar al inici</a>
+            `;
 
-        organListEl.addEventListener('click', e => {
+            // Tornem a capturar les referències del nous elements creats
+            organListEl = document.getElementById('organ-list');
+            foodIconEl = document.getElementById('food-icon');
+            progressFill = document.getElementById('progress-fill');
+            stepCounterEl = document.getElementById('step-counter');
+
+            // Afegim l'event listener al nou llistat d'organs
+            organListEl.addEventListener('click', handleOrganClick);
+        }
+
+        // Lògica quan es clica un òrgan
+        function handleOrganClick(e) {
             const btn = e.target.closest('.organ-btn');
             if (!btn || btn.classList.contains('correct')) return;
 
@@ -191,8 +208,9 @@
                 btn.classList.add('wrong');
                 setTimeout(() => btn.classList.remove('wrong'), 400);
             }
-        });
+        }
 
+        // Pantalla de victòria
         function showVictory() {
             confetti({
                 particleCount: 250, spread: 110, origin: { y: 0.6 },
@@ -204,12 +222,21 @@
                         <div class="victory-icon">🏆</div>
                         <h1>EXCELENT</h1>
                         <p>Has completat el recorregut digestiu correctament.</p>
-                        <button class="replay-btn" onclick="location.reload()">TORNAR A JUGAR</button>
+                        <button class="replay-btn" onclick="resetGame()">TORNAR A JUGAR</button>
                         <br><br>
                         <a href="index.html" class="back-link">← Tornar al inici</a>
                     </div>`;
             }, 350);
         }
+
+        // Funció per reiniciar el joc sense recarregar la pàgina
+        function resetGame() {
+            currentStep = 1;
+            initGame();
+        }
+
+        // Iniciar el joc per primera vegada
+        initGame();
     </script>
 </body>
 </html>
