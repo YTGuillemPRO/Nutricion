@@ -6,6 +6,15 @@
 <title>Teoria: La Digestió | IE Temple</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Detector primerenc per evitar l'animació en tornar enrere -->
+<script>
+try {
+  var navEntry = performance.getEntriesByType('navigation');
+  if ((navEntry.length > 0 && navEntry[0].type === 'back_forward') || sessionStorage.getItem('digestio_seen')) {
+    document.documentElement.classList.add('no-anim');
+  }
+} catch(e) {}
+</script>
 <style>
 :root{
   --bg:#040d07;--card:rgba(10,30,18,0.8);--card-border:rgba(16,185,129,0.12);
@@ -17,6 +26,13 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+
+/* Regla CSS per bloquejar l'animació instantàniament si tenim la classe no-anim */
+html.no-anim [data-sec]{
+  opacity:1!important;
+  transform:none!important;
+  transition:none!important
+}
 
 .bg-scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-scene .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.15}
@@ -361,7 +377,7 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line
         <ul>
           <li><strong>Duodè (30 cm):</strong> rep bilis i sucs pancreàtics 🔄</li>
           <li><strong>Jejú (2.5 m):</strong> absorció principal de nutrients ⭐</li>
-          <li><strong>Ili (3.5 m):</strong> absorció de vitamina B12 💊</li>
+          <li><strong>Ilié (3.5 m):</strong> absorció de vitamina B12 💊</li>
           <li>Nutrients → Sang (glucosa) i Limfa (greixos) 🩸💧</li>
         </ul>
       </div>
@@ -696,35 +712,41 @@ function drawS(){sx.clearRect(0,0,sW,sH);sArr.forEach(function(s){s.p+=.012;s.y-
 drawS();
 
 /* === SCROLL ANIM === */
-var alreadySeen = sessionStorage.getItem('digestio_seen');
+var skipAnim = document.documentElement.classList.contains('no-anim');
 
-var secObs = new IntersectionObserver(function(entries) {
-  entries.forEach(function(en) {
-    if (en.isIntersecting) {
-      en.target.style.opacity = '1';
-      en.target.style.transform = 'translateY(0)';
-      secObs.unobserve(en.target);
-    }
-  });
-}, {threshold: .06, rootMargin: '0px 0px -20px 0px'});
+if (!skipAnim) {
+  var secObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(en) {
+      if (en.isIntersecting) {
+        en.target.style.opacity = '1';
+        en.target.style.transform = 'translateY(0)';
+        secObs.unobserve(en.target);
+      }
+    });
+  }, {threshold: .06, rootMargin: '0px 0px -20px 0px'});
 
-document.querySelectorAll('[data-sec]').forEach(function(el, i) {
-  if (alreadySeen) {
-    // Ja ha visitat la pàgina: sense animació, tot visible
-    el.style.opacity = '1';
-    el.style.transform = 'translateY(0)';
-    el.style.transition = 'none';
-  } else {
-    // Primera visita: animació progressiva
+  document.querySelectorAll('[data-sec]').forEach(function(el, i) {
     el.style.opacity = '0';
     el.style.transform = 'translateY(25px)';
     el.style.transition = 'opacity .55s ease ' + (i * .04) + 's, transform .55s ease ' + (i * .04) + 's';
     secObs.observe(el);
+  });
+
+  try {
+    sessionStorage.setItem('digestio_seen', '1');
+  } catch(e) {}
+}
+
+// Gestió de la memòria cau del navegador (Back/Forward Cache)
+window.addEventListener('pageshow', function(event) {
+  if (event.persisted) {
+    document.querySelectorAll('[data-sec]').forEach(function(el) {
+      el.style.transition = 'none';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    });
   }
 });
-
-// Marquem la pàgina com a visitada per a aquesta sessió
-if (!alreadySeen) sessionStorage.setItem('digestio_seen', '1');
 </script>
 </body>
 </html>
