@@ -6,7 +6,6 @@
 <title>Teoria: La Digestió | IE Temple</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!-- Detector primerenc per evitar l'animació en tornar enrere -->
 <script>
 try {
   var navEntry = performance.getEntriesByType('navigation');
@@ -26,13 +25,7 @@ try {
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
-
-/* Regla CSS per bloquejar l'animació instantàniament si tenim la classe no-anim */
-html.no-anim [data-sec]{
-  opacity:1!important;
-  transform:none!important;
-  transition:none!important
-}
+html.no-anim [data-sec]{opacity:1!important;transform:none!important;transition:none!important}
 
 .bg-scene{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .bg-scene .orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.15}
@@ -53,7 +46,6 @@ html.no-anim [data-sec]{
 
 .page{position:relative;z-index:2;max-width:880px;margin:0 auto;padding:40px 18px 60px}
 
-/* === HEADER === */
 .header{text-align:center;margin-bottom:44px;padding-top:10px}
 .header-icon{font-size:68px;display:inline-block;animation:iconFloat 3s ease-in-out infinite;filter:drop-shadow(0 8px 28px rgba(16,185,129,.35));cursor:pointer;-webkit-tap-highlight-color:transparent}
 @keyframes iconFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-12px) rotate(3deg)}}
@@ -69,18 +61,15 @@ html.no-anim [data-sec]{
 .stat-val{font-size:1.4rem;font-weight:900;color:var(--emerald-light)}
 .stat-lbl{font-size:.68rem;color:var(--text-muted);font-weight:600;margin-top:1px}
 
-/* === SECCIONS === */
 .stitle{font-size:13px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);font-weight:800;margin-bottom:18px;display:flex;align-items:center;gap:10px}
 .stitle::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--card-border),transparent)}
 
-/* === INTRO === */
 .intro{background:var(--card);border:1.5px solid var(--card-border);border-radius:var(--radius);padding:28px 26px;margin-bottom:40px;border-left:5px solid var(--emerald);position:relative;overflow:hidden}
 .intro::after{content:'🧬';position:absolute;right:20px;top:50%;transform:translateY(-50%);font-size:6rem;opacity:.06}
 .intro h2{font-size:1.5rem;font-weight:900;color:var(--emerald-light);margin-bottom:10px;display:flex;align-items:center;gap:10px}
 .intro p{font-size:14px;color:var(--text-dim);line-height:1.8}
 .kw{background:rgba(16,185,129,.15);color:var(--emerald-light);padding:2px 10px;border-radius:8px;font-weight:700;font-size:.9em;display:inline-block}
 
-/* === ORGAN CARDS === */
 .organs{display:flex;flex-direction:column;gap:16px;margin-bottom:44px}
 .organ{background:var(--card);border:1.5px solid var(--card-border);border-radius:var(--radius);overflow:hidden;transition:all .4s cubic-bezier(.34,1.56,.64,1);cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 .organ:hover{border-color:rgba(16,185,129,.25);transform:translateY(-4px)}
@@ -92,11 +81,10 @@ html.no-anim [data-sec]{
 .organ.expanded .organ-visual{transform:scale(1.15)}
 .organ-num{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--bg);z-index:2}
 
-.organ-head h3{font-size:17px;font-weight:800;flex:1;transition:color .3s}
+.organ-head h3{font-size:17px;font-weight:800;flex:1;transition:color .3s;line-height:1.2}
 .organ-head .arrow{color:var(--text-muted);transition:all .4s;font-size:14px}
 .organ.expanded .organ-head .arrow{transform:rotate(180deg);color:var(--emerald-light)}
 
-/* Colors per organ */
 .organ[data-c="pink"] .organ-visual{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.25);color:var(--pink);box-shadow:0 0 20px rgba(244,114,182,.15)}
 .organ[data-c="pink"] .organ-num{background:var(--pink)}
 .organ[data-c="pink"]:hover h3,.organ[data-c="pink"].expanded h3{color:var(--pink)}
@@ -127,7 +115,6 @@ html.no-anim [data-sec]{
 .organ[data-c="lime"]:hover h3,.organ[data-c="lime"].expanded h3{color:var(--lime)}
 .organ[data-c="lime"].expanded{border-color:rgba(163,230,53,.3)}
 
-/* CSS organ illustration */
 .organ-illus{width:100%;height:160px;border-radius:16px;margin:0 24px 0;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
 .organ-illus .illus-emoji{font-size:72px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.4));z-index:1;animation:illusFloat 4s ease-in-out infinite}
 @keyframes illusFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -139,7 +126,6 @@ html.no-anim [data-sec]{
 .organ[data-c="violet"] .illus-bg{background:radial-gradient(circle at 50% 60%,rgba(167,139,250,.4),transparent 70%)}
 .organ[data-c="lime"] .illus-bg{background:radial-gradient(circle at 50% 60%,rgba(163,230,53,.4),transparent 70%)}
 
-/* Animated particles inside illustration */
 .illus-particle{position:absolute;border-radius:50%;opacity:.5;animation:illusPart 3s ease-in-out infinite}
 @keyframes illusPart{0%,100%{transform:translateY(0) scale(1);opacity:.4}50%{transform:translateY(-20px) scale(1.3);opacity:.7}}
 
@@ -157,7 +143,6 @@ html.no-anim [data-sec]{
 .organ.expanded .organ-body{display:block;animation:expandIn .4s ease}
 @keyframes expandIn{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
 
-/* === ACCESSORY ORGANS === */
 .acc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin-bottom:44px}
 .acc-card{background:var(--card);border:1.5px solid var(--card-border);border-radius:20px;padding:22px;transition:all .35s;cursor:default;position:relative;overflow:hidden}
 .acc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--emerald),var(--cyan));transform:scaleX(0);transition:transform .4s;transform-origin:left}
@@ -168,7 +153,6 @@ html.no-anim [data-sec]{
 .acc-card h3{font-size:15px;font-weight:800;color:var(--text);margin-bottom:8px}
 .acc-card p{font-size:12.5px;color:var(--text-dim);line-height:1.7}
 
-/* === FUN FACTS === */
 .facts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:44px}
 .fact{background:var(--card);border:1.5px solid rgba(251,191,36,.12);border-radius:18px;padding:18px;cursor:pointer;transition:all .35s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;position:relative;overflow:hidden}
 .fact:hover{transform:translateY(-3px);border-color:rgba(251,191,36,.25)}
@@ -180,7 +164,6 @@ html.no-anim [data-sec]{
 .fact-answer{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0;font-size:12.5px;color:var(--text-dim);line-height:1.65}
 .fact.revealed .fact-answer{max-height:120px;opacity:1;margin-top:10px}
 
-/* === QUIZ === */
 .quiz{background:var(--card);border:1.5px solid var(--card-border);border-radius:var(--radius);padding:28px;margin-bottom:44px}
 .quiz h3{font-size:18px;font-weight:900;text-align:center;margin-bottom:6px}
 .quiz>p{font-size:13px;color:var(--text-muted);text-align:center;margin-bottom:22px}
@@ -203,7 +186,6 @@ html.no-anim [data-sec]{
 .quiz-restart{margin-top:14px;padding:10px 26px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--emerald),var(--cyan));color:var(--bg);font-family:'Nunito',sans-serif;font-size:13px;font-weight:800;cursor:pointer;transition:all .3s}
 .quiz-restart:hover{transform:scale(1.08);box-shadow:0 6px 20px var(--emerald-glow)}
 
-/* === SUMMARY FLOW === */
 .summary{background:var(--card);border:1.5px solid var(--card-border);border-radius:var(--radius);padding:28px;margin-bottom:44px}
 .summary h3{font-size:18px;font-weight:900;margin-bottom:18px;text-align:center}
 .flow{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;margin-bottom:18px}
@@ -212,7 +194,6 @@ html.no-anim [data-sec]{
 .flow-arrow{color:var(--emerald);font-size:14px;font-weight:900}
 .summary>p{font-size:13px;color:var(--text-dim);text-align:center;line-height:1.7}
 
-/* === FOOTER === */
 .footer{text-align:center;padding:20px 0}
 .btn-back{display:inline-flex;align-items:center;gap:9px;text-decoration:none;color:var(--emerald-light);font-weight:800;font-size:14px;border:2px solid rgba(16,185,129,.25);border-radius:50px;padding:13px 30px;transition:all .35s;background:rgba(16,185,129,.05)}
 .btn-back:hover{background:linear-gradient(135deg,var(--emerald),var(--cyan));color:var(--bg);border-color:var(--emerald);transform:translateY(-3px);box-shadow:0 8px 28px var(--emerald-glow)}
@@ -242,7 +223,7 @@ html.no-anim [data-sec]{
 <canvas class="stars-canvas" id="starsCanvas"></canvas>
 
 <div class="reading-bar" id="readBar"></div>
-<div class="star-counter" id="starCtr">⭐ 0 / 12</div>
+<div class="star-counter" id="starCtr">⭐ 0 / 14</div>
 <div class="toast" id="toast"></div>
 
 <div class="page">
@@ -251,25 +232,25 @@ html.no-anim [data-sec]{
 <header class="header" data-sec>
   <span class="header-icon" id="mascot">🌱</span>
   <h1>El Viatge de l'Aliment</h1>
-  <p>Descobreix l'aventura increïble que fan els teus aliments cada dia — un recorregut de <span class="kw">9 metres</span> pel teu cos!</p>
+  <p>Posa't el cinturó! L'aliment farà un viatge de <span class="kw">9 metres</span> pel teu cos... com una muntanya russa per dins teu! 🎢</p>
   <div class="header-bar"></div>
   <div class="stats">
-    <div class="stat"><div class="stat-val">7-9</div><div class="stat-lbl">Òrgans</div></div>
-    <div class="stat"><div class="stat-val">24-72h</div><div class="stat-lbl">Durada total</div></div>
+    <div class="stat"><div class="stat-val">6</div><div class="stat-lbl">Etapes divertides</div></div>
+    <div class="stat"><div class="stat-val">24-72h</div><div class="stat-lbl">Durada del viatge</div></div>
     <div class="stat"><div class="stat-val">~9 m</div><div class="stat-lbl">Longitud del tub</div></div>
-    <div class="stat"><div class="stat-val">+1000</div><div class="stat-lbl">Espècies bacterianes</div></div>
+    <div class="stat"><div class="stat-val">+1000</div><div class="stat-lbl">Bacteris amics</div></div>
   </div>
 </header>
 
 <!-- INTRO -->
 <div class="intro" data-sec>
   <h2>🧬 Què és la Digestió?</h2>
-  <p>La <strong>digestió</strong> és el procés pel qual el cos transforma els aliments en <span class="kw">nutrients</span> (substàncies que el cos necessita per viure i créixer). Imagina que ets un explorador i l'aliment és un tresor que ha de ser processat! Aquest viatge recorre un tub de gairebé <strong>9 metres</strong> — més alt que un edifici de 3 plantes! 🏢</p>
+  <p>Imagina que el teu menjar és un aventurer! La <strong>digestió</strong> és com una màquina màgica que transforma aquest aventurer en <span class="kw">nutrients</span>, la gasolina que el teu cos necessita per córrer, pensar i créixer! El viatge passa per un tub secret de gairebé <strong>9 metres</strong> — més llarg que 3 cotes posats un damunt l'altre! 🏢</p>
 </div>
 
 <!-- ORGANS -->
-<div class="stitle" data-sec><i class="fa-solid fa-route" style="color:var(--emerald)"></i> Les 6 Etapes del Viatge Digestiu</div>
-<p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:18px" data-sec>👇 <strong>Clica cada òrgan</strong> per descobrir com funciona!</p>
+<div class="stitle" data-sec><i class="fa-solid fa-route" style="color:var(--emerald)"></i> Les 6 Aturades del Viatge</div>
+<p style="text-align:center;color:var(--text-muted);font-size:13px;margin-bottom:18px" data-sec>👇 <strong>Clica cada estació</strong> per descobrir què hi passa!</p>
 
 <div class="organs" id="organs" data-sec>
 
@@ -277,7 +258,7 @@ html.no-anim [data-sec]{
   <div class="organ" data-c="pink" data-organ>
     <div class="organ-head">
       <div class="organ-visual">🦷<span class="organ-num">1</span></div>
-      <h3>La Boca</h3>
+      <h3>La Boca: La Trituradora 💥</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -288,14 +269,14 @@ html.no-anim [data-sec]{
         <div class="illus-particle" style="width:10px;height:10px;background:rgba(244,114,182,.4);top:40%;left:50%;animation-delay:1.5s"></div>
         <span class="illus-emoji">👄</span>
       </div>
-      <p>Les <strong>32 dents</strong> trituren l'aliment com una trituradora, mentre la <strong>llengua</strong> el barreja amb la <strong>saliva</strong>. La saliva conté enzims que comencen a descompondre els hidrats de carboni. 💧</p>
+      <p>Les teves <strong>32 dents</strong> són com les dents d'un monstre que fan miques el menjar! La llengua, que és com una pala, ho barreja tot amb la <strong>saliva</strong>. La saliva té un superpoder anomenat <span class="kw">amilasa</span>, que ja comença a desfer els dolços i el pa! 💧</p>
       <div class="organ-details">
-        <h4>✨ Detalls clau</h4>
+        <h4>✨ Superpoders de la boca</h4>
         <ul>
-          <li>Es forma el <span class="kw">bol alimentari</span>: una pasta fàcil d'empassar</li>
-          <li>Les papiles gustatives identifiquen els sabors 👅</li>
-          <li>Produïm <strong>1-1.5 litres de saliva</strong> al dia!</li>
-          <li>La mastegació redueix la mida de les partícules</li>
+          <li>Es fa el <span class="kw">bol alimentari</span>: una boleta de pasta que ens empassarem</li>
+          <li>Les papiles gustatives són els teus radars de sabors 👅</li>
+          <li>Fas més d'<strong>1 litre de saliva</strong> cada dia! Ets una font! 🚰</li>
+          <li>Si mastegues bé, l'estómac treballa menys! 😌</li>
         </ul>
       </div>
     </div>
@@ -304,8 +285,8 @@ html.no-anim [data-sec]{
   <!-- 2. ESÒFAG -->
   <div class="organ" data-c="orange" data-organ>
     <div class="organ-head">
-      <div class="organ-visual">📍<span class="organ-num">2</span></div>
-      <h3>L'Esòfag</h3>
+      <div class="organ-visual">🎢<span class="organ-num">2</span></div>
+      <h3>L'Esòfag: El Tobogan 🎢</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -315,14 +296,14 @@ html.no-anim [data-sec]{
         <div class="illus-particle" style="width:9px;height:9px;background:rgba(251,146,60,.4);top:55%;left:55%;animation-delay:1.2s"></div>
         <span class="illus-emoji">🌀</span>
       </div>
-      <p>Un tub muscular de <strong>25 cm</strong> que connecta la gola amb l'estómac. L'aliment baixa gràcies als <strong>moviments peristàltics</strong> — contraccions automàtiques que empenyen el menjar cap avall... fins i tot si estàs de cap per avall! 😱</p>
+      <p>És un tub de <strong>25 cm</strong> que fa de tobogan! El menjar no cau per gravetat, sinó que les parets l'empenyen amb uns moviments superxulos anomenats <span class="kw">moviments peristàltics</span>. Són com unes ones que empenyen! Tan forts que baixarien encara que mengessis de cap per avall! 😱</p>
       <div class="organ-details">
-        <h4>✨ Detalls clau</h4>
+        <h4>✨ Superpoders del tobogan</h4>
         <ul>
-          <li>Triga només <strong>~8 segons</strong> travessar l'esòfag ⏱️</li>
-          <li>L'<span class="kw">epiglotis</span> tanca la tràquea per evitar ofegar-se 🚫</li>
-          <li>No hi ha digestió ni absorció — només transport! 🚚</li>
-          <li>Funciona amb musculatura involuntària</li>
+          <li>Triga només <strong>8 segons</strong> en baixar! Més ràpid que un mòbil! ⏱️</li>
+          <li>L'<span class="kw">epiglotis</span> és una porteta que tanca perquè no et truquis! 🚫</li>
+          <li>Aquí no es digereix res, només és una super-autopista! 🚚</li>
+          <li>És tan intel·ligent que funciona sol, sense pensar-hi! 🧠</li>
         </ul>
       </div>
     </div>
@@ -331,8 +312,8 @@ html.no-anim [data-sec]{
   <!-- 3. ESTÓMAC -->
   <div class="organ" data-c="red" data-organ>
     <div class="organ-head">
-      <div class="organ-visual">🔴<span class="organ-num">3</span></div>
-      <h3>L'Estómac</h3>
+      <div class="organ-visual">🫧<span class="organ-num">3</span></div>
+      <h3>L'Estómac: La Rentadora 🌪️</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -343,14 +324,14 @@ html.no-anim [data-sec]{
         <div class="illus-particle" style="width:10px;height:10px;background:rgba(239,68,68,.3);top:45%;left:48%;animation-delay:1.8s"></div>
         <span class="illus-emoji">🫧</span>
       </div>
-      <p>Una bossa en forma de J amb capacitat d'<strong>1-1.5 litres</strong>. Aquí l'<strong>àcid clorhídric</strong> (més fort que suc de llimona! 🍋) i enzims trenquen les proteïnes i maten bacteris. Les parets musculars barregen durant <strong>2-4 hores</strong>. 🌀</p>
+      <p>És com una bossa en forma de mitja lluna que cap 1.5 litres! Per dins és com una rentadora: té un àcid fortíssim (<span class="kw">àcid clorhídric</span>) que és com un liquidador, i un enzim anomenat <span class="kw">pepsina</span> que es menja la carn i els ous. Ho remena tot durant <strong>2-4 hores</strong> fins que es fa una sopa! 🥣</p>
       <div class="organ-details">
-        <h4>✨ Detalls clau</h4>
+        <h4>✨ Superpoders de la rentadora</h4>
         <ul>
-          <li>Es crea el <span class="kw">quim</span>: una pasta semi-líquida àcida 🥣</li>
-          <li>Produïm <strong>2-3 litres de sucs gàstrics</strong> al dia ⚗️</li>
-          <li>La mucosa protegeix l'estómac de digerir-se a si mateix 🛡️</li>
-          <li>El pílor controla la sortida cap a l'intestí 🚪</li>
+          <li>Es crea el <span class="kw">quim</span>: una sopa àcida que sembla batidor! 🥣</li>
+          <li>L'àcid és tan fort que podria fondre un clau! Però la mucosa et protegeix! 🛡️</li>
+          <li>El pílor és com un semàfor que deixa passar la sopa poc a poc 🚦</li>
+          <li>Quan tens gana, la rentadora fa grunys! 🤤</li>
         </ul>
       </div>
     </div>
@@ -359,8 +340,8 @@ html.no-anim [data-sec]{
   <!-- 4. INTESTÍ PRIM -->
   <div class="organ" data-c="green" data-organ>
     <div class="organ-head">
-      <div class="organ-visual">🟢<span class="organ-num">4</span></div>
-      <h3>L'Intestí Prim</h3>
+      <div class="organ-visual">🪄<span class="organ-num">4</span></div>
+      <h3>L'Intestí Prim: L'Esponja Màgica 🧽</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -371,14 +352,14 @@ html.no-anim [data-sec]{
         <div class="illus-particle" style="width:6px;height:6px;background:var(--green);top:75%;left:40%;animation-delay:.9s"></div>
         <span class="illus-emoji">🔬</span>
       </div>
-      <p>Un tub de <strong>6-7 metres</strong> on té lloc la major part de la <strong>digestió</strong> i l'<strong>absorció</strong>. Les vellositats intestinals augmenten la superfície fins a <strong>250-350 m²</strong> — equivalent a una pista de tennis! 🎾</p>
+      <p>Encara que es diu "prim", fa <strong>6 o 7 metres</strong> de llarg! És l'estrella del viatge, perquè aquí és on es treu tot el tresor del menjar. Les seves parets estan plenes de <span class="kw">vellositats</span>, com milers de dits petits, que absorbeixen els nutrients com una super-esponja! La superfície és tan gran com una <strong>pista de tennis</strong>! 🎾</p>
       <div class="organ-details">
-        <h4>✨ Parts i funcions</h4>
+        <h4>✨ Les 3 parts de l'esponja</h4>
         <ul>
-          <li><strong>Duodè (30 cm):</strong> rep bilis i sucs pancreàtics 🔄</li>
-          <li><strong>Jejú (2.5 m):</strong> absorció principal de nutrients ⭐</li>
-          <li><strong>Ilié (3.5 m):</strong> absorció de vitamina B12 💊</li>
-          <li>Nutrients → Sang (glucosa) i Limfa (greixos) 🩸💧</li>
+          <li><strong>Duodè (30 cm):</strong> aquí arriba la bilis i els sucs del pàncrees per ajudar 🔄</li>
+          <li><strong>Jejú (2.5 m):</strong> el campió d'absorbir vitamines i minerals! ⭐</li>
+          <li><strong>Ilié (3.5 m):</strong> l'encarregat d'absorbir la vitamina B12 💊</li>
+          <li>Els nutrients volen per la sang per donar-te energia per jugar! 🏃💨</li>
         </ul>
       </div>
     </div>
@@ -387,8 +368,8 @@ html.no-anim [data-sec]{
   <!-- 5. INTESTÍ GROS -->
   <div class="organ" data-c="violet" data-organ>
     <div class="organ-head">
-      <div class="organ-visual">🟤<span class="organ-num">5</span></div>
-      <h3>L'Intestí Gros</h3>
+      <div class="organ-visual">🦠<span class="organ-num">5</span></div>
+      <h3>L'Intestí Gros: La Depuradora 🚰</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -398,14 +379,14 @@ html.no-anim [data-sec]{
         <div class="illus-particle" style="width:6px;height:6px;background:rgba(167,139,250,.4);top:55%;left:30%;animation-delay:1.3s"></div>
         <span class="illus-emoji">🦠</span>
       </div>
-      <p>Tub ample d'<strong>1.5 metres</strong> que <strong>absorbeix aigua</strong> (fins a 1.5 litres/dia!) 💧 i compacta els residus. Allotja milions de bacteris beneficiosos — la <span class="kw">microbiota intestinal</span> — essencials per la salut! 🦠✨</p>
+      <p>És més curt (1.5 metres) però més gros! La seva feina és xuclar tota l'aigua que sobra, com una depuradora, perquè les escombraries quedin com una pasta compacta. Aquí viuen milions de <span class="kw">bacteris amics</span> (la microbiota) que ens ajuden a estar sans! Són com els teus minúsculs companys de squadra! 🦠✨</p>
       <div class="organ-details">
-        <h4>✨ Parts de l'intestí gros</h4>
+        <h4>✨ Parts de la depuradora</h4>
         <ul>
-          <li><strong>Cec i apèndix:</strong> inici del colon (apèndix = defenses!) 🛡️</li>
-          <li><strong>Colon:</strong> absorció d'aigua i minerals 🔄</li>
-          <li><strong>Recte:</strong> emmagatzematge temporal de femta 📦</li>
-          <li>Més de <strong>1000 espècies</strong> bacterianes simbiòtiques! 🧫</li>
+          <li><strong>Cec i apèndix:</strong> l'apèndix és com el quarter general dels bacteris! 🏰</li>
+          <li><strong>Colon:</strong> l'encarregat de llevar l'aigua i compactar 💧</li>
+          <li><strong>Recte:</strong> la sala d'espera on es guarden les escombraries 📦</li>
+          <li>Tens més de <strong>1000 espècies</strong> diferents de bacteris vivint aquí! 🧫</li>
         </ul>
       </div>
     </div>
@@ -415,7 +396,7 @@ html.no-anim [data-sec]{
   <div class="organ" data-c="lime" data-organ>
     <div class="organ-head">
       <div class="organ-visual">🚪<span class="organ-num">6</span></div>
-      <h3>Expulsió</h3>
+      <h3>L'Anus: La Porta de Sortida 🏁</h3>
       <span class="arrow"><i class="fa-solid fa-chevron-down"></i></span>
     </div>
     <div class="organ-body">
@@ -423,14 +404,14 @@ html.no-anim [data-sec]{
         <div class="illus-bg"></div>
         <span class="illus-emoji">🏁</span>
       </div>
-      <p>L'etapa final! Quan el recte s'omple, es produeix el reflex de defecació. Els esfínters controlen l'expulsió. Tot el viatge digestiu triga entre <strong>24-72 hores</strong>. Un viatge èpic! 🎢</p>
+      <p>I ja hem arribat al final del viatge! Quan la sala d'espera (el recte) s'omple, el cos envia el missatge: "Hora d'anar al lavabo!". Uns músculs anomenats esfínters actuen com una porta que s'obre. Tot el viatge triga entre <strong>24 i 72 hores</strong>. Missió completada! 🎉</p>
       <div class="organ-details">
-        <h4>✨ Dades curioses</h4>
+        <h4>✨ Dades curioses de la sortida</h4>
         <ul>
-          <li>La femta és ¾ aigua + residus + bacteris morts 📊</li>
-          <li>Freqüència normal: <strong>3/dia a 3/setmana</strong> ✓</li>
-          <li>El color i consistència indiquen l'estat de salut 🩺</li>
-          <li>El reflex és controlat pel sistema nerviós autònom 🧠</li>
+          <li>Les escombraires són 3 parts d'aigua i 1 part de residus i bacteris 📊</li>
+          <li>És normal anar al lavabo entre <strong>3 cops al dia i 3 a la setmana</strong> ✓</li>
+          <li>El color ens explica com ha anat el viatge! 🌈</li>
+          <li>La porta té un "panys" automàtics que tu controls! 🔐</li>
         </ul>
       </div>
     </div>
@@ -439,111 +420,138 @@ html.no-anim [data-sec]{
 </div>
 
 <!-- ÒRGANS ACCESSORIS -->
-<div class="stitle" data-sec><i class="fa-solid fa-star" style="color:var(--cyan)"></i> Òrgans Accessoris: els Herois Amagats</div>
+<div class="stitle" data-sec><i class="fa-solid fa-star" style="color:var(--cyan)"></i> Els Ajudants Secrets: Òrgans Accessoris</div>
 <div class="acc-grid" data-sec>
   <div class="acc-card">
     <div class="acc-icon">🫀</div>
-    <h3>Fetge</h3>
-    <p>L'òrgan més gran (~1.5 kg)! Produeix la <strong>bilis</strong> (500 ml/dia), emmagatzema vitamines, desintoxica substàncies nocives i pot <strong>regenerar-se</strong>! 🔄✨</p>
+    <h3>Fetge: La Fàbrica Química 🏭</h3>
+    <p>És l'òrgan més gran (pesa com una pilota de futbol!). <strong>Produeix la bilis</strong>, un líquid que actua com un <span class="kw">sabó</span>: trenca els greixos en gotetes xiquetes (emulsiona) perquè siguin més fàcils de digerir! També neteja la sang i pot <strong>tornar a créixer</strong> si es fa mal! Com un superheroi! 🦸</p>
   </div>
   <div class="acc-card">
     <div class="acc-icon">💚</div>
-    <h3>Vesícula Biliar</h3>
-    <p>Petit sac que <strong>emmagatzema i concentra la bilis</strong>. Quan arriben greixos a l'intestí, es contrau i allibera bilis per digerir-los. Com una ampolla de salsa preparada! 🍾</p>
+    <h3>Vesícula: La Nevera de la Bilis 🧊</h3>
+    <p>És com una botigueta petita que <strong>guarda i concentra la bilis</strong> que fa el fetge. Quan arriben greixos al duodè, la vesícula esprem i llença la bilis com si fos una ampolla de xarop! <em>Atenció: ella no fa la bilis, només la guarda!</em> 🍾</p>
   </div>
   <div class="acc-card">
     <div class="acc-icon">🔶</div>
-    <h3>Pàncrees</h3>
-    <p>Allibera <strong>suc pancreàtic</strong> amb enzims (lipasa, amilasa, tripsina). També produeix <strong>insulina</strong> per regular la glucosa. Un heroi de dues cares! 🦸</p>
+    <h3>Pàncrees: El Cuiner Mestre 👨‍🍳</h3>
+    <p>És el que posa els sucs més forts! Allibera el <span class="kw">suc pancreàtic</span> amb 3 enzims letals: <strong>lipasa</strong> (digeix greixos), <strong>amilasa</strong> (digeix dolços) i <strong>tripsina</strong> (digeix proteïnes). També fa <strong>insulina</strong>, l'ajudant que controla el sucre a la sang! 🍬</p>
   </div>
 </div>
 
 <!-- CURIOSITATS -->
-<div class="stitle" data-sec><i class="fa-solid fa-lightbulb" style="color:var(--yellow)"></i> Sabies Això? Clica per Descobrir!</div>
+<div class="stitle" data-sec><i class="fa-solid fa-lightbulb" style="color:var(--yellow)"></i> Sabies Això? Clica per Descobrir! 🤫</div>
 <div class="facts-grid" data-sec id="factsGrid">
   <div class="fact" data-fact>
-    <div class="fact-head"><span class="fact-emoji">🤯</span><h3>Àcid Super Fort</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
-    <div class="fact-answer">L'àcid de l'estómac és tan potent que podria dissoldre una fulla de metall! Gràcies a la mucosa protectora no ens fem mal! 🛡️</div>
+    <div class="fact-head"><span class="fact-emoji">🤯</span><h3>Àcid de Volcà!</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
+    <div class="fact-answer">L'àcid de l'estómac és tan fort que podria dissoldre una fulla de metall! Gràcies a la mucosa, l'estómac no es menja a si mateix! 🛡️</div>
   </div>
   <div class="fact" data-fact>
     <div class="fact-head"><span class="fact-emoji">📏</span><h3>Més Gran que Tu!</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
     <div class="fact-answer">L'intestí prim estirat fa 6-7 metres! Gairebé 4 vegades la teva altura. Podries fer-ne una corda per saltar! 🤸</div>
   </div>
   <div class="fact" data-fact>
-    <div class="fact-head"><span class="fact-emoji">🦠</span><h3>Més Bacteris que Cèl·lules</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
+    <div class="fact-head"><span class="fact-emoji">🦠</span><h3>Exèrcit Amic</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
     <div class="fact-answer">Tens 37 bilions de bacteris a l'intestí — més que cèl·lules humanes a tot el cos! Són els teus aliats! 🤝</div>
   </div>
   <div class="fact" data-fact>
-    <div class="fact-head"><span class="fact-emoji">⚡</span><h3>Cervell Segon</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
-    <div class="fact-answer">L'intestí té 500 milions de neurones i produeix el 95% de la serotonina! Per això dius "tinc papilles a l'estómac"! 😅</div>
+    <div class="fact-head"><span class="fact-emoji">⚡</span><h3>El Teu Segon Cervell!</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
+    <div class="fact-answer">L'intestí té 500 milions de neurones i fa el 95% de la serotonina (l'hormona de la felicitat)! Per això et poses de bon humor! 😄</div>
   </div>
   <div class="fact" data-fact>
-    <div class="fact-head"><span class="fact-emoji">🔄</span><h3>Renovació Constant</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
-    <div class="fact-answer">La mucosa de l'estómac es renova completament cada 3-4 dies! El cos és una màquina de regeneració! 🏭</div>
+    <div class="fact-head"><span class="fact-emoji">🔄</span><h3>Pell Nova!</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
+    <div class="fact-answer">La mucosa de l'estómac es canvia per una de nova cada 3-4 dies! Ets una màquina de regeneració! 🏭</div>
   </div>
   <div class="fact" data-fact>
-    <div class="fact-head"><span class="fact-emoji">💧</span><h3>Fàbrica d'Aigua</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
-    <div class="fact-answer">L'intestí gros absorbeix 1.5 litres d'aigua al dia — com 6 ampolletes! Sense això, la femta seria líquida! 🚰</div>
+    <div class="fact-head"><span class="fact-emoji">💧</span><h3>Xucla-xucla!</h3><span class="fact-arrow"><i class="fa-solid fa-chevron-right"></i></span></div>
+    <div class="fact-answer">L'intestí gros absorbeix 1.5 litres d'aigua al dia — com 6 ampolletes! Sense ell, la femta seria líquida! 🚰</div>
   </div>
 </div>
 
 <!-- QUIZ -->
-<div class="stitle" data-sec><i class="fa-solid fa-trophy" style="color:var(--yellow)"></i> Quiz: Quant has Aprés?</div>
+<div class="stitle" data-sec><i class="fa-solid fa-trophy" style="color:var(--yellow)"></i> Quiz: Ets un Expert en Digestió? 🏆</div>
 <div class="quiz" data-sec>
   <h3>🏆 Posat a Prova!</h3>
-  <p>Respon aquestes 5 preguntes sobre la digestió</p>
+  <p>Respon aquestes 8 preguntes per veure si has estat un bon explorador!</p>
 
   <div id="quizBox">
     <div class="quiz-q" data-qq="0">
-      <div class="quiz-q-text"><span class="qq">🦷</span> Quin òrgan inicia la digestió?</div>
+      <div class="quiz-q-text"><span class="qq">🦷</span> On comença l'aventura de l'aliment?</div>
       <div class="quiz-opts">
-        <button class="quiz-opt" data-q="0" data-c="false">L'estómac</button>
-        <button class="quiz-opt" data-q="0" data-c="true">La boca</button>
-        <button class="quiz-opt" data-q="0" data-c="false">L'esòfag</button>
-        <button class="quiz-opt" data-q="0" data-c="false">L'intestí</button>
+        <button class="quiz-opt" data-q="0" data-c="false">A l'estómac</button>
+        <button class="quiz-opt" data-q="0" data-c="true">A la boca</button>
+        <button class="quiz-opt" data-q="0" data-c="false">A l'esòfag</button>
+        <button class="quiz-opt" data-q="0" data-c="false">A l'intestí</button>
       </div>
     </div>
     <div class="quiz-q" data-qq="1">
-      <div class="quiz-q-text"><span class="qq">🌀</span> Què són els moviments peristàltics?</div>
+      <div class="quiz-q-text"><span class="qq">🎢</span> Què són els moviments peristàltics?</div>
       <div class="quiz-opts">
-        <button class="quiz-opt" data-q="1" data-c="false">Enzims digestius</button>
-        <button class="quiz-opt" data-q="1" data-c="false">Bacteris de l'intestí</button>
-        <button class="quiz-opt" data-q="1" data-c="true">Contraccions que mouen l'aliment</button>
-        <button class="quiz-opt" data-q="1" data-c="false">Sucs gàstrics</button>
+        <button class="quiz-opt" data-q="1" data-c="false">Uns enzims que es mengen el menjar</button>
+        <button class="quiz-opt" data-q="1" data-c="false">Els bacteris de la panxa</button>
+        <button class="quiz-opt" data-q="1" data-c="true">Unes ones que empenyen el menjar pel tobogan</button>
+        <button class="quiz-opt" data-q="1" data-c="false">Els sucs de l'estómac</button>
       </div>
     </div>
     <div class="quiz-q" data-qq="2">
-      <div class="quiz-q-text"><span class="qq">📏</span> Quant fa l'intestí prim aproximadament?</div>
+      <div class="quiz-q-text"><span class="qq">🌪️</span> Què fa l'estómac per trencar les proteïnes?</div>
       <div class="quiz-opts">
-        <button class="quiz-opt" data-q="2" data-c="false">1 metre</button>
-        <button class="quiz-opt" data-q="2" data-c="false">3 metres</button>
-        <button class="quiz-opt" data-q="2" data-c="true">6-7 metres</button>
-        <button class="quiz-opt" data-q="2" data-c="false">15 metres</button>
+        <button class="quiz-opt" data-q="2" data-c="true">Utilitza àcid i pepsina com una rentadora</button>
+        <button class="quiz-opt" data-q="2" data-c="false">Utilitza bilis per emulsionar</button>
+        <button class="quiz-opt" data-q="2" data-c="false">Utilitza saliva i amilasa</button>
+        <button class="quiz-opt" data-q="2" data-c="false">Utilitza insulina i glucosa</button>
       </div>
     </div>
     <div class="quiz-q" data-qq="3">
-      <div class="quiz-q-text"><span class="qq">🫀</span> Quin òrgan produeix la bilis?</div>
+      <div class="quiz-q-text"><span class="qq">🧽</span> Quant fa l'intestí prim (l'esponja màgica)?</div>
       <div class="quiz-opts">
-        <button class="quiz-opt" data-q="3" data-c="true">El fetge</button>
-        <button class="quiz-opt" data-q="3" data-c="false">El pàncrees</button>
-        <button class="quiz-opt" data-q="3" data-c="false">L'estómac</button>
-        <button class="quiz-opt" data-q="3" data-c="false">La vesícula</button>
+        <button class="quiz-opt" data-q="3" data-c="false">1 metre</button>
+        <button class="quiz-opt" data-q="3" data-c="false">3 metres</button>
+        <button class="quiz-opt" data-q="3" data-c="true">6-7 metres</button>
+        <button class="quiz-opt" data-q="3" data-c="false">15 metres</button>
       </div>
     </div>
     <div class="quiz-q" data-qq="4">
-      <div class="quiz-q-text"><span class="qq">⏱️</span> Quantes hores triga la digestió completa?</div>
+      <div class="quiz-q-text"><span class="qq">🚰</span> Quina és la feina principal de l'intestí gros (la depuradora)?</div>
       <div class="quiz-opts">
-        <button class="quiz-opt" data-q="4" data-c="false">1-2 hores</button>
-        <button class="quiz-opt" data-q="4" data-c="false">6-12 hores</button>
-        <button class="quiz-opt" data-q="4" data-c="true">24-72 hores</button>
-        <button class="quiz-opt" data-q="4" data-c="false">1 setmana</button>
+        <button class="quiz-opt" data-q="4" data-c="false">Digerir les proteïnes</button>
+        <button class="quiz-opt" data-q="4" data-c="true">Absorbir aigua i fer maons d'escombraries</button>
+        <button class="quiz-opt" data-q="4" data-c="false">Fer la bilis</button>
+        <button class="quiz-opt" data-q="4" data-c="false">Absorbir les vitamines</button>
+      </div>
+    </div>
+    <div class="quiz-q" data-qq="5">
+      <div class="quiz-q-text"><span class="qq">🫀</span> Qui és la fàbrica que produeix la bilis?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-q="5" data-c="true">El fetge</button>
+        <button class="quiz-opt" data-q="5" data-c="false">El pàncrees</button>
+        <button class="quiz-opt" data-q="5" data-c="false">L'estómac</button>
+        <button class="quiz-opt" data-q="5" data-c="false">La vesícula biliar</button>
+      </div>
+    </div>
+    <div class="quiz-q" data-qq="6">
+      <div class="quiz-q-text"><span class="qq">🧊</span> Què fa la bilis amb els greixos?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-q="6" data-c="false">Se'ls menja com un monstre</button>
+        <button class="quiz-opt" data-q="6" data-c="true">Els trenca en gotetes (emulsiona) com un sabó</button>
+        <button class="quiz-opt" data-q="6" data-c="false">Els converteix en aigua</button>
+        <button class="quiz-opt" data-q="6" data-c="false">Els guarda a la nevera</button>
+      </div>
+    </div>
+    <div class="quiz-q" data-qq="7">
+      <div class="quiz-q-text"><span class="qq">⏱️</span> Quant de temps triga tot el viatge digestiu?</div>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-q="7" data-c="false">1-2 hores</button>
+        <button class="quiz-opt" data-q="7" data-c="false">6-12 hores</button>
+        <button class="quiz-opt" data-q="7" data-c="true">24-72 hores</button>
+        <button class="quiz-opt" data-q="7" data-c="false">1 setmana</button>
       </div>
     </div>
   </div>
 
   <div class="quiz-result" id="quizRes">
     <div class="quiz-result-emoji" id="qEmoji">🏆</div>
-    <div class="quiz-result-val" id="qVal">5/5</div>
+    <div class="quiz-result-val" id="qVal">8/8</div>
     <div class="quiz-result-msg" id="qMsg"></div>
     <button class="quiz-restart" id="qRestart">🔄 Tornar a intentar</button>
   </div>
@@ -551,21 +559,21 @@ html.no-anim [data-sec]{
 
 <!-- RESUM -->
 <div class="summary" data-sec>
-  <h3>🎯 Resum del Procés Complet</h3>
+  <h3>🎯 Resum: El Mapa del Tresor!</h3>
   <div class="flow">
-    <div class="flow-step">🍴 Boca</div>
+    <div class="flow-step">🦷 Boca</div>
     <span class="flow-arrow">→</span>
-    <div class="flow-step">🌀 Esòfag</div>
+    <div class="flow-step">🎢 Esòfag</div>
     <span class="flow-arrow">→</span>
-    <div class="flow-step">🔴 Estómac</div>
+    <div class="flow-step">🌪️ Estómac</div>
     <span class="flow-arrow">→</span>
-    <div class="flow-step">🟢 Intestí Prim</div>
+    <div class="flow-step">🧽 Intestí Prim</div>
     <span class="flow-arrow">→</span>
-    <div class="flow-step">🟤 Intestí Gros</div>
+    <div class="flow-step">🚰 Intestí Gros</div>
     <span class="flow-arrow">→</span>
-    <div class="flow-step">🏁 Expulsió</div>
+    <div class="flow-step">🚪 Anus</div>
   </div>
-  <p>Cada etapa està coordinada pel <strong>sistema nerviós</strong>, <strong>hormones</strong> i <strong>enzims</strong>. 🧠💊🔬 Una alteració en qualsevol punt pot afectar tot el procés. El cos és una màquina extraordinària! 🌟</p>
+  <p>Cada aturada està controlada pel <strong>cervell</strong>, les <strong>hormones</strong> i els <strong>enzims</strong>. 🧠💊🔬 Si una aturada falla, tot el tren s'atura! El teu cos és la màquina més increïble del món! 🌟</p>
 </div>
 
 <!-- FOOTER -->
@@ -578,16 +586,15 @@ html.no-anim [data-sec]{
 
 <script>
 /* === ESTRELLES === */
-var totalStars=0,maxStars=12;
+var totalStars=0,maxStars=14;
 var starCtr=document.getElementById('starCtr');
-var progressFill=document.getElementById('starCtr');
 function addStars(n,x,y){
   totalStars=Math.min(totalStars+n,maxStars);
   starCtr.textContent='\u2B50 '+totalStars+' / '+maxStars;
   document.getElementById('readBar').style.width=(totalStars/maxStars*100)+'%';
   starCtr.classList.remove('bump');void starCtr.offsetWidth;starCtr.classList.add('bump');
   if(x!=null&&y!=null)burstConfetti(x,y);
-  if(totalStars>=maxStars)showToast('\uD83C\uDF89 Totes les estrelles! Ets un expert en digesti\u00F3!');
+  if(totalStars>=maxStars)showToast('\uD83C\uDF89 Totes les estrelles! Ets un crack de la digesti\u00F3!');
 }
 
 /* === CONFETTI === */
@@ -627,7 +634,7 @@ function sfxStar(){snd(880,.07);setTimeout(function(){snd(1100,.1)},70)}
 /* === MASCOT === */
 document.getElementById('mascot').addEventListener('click',function(e){
   sfxStar();burstConfetti(e.clientX,e.clientY);
-  var m=['Mastega b\u00E9! \uD83D\uDE0B','Beu aigua! \uD83D\uDCA7','El teu cos \u00E9s incre\u00EFble! \u2728','Cuida la teva digesti\u00F3! \uD83D\uDE0A','Somri! \uD83D\uDE04'];
+  var m=['Mastega b\u00E9! \uD83D\uDE0B','Beu aigua! \uD83D\uDCA7','El teu cos \u00E9s la bomba! \uD83D\uDCA3','Cuida la teva digesti\u00F3! \uD83D\uDE0A','Ets un crack! \uD83D\uDE04'];
   showToast(m[Math.floor(Math.random()*m.length)]);
 });
 
@@ -639,9 +646,9 @@ document.querySelectorAll('[data-organ]').forEach(function(card){
     var wasOpen=card.classList.contains('expanded');
     card.classList.toggle('expanded');
     if(!wasOpen){sfxOpen();openedCount++;
-      if(openedCount===1){addStars(1,null,null);showToast('\uD83D\uDCDD Primer \u00F2rgan obert! +1 \u2B50')}
-      else if(openedCount===3){addStars(1,null,null);showToast('\uD83D\uDCDD 3 \u00F2rgans! +1 \u2B50')}
-      else if(openedCount===6){addStars(2,null,null);showToast('\uD83D\uDCDD Tots els \u00F2rgans! +2 \u2B50')}
+      if(openedCount===1){addStars(1,null,null);showToast('\uD83D\uDCDD Primera aturada! +1 \u2B50')}
+      else if(openedCount===3){addStars(1,null,null);showToast('\uD83D\uDCDD 3 aturades! +1 \u2B50')}
+      else if(openedCount===6){addStars(2,null,null);showToast('\uD83D\uDCDD Totes les aturades! +2 \u2B50')}
     }
   }
   card.addEventListener('click',toggle);
@@ -663,7 +670,7 @@ document.querySelectorAll('[data-fact]').forEach(function(f){
 });
 
 /* === QUIZ === */
-var qAns=0,qCor=0;
+var totalQuestions=8,qAns=0,qCor=0;
 document.querySelectorAll('.quiz-opt').forEach(function(btn){
   btn.addEventListener('click',function(e){
     e.stopPropagation();
@@ -679,16 +686,16 @@ document.querySelectorAll('.quiz-opt').forEach(function(btn){
       opts.forEach(function(o){if(o.getAttribute('data-c')==='true')o.classList.add('ok')});
     }
     qAns++;
-    if(qAns===5)setTimeout(showQuizResult,600);
+    if(qAns===totalQuestions)setTimeout(showQuizResult,600);
   });
 });
 
 function showQuizResult(){
   var res=document.getElementById('quizRes'),em=document.getElementById('qEmoji'),v=document.getElementById('qVal'),m=document.getElementById('qMsg');
-  v.textContent=qCor+'/5';
-  if(qCor===5){em.textContent='\uD83C\uDFC6';m.textContent='PERFECTE! Coneixes la digesti\u00F3 perfectament!';addStars(2,window.innerWidth/2,window.innerHeight/2)}
-  else if(qCor>=3){em.textContent='\uD83C\uDF1F';m.textContent='Molt b\u00E9! Gaireb\u00E9 tot correcte!';addStars(1,window.innerWidth/2,window.innerHeight/2)}
-  else{em.textContent='\uD83D\uDCDA';m.textContent='Revisa el contingut i torna-ho a intentar!'}
+  v.textContent=qCor+'/'+totalQuestions;
+  if(qCor===totalQuestions){em.textContent='\uD83C\uDFC6';m.textContent='PERFECTE! Ets un veritable cient\u00EDfic del cos hum\u00E0!';addStars(2,window.innerWidth/2,window.innerHeight/2)}
+  else if(qCor>=6){em.textContent='\uD83C\uDF1F';m.textContent='Molt b\u00E9! Gaireb\u00E9 ho saps tot!';addStars(1,window.innerWidth/2,window.innerHeight/2)}
+  else{em.textContent='\uD83D\uDCDA';m.textContent='Revisa el viatge i torna-ho a intentar!'}
   res.classList.add('show');
 }
 
@@ -737,7 +744,6 @@ if (!skipAnim) {
   } catch(e) {}
 }
 
-// Gestió de la memòria cau del navegador (Back/Forward Cache)
 window.addEventListener('pageshow', function(event) {
   if (event.persisted) {
     document.querySelectorAll('[data-sec]').forEach(function(el) {
